@@ -1,8 +1,6 @@
-#include "Utils.h"
+#include "Headers.h"
 #include <stdlib.h>
-#include "API_Leitura.h"
 #include <stdio.h>
-#include "Cliente.h"
 
 void ecra_utilizador() {
 
