@@ -13,5 +13,7 @@
 #include "Utilizador.h"
 #include "Veiculo.h"
 #include "Viagem.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 #endif //VIAVERDE_HEADERS_H

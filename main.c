@@ -1,6 +1,4 @@
 #include "Headers.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 void ecra_utilizador() {
 
