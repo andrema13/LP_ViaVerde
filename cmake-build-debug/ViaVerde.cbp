@@ -8,123 +8,121 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug"/>
+				<Option working_dir="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug"/>
+				<Option working_dir="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="ViaVerde">
-				<Option output="/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/ViaVerde" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug"/>
+				<Option output="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/ViaVerde.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 ViaVerde"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 ViaVerde"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="ViaVerde/fast">
-				<Option output="/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/ViaVerde" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug"/>
+				<Option output="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/ViaVerde.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 ViaVerde/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/filinto/Documents/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 ViaVerde/fast"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/API_Leitura.c">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/API_Leitura.c">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/API_Leitura.h">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/API_Leitura.h">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/API_Utils.c">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/API_Utils.c">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/API_Utils.h">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/API_Utils.h">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Cliente.c">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Cliente.c">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Cliente.h">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Cliente.h">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Headers.h">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Headers.h">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Portico.c">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Portico.c">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Portico.h">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Portico.h">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Utilizador.c">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Utilizador.c">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Utilizador.h">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Utilizador.h">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Veiculo.c">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Veiculo.c">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Veiculo.h">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Veiculo.h">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Viagem.c">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Viagem.c">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/Viagem.h">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Viagem.h">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/main.c">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/main.c">
 			<Option target="ViaVerde"/>
 		</Unit>
-		<Unit filename="/Users/filinto/Documents/GitHub/LP_ViaVerde/CMakeLists.txt">
+		<Unit filename="/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
