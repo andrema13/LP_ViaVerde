@@ -65,7 +65,6 @@ void ecra_cliente() {
         switch (choice) {
             case 1:
                 //system("clear");
-                printf("ads");
                 registar_cliente();
                 break;
             case 2:
