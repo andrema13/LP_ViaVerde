@@ -1,18 +1,20 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
+
+#include "Veiculo.h"
 // structs , funções , variaveis globais
 void ler_ficheiro();
-void registar_cliente();
 
-typedef struct cliente {
+struct Cliente{
 
         char nome[20];
-        int nif[10];
-        int cc[10];
-        char NIB[22];
-        char morada[30];
-        //int pontosVV;
+        int nif;
+        int cc;
+        int NIB;
+        char morada[20];
+        int pontosVV;
+        struct Veiculo veiculo;
        
-    }reg_cliente;
+    };
     
 #endif

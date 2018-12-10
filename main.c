@@ -7,7 +7,7 @@ void ecra_utilizador() {
         printf("---Área do Utilizador---\n\n");
         printf("1. Gestão de Utilizador\n");
         printf("2. Gestão de Viagens\n");
-        printf("3. Gestão de Pre�os\n");
+        printf("3. Gestão de Preços\n");
         printf("4. Gestão de Faturas\n");
         printf("5. Persistencia de Dados\n");
         printf("6. Menu Anterior\n");
@@ -65,7 +65,6 @@ void ecra_cliente() {
         switch (choice) {
             case 1:
                 //system("clear");
-                registar_cliente();
                 break;
             case 2:
                 printf("Veiculo");
@@ -115,7 +114,8 @@ void menu_cliente() {
             case 2:
                 system("clear");
                 printf("Registar novo cliente\n");
-                 registar_cliente();// Registar
+                ler_ficheiro();// Registar
+                printf("Registado com sucesso!\n");
                 break;
             case 3:
                 system("clear");//menu anterior
@@ -135,7 +135,7 @@ void main_menu() {
 
     int choice;
     do {
-        printf("---Bem Vindo � Via Verde---\n\n");
+        printf("---Bem Vindo á Via Verde---\n\n");
         printf("1. Cliente\n");
         printf("2. Utilizador\n");
         printf("3. Exit\n");
@@ -153,7 +153,6 @@ void main_menu() {
             case 3: // Exit
                 printf("\nAté á proxima ;\051");
                 exit(0);
-                break;
             default:
                 printf("Escolha errada. Tente novamente\n");
                 break;
@@ -162,9 +161,6 @@ void main_menu() {
 }
 
 int main() {
-    //main_menu();
-
-    ler_ficheiro();
-
+    main_menu();
     return 0;
 }
