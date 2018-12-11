@@ -44,6 +44,94 @@ void gestao_utiizadores() {
             }
         } while (choice != 5);
 }
+void gestao_viagens(){
+    int choice;
+    do {
+        printf("---Gestao de Viagens---\n\n");
+        printf("1. Acrescentar viagem\n");
+        printf("2. Pesquisar Viagem\n");
+        printf("3. Menu Anterior\n");
+        printf("4. Sair\n");
+        readInt(&choice, 1, 4, "Escolha uma opção: ");
+        switch (choice) {
+            case 1:
+                system("clear");
+                //acrescentar viagens( ver enunciado)
+                break;
+            case 2:
+                system("clear");
+                //pesquisar por viagens de varios modos
+                break;
+            case 3:
+                system("clear");
+                break;
+            case 4:
+                printf("\nAté á proxima ;\051");
+                exit(0);//sair
+            default:
+                printf("Escolha errada. Tente novamente\n");
+                break;
+        }
+    } while (choice != 3);
+}
+void gestao_precos(){
+    int choice;
+    do {
+        printf("---Gestao de Preços---\n\n");
+        printf("1. Editar Preços\n");
+        printf("2. Histórico de Alteraçoes\n");//nova funcionalidade ( relatorio )
+        printf("3. Menu Anterior\n");
+        printf("4. Sair\n");
+        readInt(&choice, 1, 4, "Escolha uma opção: ");
+        switch (choice) {
+            case 1:
+                system("clear");
+                //editar preços
+                break;
+            case 2:
+                system("clear");
+                //historico de alteraçoes de preços
+            case 3:
+                system("clear");//menu anterior
+                break;
+            case 4:
+                printf("\nAté á proxima ;\051");
+                exit(0);//sair
+            default:
+                printf("Escolha errada. Tente novamente\n");
+                break;
+        }
+    } while (choice != 3);
+}
+void geracao_faturas(){
+    int choice;
+    do {
+        printf("---Geraçao de Faturas---\n\n");
+        printf("1. Gerar Fatura\n");
+        printf("2. Pesquisar Faturas\n");// nova funcionalidade (relatorio)
+        printf("3. Menu Anterior\n");
+        printf("4. Sair\n");
+        readInt(&choice, 1, 4, "Escolha uma opção: ");
+        switch (choice) {
+            case 1:
+                system("clear");
+                //gerar fatura para um utiliz especifico num dado mes
+                break;
+            case 2:
+                system("clear");
+                //Pesquisar por faturas anteriores
+            case 3:
+                system("clear");//menu anterior
+                break;
+            case 4:
+                printf("\nAté á proxima ;\051");
+                exit(0);//sair
+            default:
+                printf("Escolha errada. Tente novamente\n");
+                break;
+        }
+    } while (choice != 3);
+}
 
 void ecra_utilizador() {
 
@@ -53,7 +141,7 @@ void ecra_utilizador() {
         printf("1. Gestão de Utilizador\n");
         printf("2. Gestão de Viagens\n");
         printf("3. Gestão de Preços\n");
-        printf("4. Gestão de Faturas\n");
+        printf("4. Geraçao de Faturas\n");
         printf("5. Persistencia de Dados\n");
         printf("6. Menu Anterior\n");
         printf("7. Sair\n");
@@ -66,15 +154,15 @@ void ecra_utilizador() {
                 break;
             case 2:
                 system("clear");
-                printf("gestao viagens");
+                gestao_viagens();
                 break;
             case 3:
                 system("clear");
-                printf("gestao de preços");
+                gestao_precos();
                 break;
             case 4:
                 system("clear");
-                printf("gestao faturas");
+                geracao_faturas();
                 break;
             case 5:
                 system("clear");
