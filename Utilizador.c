@@ -7,7 +7,7 @@ void gestao_utiizadores() {
 
     int choice;
     do {
-        printf("---Gestao de Utilizadores---\n\n");
+        printf("---Gestão de Utilizadores---\n\n");
         printf("1. Criar Utilizador\n");
         printf("2. Editar Utilizador\n");
         printf("3. Remover Utilizador\n");
@@ -36,10 +36,10 @@ void gestao_utiizadores() {
                 system("clear");
                 break;
             case 6:
-                printf("\nAté á proxima ;\051");
+                printf("\nAté à próxima ;\051");
                 exit(0);//sair
             default:
-                printf("Escolha errada. Tente novamente\n");
+                printf("Escolha errada. Tente novamente.\n");
                 break;
             }
         } while (choice != 5);
@@ -47,7 +47,7 @@ void gestao_utiizadores() {
 void gestao_viagens(){
     int choice;
     do {
-        printf("---Gestao de Viagens---\n\n");
+        printf("---Gestão de Viagens---\n\n");
         printf("1. Acrescentar viagem\n");
         printf("2. Pesquisar Viagem\n");
         printf("3. Menu Anterior\n");
@@ -66,10 +66,10 @@ void gestao_viagens(){
                 system("clear");
                 break;
             case 4:
-                printf("\nAté á proxima ;\051");
+                printf("\nAté à próxima ;\051");
                 exit(0);//sair
             default:
-                printf("Escolha errada. Tente novamente\n");
+                printf("Escolha errada. Tente novamente.\n");
                 break;
         }
     } while (choice != 3);

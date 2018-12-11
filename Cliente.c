@@ -45,7 +45,6 @@ void ecra_cliente() {
             case 7:
                 printf("\nAté á proxima ;\051");
                 exit(0);
-                break;
             default:
                 printf("Escolha errada. Tente novamente\n");
                 break;

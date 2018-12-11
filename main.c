@@ -4,7 +4,7 @@ void main_menu() {
 
     int choice;
     do {
-        printf("---Bem Vindo á Via Verde---\n\n");
+        printf("---Bem Vindo à Via Verde---\n\n");
         printf("1. Cliente\n");
         printf("2. Utilizador\n");
         printf("3. Exit\n");
@@ -20,10 +20,10 @@ void main_menu() {
                 ecra_utilizador();
                 break;
             case 3: // Exit
-                printf("\nAté á proxima ;\051");
+                printf("\nAté à próxima! ;\051");
                 exit(0);
             default:
-                printf("Escolha errada. Tente novamente\n");
+                printf("Escolha errada. Tente novamente.\n");
                 break;
         }
     } while (choice != 3);

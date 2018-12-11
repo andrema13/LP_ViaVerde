@@ -8,8 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/ViaVerde.dir/API_Leitura.c.o"
   "CMakeFiles/ViaVerde.dir/API_Utils.c.o"
   "ViaVerde.pdb"
-  "ViaVerde.exe"
-  "libViaVerde.dll.a"
+  "ViaVerde"
 )
 
 # Per-language clean rules from dependency scanning.
