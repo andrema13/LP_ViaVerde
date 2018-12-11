@@ -10,6 +10,22 @@
 stdbool.h
 -
 
+/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Cliente.c
+stdio.h
+-
+stdlib.h
+-
+Cliente.h
+/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Cliente.h
+Veiculo.h
+/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Veiculo.h
+API_Leitura.h
+/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/API_Leitura.h
+
+/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Cliente.h
+Veiculo.h
+/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Veiculo.h
+
 /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Utilizador.c
 stdio.h
 -
@@ -21,4 +37,8 @@ API_Leitura.h
 /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/API_Leitura.h
 
 /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Utilizador.h
+
+/cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Veiculo.h
+string.h
+-
 

@@ -5,6 +5,7 @@
 #include "API_Leitura.h"
 
 void ecra_cliente() {
+
     int choice;
     do {
         printf("---Área Cliente---\n\n");
@@ -20,9 +21,11 @@ void ecra_cliente() {
         switch (choice) {
             case 1:
                 //system("clear");
+                // aqui o cliente podera ver o  registo dos seus dados pessoais
                 break;
             case 2:
                 printf("Veiculo");
+                // aqui o cliente podera ver o registo do seu carro(s)
                 break;
             case 3:
                 system("clear");
@@ -68,7 +71,7 @@ void menu_cliente() {
                 break; // Login
             case 2:
                 system("clear");
-                printf("Registar novo cliente\n");
+                printf("\nRegistar novo cliente\n");
                 criar_cliente();
                 printf("\nRegistado com sucesso!\n");
                 break;

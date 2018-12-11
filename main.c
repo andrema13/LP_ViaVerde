@@ -15,7 +15,7 @@ void main_menu() {
                 system("clear");
                 menu_cliente();
                 break;
-            case 2: // Utilizador
+            case 2:
                 system("clear");
                 ecra_utilizador();
                 break;
