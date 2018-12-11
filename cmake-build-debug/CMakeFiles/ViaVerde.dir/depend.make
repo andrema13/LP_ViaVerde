@@ -6,6 +6,7 @@ CMakeFiles/ViaVerde.dir/API_Leitura.c.o: ../API_Utils.h
 
 CMakeFiles/ViaVerde.dir/API_Utils.c.o: ../API_Utils.c
 
+CMakeFiles/ViaVerde.dir/Cliente.c.o: ../API_Leitura.h
 CMakeFiles/ViaVerde.dir/Cliente.c.o: ../Cliente.c
 CMakeFiles/ViaVerde.dir/Cliente.c.o: ../Cliente.h
 CMakeFiles/ViaVerde.dir/Cliente.c.o: ../Veiculo.h
@@ -18,6 +19,8 @@ CMakeFiles/ViaVerde.dir/Portico.c.o: ../Veiculo.h
 CMakeFiles/ViaVerde.dir/Utilizador.c.o: ../Utilizador.c
 CMakeFiles/ViaVerde.dir/Utilizador.c.o: ../Utilizador.h
 
+CMakeFiles/ViaVerde.dir/Veiculo.c.o: ../API_Leitura.h
+CMakeFiles/ViaVerde.dir/Veiculo.c.o: ../Cliente.h
 CMakeFiles/ViaVerde.dir/Veiculo.c.o: ../Veiculo.c
 CMakeFiles/ViaVerde.dir/Veiculo.c.o: ../Veiculo.h
 

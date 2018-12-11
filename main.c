@@ -99,7 +99,7 @@ void menu_cliente() {
 
     int choice;
     do {
-        printf("---Menu Inicial---\n\n");
+        printf("\n---Menu Inicial---\n\n");
         printf("1. Login\n");
         printf("2. Registar Novo Cliente\n");
         printf("3. Menu Anterior\n");
@@ -114,8 +114,8 @@ void menu_cliente() {
             case 2:
                 system("clear");
                 printf("Registar novo cliente\n");
-                ler_ficheiro();// Registar
-                printf("Registado com sucesso!\n");
+                criar_cliente();
+                printf("\nRegistado com sucesso!\n");
                 break;
             case 3:
                 system("clear");//menu anterior

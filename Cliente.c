@@ -2,22 +2,23 @@
 #include <stdlib.h>
 #include "Cliente.h"
 #include "Veiculo.h"
+#include "API_Leitura.h"
 
-void ler_ficheiro() {
+void criar_cliente() {
 
     struct Cliente cliente1;
     int c;
     FILE *file;
 
-    printf("Nome: "); scanf(" %s", cliente1.nome);
-    printf("NIF: "); scanf(" %d", &cliente1.nif);
-    printf("CC: "); scanf(" %d", &cliente1.cc);
-    printf("NIB: "); scanf(" %d", &cliente1.NIB);
-    printf("Morada: "); scanf(" %s", cliente1.morada);
+    readString(cliente1.nome,20, "Nome: ");
+    readString(cliente1.nif,10,"NIF: ");
+    readString(cliente1.cc,9, "CC: ");
+    readString(cliente1.NIB,22, "NIB: ");
+    readString(cliente1.morada,20, "Morada: ");
     cliente1.pontosVV = 0;
-    file = fopen("../test.txt", "a");
+    file = fopen("../info_cliente.txt", "a");
 
-    fprintf(file,"%s\t%d\t%d\t%d\t%s\t%d\n", cliente1.nome, cliente1.nif, cliente1.cc, cliente1.NIB,
+    fprintf(file,"%s\t%s\t%s\t%s\t%s\t%d\t", cliente1.nome, cliente1.nif, cliente1.cc, cliente1.NIB,
             cliente1.morada, cliente1.pontosVV);
     if (file) {
         while ((c = fgetc(file)) != EOF) {
@@ -25,4 +26,5 @@ void ler_ficheiro() {
         }
         fclose(file);
     }
+    registar_veiculo();
 }

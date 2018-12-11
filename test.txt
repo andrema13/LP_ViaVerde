@@ -1,4 +1,0 @@
-Nome	NIF 	CC  	NIB 	Morada  	PontosVV
-Andre	24577	142493	20938327	Ruaaa	0
-
-Filinto	23567	-706661975	132456789	Ruaaa	0

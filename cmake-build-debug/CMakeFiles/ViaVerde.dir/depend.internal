@@ -7,6 +7,7 @@ CMakeFiles/ViaVerde.dir/API_Leitura.c.o
 CMakeFiles/ViaVerde.dir/API_Utils.c.o
  /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/API_Utils.c
 CMakeFiles/ViaVerde.dir/Cliente.c.o
+ /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/API_Leitura.h
  /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Cliente.c
  /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Cliente.h
  /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Veiculo.h
@@ -19,6 +20,8 @@ CMakeFiles/ViaVerde.dir/Utilizador.c.o
  /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Utilizador.c
  /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Utilizador.h
 CMakeFiles/ViaVerde.dir/Veiculo.c.o
+ /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/API_Leitura.h
+ /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Cliente.h
  /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Veiculo.c
  /cygdrive/c/Users/a-mar/OneDrive/Documentos/GitHub/LP_ViaVerde/Veiculo.h
 CMakeFiles/ViaVerde.dir/Viagem.c.o

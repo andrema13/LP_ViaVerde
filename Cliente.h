@@ -3,14 +3,14 @@
 
 #include "Veiculo.h"
 // structs , funções , variaveis globais
-void ler_ficheiro();
+void criar_cliente();
 
 struct Cliente{
 
         char nome[20];
-        int nif;
-        int cc;
-        int NIB;
+        char nif[10];
+        char cc[9];
+        char NIB[21];
         char morada[20];
         int pontosVV;
         struct Veiculo veiculo;
