@@ -3,6 +3,8 @@
 
 #include "Veiculo.h"
 // structs , funções , variaveis globais
+void ecra_cliente();
+void menu_cliente();
 void criar_cliente();
 
 struct Cliente{

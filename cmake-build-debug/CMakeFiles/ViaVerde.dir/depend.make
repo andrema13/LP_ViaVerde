@@ -16,6 +16,7 @@ CMakeFiles/ViaVerde.dir/Portico.c.o: ../Portico.c
 CMakeFiles/ViaVerde.dir/Portico.c.o: ../Portico.h
 CMakeFiles/ViaVerde.dir/Portico.c.o: ../Veiculo.h
 
+CMakeFiles/ViaVerde.dir/Utilizador.c.o: ../API_Leitura.h
 CMakeFiles/ViaVerde.dir/Utilizador.c.o: ../Utilizador.c
 CMakeFiles/ViaVerde.dir/Utilizador.c.o: ../Utilizador.h
 
