@@ -17,7 +17,7 @@ void registar_veiculo(){
     cliente1.pontosVV = 0;
     file = fopen("../info_cliente.txt", "a");
 
-    fprintf(file,"%s,%s,%s,%d;\n", cliente1.veiculo.marca, cliente1.veiculo.modelo,
+    fprintf(file,",%s,%s,%s,%d;\n", cliente1.veiculo.marca, cliente1.veiculo.modelo,
             cliente1.veiculo.matricula,cliente1.pontosVV);
     if (file) {
         while ((c = fgetc(file)) != EOF) {

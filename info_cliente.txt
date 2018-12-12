@@ -1,3 +1,2 @@
 Id,Nome,NIF,CC,NIB,Morada,Marca,Modelo,Matricula,PontosVV
-0,ewdaszx,122234356,13242434,23456789765432456745,rua de m,medas,asdsf,1234221,0;
-0,Andre,245665424,13425678,12345634563456546363,Rua de Smiguel,Merdce,mas,23rt48,0;
+1,Andre MArtins,234667547,36547568,312246789763243254789,Rua de S.Miguel 272,Opel,Corsa,21-09-GI,0;

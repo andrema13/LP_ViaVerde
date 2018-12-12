@@ -5,14 +5,14 @@
 // structs , funções , variaveis globais
 void ecra_cliente();
 void menu_cliente();
-void criar_cliente();
+void criar_cliente(int id);
 
 struct Cliente{
 
         char nome[20];
         char nif[10];
         char cc[9];
-        char NIB[21];
+        char NIB[22];
         char morada[20];
         int pontosVV;
         struct Veiculo veiculo;
