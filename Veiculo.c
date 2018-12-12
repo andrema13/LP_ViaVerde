@@ -16,7 +16,7 @@ void registar_veiculo(){
     readString(cliente1.veiculo.matricula,10, "Matricula: ");
     file = fopen("../info_cliente.txt", "a");
 
-    fprintf(file,"%s\t%s\t%s\n", cliente1.veiculo.marca, cliente1.veiculo.modelo,
+    fprintf(file,"%s,%s,%s\n", cliente1.veiculo.marca, cliente1.veiculo.modelo,
             cliente1.veiculo.matricula);
     if (file) {
         while ((c = fgetc(file)) != EOF) {

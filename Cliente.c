@@ -101,7 +101,7 @@ void criar_cliente() {
     cliente1.pontosVV = 0;
     file = fopen("../info_cliente.txt", "a");
 
-    fprintf(file,"%s\t%s\t%s\t%s\t%s\t%d\t", cliente1.nome, cliente1.nif, cliente1.cc, cliente1.NIB,
+    fprintf(file,"%s,%s,%s,%s,%s,%d,", cliente1.nome, cliente1.nif, cliente1.cc, cliente1.NIB,
             cliente1.morada, cliente1.pontosVV);
     if (file) {
         while ((c = fgetc(file)) != EOF) {
