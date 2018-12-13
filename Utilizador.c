@@ -208,19 +208,21 @@ void edit_prices() {
         readFloat(&new_price, 1, 100, "Choose between 1-100: ");
         matrix[(choice_x -1) * NUM_PORTAGENS + (choice_y-1)].price = new_price;
         write_matrix(matrix, "../Precos.txt");
+        system("clear");
         show_prices();
     }
 }
 
 void show_prices() {
 
+    //TODO meter a matriz em memoria para toda a aplicaçao
     struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
 
     fill_matrix(matrix, "../Precos.txt", false);
 
     int i, j;
 
-    printf("\n---Prices---\n\n");
+    printf("---Prices---\n\n");
 
     for (i = 0; i < NUM_PORTAGENS; i++) {
         for (j = 0; j < NUM_PORTAGENS; j++) {

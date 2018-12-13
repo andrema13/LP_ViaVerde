@@ -3,6 +3,7 @@
 #include "Cliente.h"
 #include "Veiculo.h"
 #include "API_Leitura.h"
+#include "Portico.h"
 
 void client_screen() {
 
@@ -29,7 +30,8 @@ void client_screen() {
                 break;
             case 3:
                 system("clear");
-                printf("Viagens");
+                //printf("Viagens");
+                toll_id();
                 break;
             case 4:
                 system("clear");

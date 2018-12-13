@@ -3,8 +3,9 @@
 #include "Cliente.h"
 #endif
 
+void toll_id();
+
 struct portico {
-    
-    //cliente
-    
+
+    float ID[30];
 };
