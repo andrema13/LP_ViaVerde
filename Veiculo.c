@@ -4,21 +4,21 @@
 #include "Veiculo.h"
 #include "API_Leitura.h"
 
-void registar_veiculo(){
+void register_vehicle(){
 
-    struct Cliente cliente1;
+    struct Client client;
     int c;
     FILE *file;
 
-    printf("\nIntroduza as informaçoes do seu veiculo:\n ");
-    readString(cliente1.veiculo.marca,12, "Marca: ");
-    readString(cliente1.veiculo.modelo,12, "Modelo: ");
-    readString(cliente1.veiculo.matricula,10, "Matricula: ");
-    cliente1.pontosVV = 0;
+    printf("\nEnter your vehicle information: \n ");
+    readString(client.vehicle.manufacturer,12, "Manufacturer: ");
+    readString(client.vehicle.model,12, "Model: ");
+    readString(client.vehicle.registration,10, "Registration: ");
+    client.VVPoints = 0;
     file = fopen("../info_cliente.txt", "a");
 
-    fprintf(file,",%s,%s,%s,%d;\n", cliente1.veiculo.marca, cliente1.veiculo.modelo,
-            cliente1.veiculo.matricula,cliente1.pontosVV);
+    fprintf(file,",%s,%s,%s,%d;\n", client.vehicle.manufacturer, client.vehicle.model,
+            client.vehicle.registration,client.VVPoints);
     if (file) {
         while ((c = fgetc(file)) != EOF) {
             putchar(c);

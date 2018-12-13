@@ -28,7 +28,7 @@ struct lanco {
  * @return Indica se a função terminou com sucesso
  */
 bool preencheMatriz(struct lanco *matriz, char *ficheiro, bool distancia);
-bool escreveMatriz(struct lanco *matriz, char *ficheiro);
+bool write_matrix(struct lanco *matriz, char *ficheiro);
 
 
 #ifdef __cplusplus

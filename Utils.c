@@ -39,7 +39,8 @@ bool preencheMatriz(struct lanco *matriz, char *ficheiro, bool distancia) {
     return true;
 }
 
-bool escreveMatriz(struct lanco *matriz, char *ficheiro) {
+bool write_matrix(struct lanco *matriz, char *ficheiro) {
+
     FILE *fp;
 
     fp = fopen(ficheiro, "w");
@@ -47,8 +48,8 @@ bool escreveMatriz(struct lanco *matriz, char *ficheiro) {
         return false;
 
     int i, j;
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
+    for (i = 0; i < NUM_PORTAGENS; i++) {
+        for (j = 0; j < NUM_PORTAGENS; j++) {
             fprintf(fp, "%f\t", matriz[i * NUM_PORTAGENS + j].preco);
         }
         fprintf(fp, "\n");

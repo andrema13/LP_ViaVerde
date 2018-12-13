@@ -1,10 +1,10 @@
 #ifndef UTILIZADOR_H
 #define UTILIZADOR_H
 
-void ecra_utilizador();
-void gestao_utiizadores();
-void gestao_viagens();
-void gestao_precos();
-void geracao_faturas();
+void user_screen();
+void user_management();
+void travel_management();
+void price_management();
+void invoice_generation();
 
 #endif

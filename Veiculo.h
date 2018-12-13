@@ -2,13 +2,13 @@
 #define VEICULO_H
 #include <string.h>
 
-void registar_veiculo();
+void register_vehicle();
 
-struct Veiculo {
+struct Vehicle {
 
-    char matricula[10];
-    char marca[12];
-    char modelo[12];
+    char registration[10];
+    char manufacturer[12];
+    char model[12];
    
 };
 #endif

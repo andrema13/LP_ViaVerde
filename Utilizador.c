@@ -3,18 +3,18 @@
 #include "Utilizador.h"
 #include "API_Leitura.h"
 
-void gestao_utiizadores() {
+void user_management() {
 
     int choice;
     do {
-        printf("---Gestão de Utilizadores---\n\n");
-        printf("1. Criar Utilizador\n");
-        printf("2. Editar Utilizador\n");
-        printf("3. Remover Utilizador\n");
-        printf("4. Pesquisar\\listar Utilizador\n");
-        printf("5. Menu Anterior\n");
-        printf("6. Sair\n");
-        readInt(&choice, 1, 6, "Escolha uma opção: ");
+        printf("---User Management---\n\n");
+        printf("1. Create new user\n");
+        printf("2. Edit user\n");
+        printf("3. Remove user\n");
+        printf("4. Search\\list user\n");
+        printf("5. Previous Menu\n");
+        printf("6. Exit\n");
+        readInt(&choice, 1, 6, "Choose an option: ");
         switch (choice) {
             case 1:
                 system("clear");
@@ -36,23 +36,23 @@ void gestao_utiizadores() {
                 system("clear");
                 break;
             case 6:
-                printf("\nAté à próxima ;\051");
+                printf("\nSee you soon! ;\051");
                 exit(0);//sair
             default:
-                printf("Escolha errada. Tente novamente.\n");
+                printf("Wrong choice. Try Again\n");
                 break;
             }
         } while (choice != 5);
 }
-void gestao_viagens(){
+void travel_management(){
     int choice;
     do {
-        printf("---Gestão de Viagens---\n\n");
-        printf("1. Acrescentar viagem\n");
-        printf("2. Pesquisar Viagem\n");
-        printf("3. Menu Anterior\n");
-        printf("4. Sair\n");
-        readInt(&choice, 1, 4, "Escolha uma opção: ");
+        printf("---Travel Management---\n\n");
+        printf("1. Add travel\n");
+        printf("2. Search travel\n");
+        printf("3. Previous Menu\n");
+        printf("4. Exit\n");
+        readInt(&choice, 1, 4, "Choose an option: ");
         switch (choice) {
             case 1:
                 system("clear");
@@ -66,52 +66,48 @@ void gestao_viagens(){
                 system("clear");
                 break;
             case 4:
-                printf("\nAté à próxima ;\051");
+                printf("\nSee you soon!;\051");
                 exit(0);//sair
             default:
-                printf("Escolha errada. Tente novamente.\n");
+                printf("Wrong choice. Try again\n");
                 break;
         }
     } while (choice != 3);
 }
-void gestao_precos(){
+void price_management(){
     int choice;
     do {
-        printf("---Gestao de Preços---\n\n");
-        printf("1. Editar Preços\n");
-        printf("2. Histórico de Alteraçoes\n");//nova funcionalidade ( relatorio )
-        printf("3. Menu Anterior\n");
-        printf("4. Sair\n");
-        readInt(&choice, 1, 4, "Escolha uma opção: ");
+        printf("---Price Management---\n\n");
+        printf("1. Edit Prices\n");
+        printf("2. Previous Menu\n");
+        printf("3. Exit\n");
+        readInt(&choice, 1, 3, "Choose an option: ");
         switch (choice) {
             case 1:
                 system("clear");
                 //editar preços
                 break;
             case 2:
-                system("clear");
-                //historico de alteraçoes de preços
-            case 3:
                 system("clear");//menu anterior
                 break;
-            case 4:
-                printf("\nAté á proxima ;\051");
+            case 3:
+                printf("\nSee you soon! ;\051");
                 exit(0);//sair
             default:
-                printf("Escolha errada. Tente novamente\n");
+                printf("Wrong choice. Try Again\n");
                 break;
         }
-    } while (choice != 3);
+    } while (choice != 2);
 }
-void geracao_faturas(){
+void invoice_generation(){
     int choice;
     do {
-        printf("---Geraçao de Faturas---\n\n");
-        printf("1. Gerar Fatura\n");
-        printf("2. Pesquisar Faturas\n");// nova funcionalidade (relatorio)
-        printf("3. Menu Anterior\n");
-        printf("4. Sair\n");
-        readInt(&choice, 1, 4, "Escolha uma opção: ");
+        printf("---Invoice Generation---\n\n");
+        printf("1. Invoice Generation\n");
+        printf("2. Invoice Search\n");// nova funcionalidade (relatorio)
+        printf("3. Previous Menu\n");
+        printf("4. Exit\n");
+        readInt(&choice, 1, 4, "Choose an option: ");
         switch (choice) {
             case 1:
                 system("clear");
@@ -124,45 +120,45 @@ void geracao_faturas(){
                 system("clear");//menu anterior
                 break;
             case 4:
-                printf("\nAté á proxima ;\051");
+                printf("\nSee you soon! ;\051");
                 exit(0);//sair
             default:
-                printf("Escolha errada. Tente novamente\n");
+                printf("Wrong choice. Try Again\n");
                 break;
         }
     } while (choice != 3);
 }
 
-void ecra_utilizador() {
+void user_screen() {
 
     int choice;
     do {
-        printf("---Área do Utilizador---\n\n");
-        printf("1. Gestão de Utilizador\n");
-        printf("2. Gestão de Viagens\n");
-        printf("3. Gestão de Preços\n");
-        printf("4. Geraçao de Faturas\n");
-        printf("5. Persistencia de Dados\n");
-        printf("6. Menu Anterior\n");
-        printf("7. Sair\n");
-        readInt(&choice, 1, 7, "Escolha uma opção: ");
+        printf("---User Area---\n\n");
+        printf("1. User Management\n");
+        printf("2. Travel Management\n");
+        printf("3. Price Management\n");
+        printf("4. Invoice Generation\n");
+        printf("5. Data Persistence\n");
+        printf("6. Previous Menu\n");
+        printf("7. Exit\n");
+        readInt(&choice, 1, 7, "Choose an option: ");
 
         switch (choice) {
             case 1:
                 system("clear");
-                gestao_utiizadores();
+                user_management();
                 break;
             case 2:
                 system("clear");
-                gestao_viagens();
+                travel_management();
                 break;
             case 3:
                 system("clear");
-                gestao_precos();
+                price_management();
                 break;
             case 4:
                 system("clear");
-                geracao_faturas();
+                invoice_generation();
                 break;
             case 5:
                 system("clear");
@@ -172,10 +168,10 @@ void ecra_utilizador() {
                 system("clear");
                 break;
             case 7:
-                printf("\nAté á proxima ;\051");
+                printf("\nSee you soon! ;\051");
                 exit(0);//sair
             default:
-                printf("Escolha errada. Tente novamente\n");
+                printf("Wrong choice. Try again\n");
                 break;
         }
     } while (choice != 6);

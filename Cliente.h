@@ -3,19 +3,20 @@
 
 #include "Veiculo.h"
 // structs , funções , variaveis globais
-void ecra_cliente();
-void menu_cliente();
-void criar_cliente(int id);
+void client_screen();
+void client_menu();
+void new_client();
 
-struct Cliente{
+struct Client{
 
-        char nome[20];
-        char nif[10];
-        char cc[9];
+        int ID;
+        char name[20];
+        char NIF[10];
+        char CC[9];
         char NIB[22];
-        char morada[20];
-        int pontosVV;
-        struct Veiculo veiculo;
+        char street[20];
+        int VVPoints;
+        struct Vehicle vehicle;
        
     };
     
