@@ -1,8 +1,8 @@
 #include "Utils.h"
 
 bool preencheMatriz(struct lanco *matriz, char *ficheiro, bool distancia) {
-    FILE * fp;
-    char * linha = NULL;
+    FILE *fp;
+    char *linha = NULL;
     size_t len = 0;
     const char s[] = "\t\n\0";
     char *token;
@@ -13,17 +13,17 @@ bool preencheMatriz(struct lanco *matriz, char *ficheiro, bool distancia) {
         return false;
 
     while ((getline(&linha, &len, fp)) != -1) {
-        j = 0;    
+        j = 0;
         token = strtok(linha, s);
-        
+
         if (distancia) matriz[i * NUM_PORTAGENS + j].dist = atof(token);
         else matriz[i * NUM_PORTAGENS + j].preco = atof(token);
-        
+
         j++;
-        while(token != NULL ) {
+        while (token != NULL) {
             token = strtok(NULL, s);
-            
-            if(token != NULL){
+
+            if (token != NULL) {
                 if (distancia) matriz[i * NUM_PORTAGENS + j].dist = atof(token);
                 else matriz[i * NUM_PORTAGENS + j].preco = atof(token);
             }
@@ -33,8 +33,28 @@ bool preencheMatriz(struct lanco *matriz, char *ficheiro, bool distancia) {
     }
 
     fclose(fp);
-    if (linha) 
+    if (linha)
         free(linha);
-    
+
+    return true;
+}
+
+bool escreveMatriz(struct lanco *matriz, char *ficheiro) {
+    FILE *fp;
+
+    fp = fopen(ficheiro, "w");
+    if (fp == NULL)
+        return false;
+
+    int i, j;
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 5; j++) {
+            fprintf(fp, "%f\t", matriz[i * NUM_PORTAGENS + j].preco);
+        }
+        fprintf(fp, "\n");
+    }
+
+    fclose(fp);
+
     return true;
 }

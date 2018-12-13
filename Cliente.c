@@ -89,20 +89,21 @@ void menu_cliente() {
         }
     } while (choice != 3);
 }
+
 void criar_cliente(int id) {
 
     struct Cliente cliente1;
     int c;
     FILE *file;
 
-    readString(cliente1.nome,20, "Nome: ");
-    readString(cliente1.nif,10,"NIF: ");
-    readString(cliente1.cc,9, "CC: ");
-    readString(cliente1.NIB,22, "NIB: ");
-    readString(cliente1.morada,20, "Morada: ");
+    readString(cliente1.nome, 20, "Nome: ");
+    readString(cliente1.nif, 10, "NIF: ");
+    readString(cliente1.cc, 9, "CC: ");
+    readString(cliente1.NIB, 22, "NIB: ");
+    readString(cliente1.morada, 20, "Morada: ");
     file = fopen("../info_cliente.txt", "a");
 
-    fprintf(file,"%d,%s,%s,%s,%s,%s", id,cliente1.nome, cliente1.nif, cliente1.cc, cliente1.NIB, cliente1.morada);
+    fprintf(file, "%d,%s,%s,%s,%s,%s", id, cliente1.nome, cliente1.nif, cliente1.cc, cliente1.NIB, cliente1.morada);
     if (file) {
         while ((c = fgetc(file)) != EOF) {
             putchar(c);
