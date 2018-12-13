@@ -190,20 +190,23 @@ void user_screen() {
 void edit_prices() {
 
     struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
-    int choice, new_price;
+    int choice_x, choice_y;
+    float new_price;
 
     fill_matrix(matrix, "../Precos.txt", false);
-
+    show_prices();
     printf("Enter the price to edit:\n");
-    readInt(&choice, 1, 25, "Choose between 1-25: \n");
-    if (choice == 1 || choice == 7 || choice == 13 || choice == 19 || choice == 25) {
+    readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:\n");
+    readInt(&choice_y, 1, NUM_PORTAGENS, "Choose between 1-5:\nY:\n");
+
+    if (choice_x == choice_y) {
         printf("Cannot edit this price.\n");
-        printf("Please try another one.\n\n");
+        printf("Please try another one.\n");
         edit_prices();
-    } else{
+    } else {
         printf("Enter the new price:\n");
-        readInt(&new_price, 1, 100, "Choose between 1-100: ");
-        matrix[choice - 1].price = (float) new_price;
+        readFloat(&new_price, 1, 100, "Choose between 1-100: ");
+        matrix[(choice_x -1) * NUM_PORTAGENS + (choice_y-1)].price = new_price;
         write_matrix(matrix, "../Precos.txt");
         show_prices();
     }
