@@ -42,10 +42,11 @@ void user_management() {
             default:
                 printf("Wrong choice. Try Again\n");
                 break;
-            }
-        } while (choice != 5);
+        }
+    } while (choice != 5);
 }
-void travel_management(){
+
+void travel_management() {
     int choice;
     do {
         printf("---Travel Management---\n\n");
@@ -75,7 +76,8 @@ void travel_management(){
         }
     } while (choice != 3);
 }
-void price_management(){
+
+void price_management() {
     int choice;
     do {
         printf("\n---Price Management---\n\n");
@@ -106,7 +108,8 @@ void price_management(){
         }
     } while (choice != 3);
 }
-void invoice_generation(){
+
+void invoice_generation() {
     int choice;
     do {
         printf("---Invoice Generation---\n\n");
@@ -183,29 +186,30 @@ void user_screen() {
         }
     } while (choice != 6);
 }
-void edit_prices(){
+
+void edit_prices() {
 
     struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
     int choice, new_price;
 
+    fill_matrix(matrix, "../Precos.txt", false);
+
     printf("Enter the price to edit:\n");
-    readInt(&choice,1,4,"Choose between 1-4: ");
-    printf("Enter the new price:\n");
-    readInt(&new_price,1,100,"Choose between 1-100: ");
-    matrix[choice].price = (float)new_price;
-
-    write_matrix(matrix, "../Precos.txt");
-    /*fill_matrix(matrix, "../Distancias.txt", true);
-
-    for(i=0; i<NUM_PORTAGENS; i++) {
-        for (j = 0; j < NUM_PORTAGENS; j++) {
-            printf("%f, ", matrix[i * NUM_PORTAGENS + j].dist);
-        }
-        printf("\n");
-    }*/
-    //write_matrix(matrix, "../Precos.txt");
+    readInt(&choice, 1, 25, "Choose between 1-25: \n");
+    if (choice == 1 || choice == 7 || choice == 13 || choice == 19 || choice == 25) {
+        printf("Cannot edit this price.\n");
+        printf("Please try another one.\n\n");
+        edit_prices();
+    } else{
+        printf("Enter the new price:\n");
+        readInt(&new_price, 1, 100, "Choose between 1-100: ");
+        matrix[choice - 1].price = (float) new_price;
+        write_matrix(matrix, "../Precos.txt");
+        show_prices();
+    }
 }
-void show_prices(){
+
+void show_prices() {
 
     struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
 
@@ -215,7 +219,7 @@ void show_prices(){
 
     printf("\n---Prices---\n\n");
 
-    for(i=0; i < NUM_PORTAGENS; i++) {
+    for (i = 0; i < NUM_PORTAGENS; i++) {
         for (j = 0; j < NUM_PORTAGENS; j++) {
             printf("%f\t ", matrix[i * NUM_PORTAGENS + j].price);
         }
