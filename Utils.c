@@ -1,31 +1,32 @@
 #include "Utils.h"
 
-bool preencheMatriz(struct lanco *matriz, char *ficheiro, bool distancia) {
+bool fill_matrix(struct lanco *matrix, char *file, bool is_distance) {
+
     FILE *fp;
-    char *linha = NULL;
+    char *line = NULL;
     size_t len = 0;
     const char s[] = "\t\n\0";
     char *token;
     int i = 0, j = 0;
 
-    fp = fopen(ficheiro, "r");
+    fp = fopen(file, "r");
     if (fp == NULL)
         return false;
 
-    while ((getline(&linha, &len, fp)) != -1) {
+    while ((getline(&line, &len, fp)) != -1) {
         j = 0;
-        token = strtok(linha, s);
+        token = strtok(line, s);
 
-        if (distancia) matriz[i * NUM_PORTAGENS + j].dist = atof(token);
-        else matriz[i * NUM_PORTAGENS + j].preco = atof(token);
+        if (is_distance) matrix[i * NUM_PORTAGENS + j].dist = atof(token);
+        else matrix[i * NUM_PORTAGENS + j].price = atof(token);
 
         j++;
         while (token != NULL) {
             token = strtok(NULL, s);
 
             if (token != NULL) {
-                if (distancia) matriz[i * NUM_PORTAGENS + j].dist = atof(token);
-                else matriz[i * NUM_PORTAGENS + j].preco = atof(token);
+                if (is_distance) matrix[i * NUM_PORTAGENS + j].dist = atof(token);
+                else matrix[i * NUM_PORTAGENS + j].price = atof(token);
             }
             j++;
         }
@@ -33,24 +34,24 @@ bool preencheMatriz(struct lanco *matriz, char *ficheiro, bool distancia) {
     }
 
     fclose(fp);
-    if (linha)
-        free(linha);
+    if (line)
+        free(line);
 
     return true;
 }
 
-bool write_matrix(struct lanco *matriz, char *ficheiro) {
+bool write_matrix(struct lanco *matrix, char *file) {
 
     FILE *fp;
 
-    fp = fopen(ficheiro, "w");
+    fp = fopen(file, "w");
     if (fp == NULL)
         return false;
 
     int i, j;
     for (i = 0; i < NUM_PORTAGENS; i++) {
         for (j = 0; j < NUM_PORTAGENS; j++) {
-            fprintf(fp, "%f\t", matriz[i * NUM_PORTAGENS + j].preco);
+            fprintf(fp, "%f\t", matrix[i * NUM_PORTAGENS + j].price);
         }
         fprintf(fp, "\n");
     }

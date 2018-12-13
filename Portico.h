@@ -3,8 +3,6 @@
 #include "Cliente.h"
 #endif
 
-
-
 struct portico {
     
     //cliente

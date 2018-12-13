@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "Utilizador.h"
 #include "API_Leitura.h"
+#include "Utils.h"
 
 void user_management() {
 
@@ -77,27 +78,33 @@ void travel_management(){
 void price_management(){
     int choice;
     do {
-        printf("---Price Management---\n\n");
-        printf("1. Edit Prices\n");
-        printf("2. Previous Menu\n");
-        printf("3. Exit\n");
-        readInt(&choice, 1, 3, "Choose an option: ");
+        printf("\n---Price Management---\n\n");
+        printf("1. Show Prices\n");//funcionalidade nova(relatorio)
+        printf("2. Edit Prices\n");
+        printf("3. Previous Menu\n");
+        printf("4. Exit\n");
+        readInt(&choice, 1, 4, "Choose an option: ");
         switch (choice) {
+
             case 1:
                 system("clear");
-                //editar preços
+                show_prices();
                 break;
             case 2:
                 system("clear");//menu anterior
+                edit_prices();
                 break;
             case 3:
+                system("clear");
+                break;
+            case 4:
                 printf("\nSee you soon! ;\051");
                 exit(0);//sair
             default:
                 printf("Wrong choice. Try Again\n");
                 break;
         }
-    } while (choice != 2);
+    } while (choice != 3);
 }
 void invoice_generation(){
     int choice;
@@ -175,4 +182,43 @@ void user_screen() {
                 break;
         }
     } while (choice != 6);
+}
+void edit_prices(){
+
+    struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
+    int choice, new_price;
+
+    printf("Enter the price to edit:\n");
+    readInt(&choice,1,4,"Choose between 1-4: ");
+    printf("Enter the new price:\n");
+    readInt(&new_price,1,100,"Choose between 1-100: ");
+    matrix[choice].price = (float)new_price;
+
+    write_matrix(matrix, "../Precos.txt");
+    /*fill_matrix(matrix, "../Distancias.txt", true);
+
+    for(i=0; i<NUM_PORTAGENS; i++) {
+        for (j = 0; j < NUM_PORTAGENS; j++) {
+            printf("%f, ", matrix[i * NUM_PORTAGENS + j].dist);
+        }
+        printf("\n");
+    }*/
+    //write_matrix(matrix, "../Precos.txt");
+}
+void show_prices(){
+
+    struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
+
+    fill_matrix(matrix, "../Precos.txt", false);
+
+    int i, j;
+
+    printf("\n---Prices---\n\n");
+
+    for(i=0; i < NUM_PORTAGENS; i++) {
+        for (j = 0; j < NUM_PORTAGENS; j++) {
+            printf("%f\t ", matrix[i * NUM_PORTAGENS + j].price);
+        }
+        printf("\n");
+    }
 }

@@ -30,34 +30,6 @@ void main_menu() {
 }
 
 int main() {
-
     main_menu();
-
-    struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
-
-    preencheMatriz(matrix, "../Precos.txt", false);
-
-    int i, j;
-
-    for(i=0; i < NUM_PORTAGENS; i++) {
-        for (j = 0; j < NUM_PORTAGENS; j++) {
-            printf("%f, ", matrix[i * NUM_PORTAGENS + j].preco);
-        }
-        printf("\n");
-    }
-
-    printf("\n\n");
-    preencheMatriz(matrix, "../Distancias.txt", true);
-
-    for(i=0; i<NUM_PORTAGENS; i++) {
-        for (j = 0; j < NUM_PORTAGENS; j++) {
-            printf("%f, ", matrix[i * NUM_PORTAGENS + j].dist);
-        }
-        printf("\n");
-    }
-
-    matrix[1].preco = 1.0;
-    write_matrix(matrix, "../Precos.txt");
-
     return 0;
 }

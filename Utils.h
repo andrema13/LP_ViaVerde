@@ -13,7 +13,7 @@ extern "C" {
 #define NUM_PORTAGENS 5
     
 struct lanco {
-    float preco, dist;
+    float price, dist;
 };
 
 /**
@@ -21,14 +21,14 @@ struct lanco {
  * conteúdo do ficheiro especificado. A função pode ser utilizada para preencher
  * a matriz de distâncias ou a matriz de preços.
  * 
- * @param matriz A matriz a preencher, que deve ser previamente alocada
- * @param ficheiro O ficheiro de onde vão ser lidos os dados
- * @param distancia Indica se será preenchida a matriz de distâncias ou de preços
+ * @param matrix A matriz a preencher, que deve ser previamente alocada
+ * @param file O ficheiro de onde vão ser lidos os dados
+ * @param is_distance Indica se será preenchida a matriz de distâncias ou de preços
  * 
  * @return Indica se a função terminou com sucesso
  */
-bool preencheMatriz(struct lanco *matriz, char *ficheiro, bool distancia);
-bool write_matrix(struct lanco *matriz, char *ficheiro);
+bool fill_matrix(struct lanco *matrix, char *file, bool is_distance);
+bool write_matrix(struct lanco *matrix, char *file);
 
 
 #ifdef __cplusplus
