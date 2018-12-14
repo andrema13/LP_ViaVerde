@@ -9,24 +9,35 @@ void client_info() {
     struct Client client;
     FILE *file;
     char line[256];
+    int line_number = 0;
+    int count = 0;
     file = fopen("../info_cliente.txt", "r");
 
     if (file == NULL) {
         perror("Error: ");
     }
-    else if(fgets(line, sizeof(line), file)) {
-        fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
-                &client.ID, client.name,client.NIF,
-                client.CC,client.NIB,client.street,client.vehicle.manufacturer,
-                client.vehicle.model,client.vehicle.registration,&client.VVPoints);
-        //pesquisa a info pessoal
-        printf("---Personal Info---\n");
-        printf("ID: %d\n", client.ID);
-        printf("Nome: %s\n",client.name);
-        printf("NIF: %s\n",client.NIF);
-        printf("CC: %s\n",client.CC);
-        printf("NIB: %s\n",client.NIB);
-        printf("Street: %s\n",client.street);
+    else{
+        while (fgets(line, sizeof(line), file)) {
+
+            if(count == line_number){
+
+                fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
+                       &client.ID, client.name,client.NIF,
+                       client.CC,client.NIB,client.street,client.vehicle.manufacturer,
+                       client.vehicle.model,client.vehicle.registration,&client.VVPoints);
+                //pesquisa a info pessoal
+                printf("---Personal Info---\n");
+                printf("ID: %d\n", client.ID);
+                printf("Nome: %s\n",client.name);
+                printf("NIF: %s\n",client.NIF);
+                printf("CC: %s\n",client.CC);
+                printf("NIB: %s\n",client.NIB);
+                printf("Street: %s\n",client.street);
+            } else{
+                count++;
+            }
+
+        }
     }
     fclose(file);
 }
@@ -35,21 +46,31 @@ void vehicle_info(){
     struct Client client;
     FILE *file;
     char line[256];
+    int line_number = 0; // ver isto depois
+    int count = 0;
     file = fopen("../info_cliente.txt", "r");
 
     if (file == NULL) {
         perror("Error: ");
     }
-    else if(fgets(line, sizeof(line), file)) {
-        fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
-               &client.ID, client.name,client.NIF,
-               client.CC,client.NIB,client.street,client.vehicle.manufacturer,
-               client.vehicle.model,client.vehicle.registration,&client.VVPoints);//pesquisa a info do carro
-        printf("---Vehicle Info---\n");
-        printf("Manufacturer: %s\n", client.vehicle.manufacturer);
-        printf("Model: %s\n",client.vehicle.model);
-        printf("Registration: %s\n",client.vehicle.registration);
-        printf("VV Points: %d\n",client.VVPoints);
+    else{
+
+        while (fgets(line, sizeof line, file) != NULL){
+
+            if(count == line_number){
+                fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
+                       &client.ID, client.name,client.NIF,
+                       client.CC,client.NIB,client.street,client.vehicle.manufacturer,
+                       client.vehicle.model,client.vehicle.registration,&client.VVPoints);//pesquisa a info do carro
+                printf("---Vehicle Info---\n");
+                printf("Manufacturer: %s\n", client.vehicle.manufacturer);
+                printf("Model: %s\n",client.vehicle.model);
+                printf("Registration: %s\n",client.vehicle.registration);
+                printf("VV Points: %d\n",client.VVPoints);
+            } else{
+                count++;
+            }
+        }
     }
     fclose(file);
 }
