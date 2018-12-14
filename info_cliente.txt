@@ -1,2 +1,2 @@
-Id  Username    Password    Nome	NIF	CC	NIB	Morada	Marca	Modelo	Matricula	PontosVV
-0	andre	1234	atdsfd	edfg	werdfg	sdfg	wert	sdfg	sdrf	grdfg	0
+Id  Nome    NIF CC  NIB Morada  Marca	Modelo	Matricula	PontosVV
+0	andre	234345678	35467897	356788654324567665434	rua de snsusd	merdedes	amg	23-tr-08	0

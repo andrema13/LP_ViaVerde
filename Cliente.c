@@ -5,6 +5,22 @@
 #include "API_Leitura.h"
 #include "Portico.h"
 
+void client_info() {
+
+}
+void vehicle_info(){
+
+}
+void travel_info(){
+
+}
+void extracts_info(){
+
+}
+void points_info(){
+
+}
+
 void customer_area() {
 
     int choice;
@@ -21,25 +37,24 @@ void customer_area() {
 
         switch (choice) {
             case 1:
-                //system("clear");
-                // aqui o cliente podera ver o  registo dos seus dados pessoais
+                system("clear");
+                client_info();// aqui o cliente podera ver o  registo dos seus dados pessoais
                 break;
             case 2:
-                printf("Veiculo");
-                // aqui o cliente podera ver o registo do seu carro(s)
+                system("clear");
+                vehicle_info();// aqui o cliente podera ver o registo do seu carro(s)
                 break;
             case 3:
                 system("clear");
-                //printf("Viagens");
+                travel_info();// aqui o cliente podera ver o registo das suas viagens
                 break;
             case 4:
                 system("clear");
-                printf("Extratos");
-                client_id();
+                extracts_info();// aqui o cliente podera ver o extrato das viagens ja efetuadas
                 break;
             case 5:
                 system("clear");
-                printf("Pontos");
+                points_info();// aqui o cliente podera ver o registo dos seus pontos
                 break;
             case 6:
                 system("clear");
@@ -73,6 +88,7 @@ void client_menu() {
             case 2:
                 system("clear");
                 printf("\nEnter your data: \n");
+                client_id();
                 new_client();
                 printf("\nRegistered successfully!\n");
                 break;
@@ -116,8 +132,6 @@ void new_client() {
     int c;
     FILE *file;
 
-    readString(client.username, 11, "Username: ");
-    readString(client.password, 11, "Password: ");
     readString(client.name, 20, "Name: ");//Pede informaçoes pessoais ao utilizador
     readString(client.NIF, 10, "NIF: ");
     readString(client.CC, 9, "CC: ");
@@ -126,8 +140,8 @@ void new_client() {
     file = fopen("../info_cliente.txt", "a");
 
     if (file != NULL) {
-        fprintf(file, "%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s", client_id(), client.username, client.password,
-                client.name, client.NIF, client.CC, client.NIB, client.street);
+        fprintf(file, "%d\t%s\t%s\t%s\t%s\t%s", client_id(), client.name, client.NIF,
+                client.CC, client.NIB, client.street);
         if (ferror(file)) {
             perror("Error: ");
         }
