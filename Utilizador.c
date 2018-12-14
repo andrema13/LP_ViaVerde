@@ -31,7 +31,7 @@ void user_management() {
                 break;
             case 3:
                 system("clear");
-                delete_client();
+                //delete_client();
                 //remover utili
                 break;
             case 4:
@@ -207,7 +207,7 @@ void edit_prices() {
     } else {
         printf("Enter the new price:\n");
         readFloat(&new_price, 1, 100, "Choose between 1-100: ");
-        matrix[(choice_x -1) * NUM_PORTAGENS + (choice_y-1)].price = new_price;
+        matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price = new_price;
         write_matrix(matrix, "../Precos.txt");
         system("clear");
         show_prices();
@@ -233,11 +233,11 @@ void show_prices() {
     }
 }
 
-void delete_client() {
+/*void delete_client() {
     // Write program do delete from file
     char filename[100];
     char str[100];
-    FILE * fp1, * fp2;
+    FILE *fp1, *fp2;
     int del_line_no;
     int line_no = 0;
 
@@ -246,7 +246,7 @@ void delete_client() {
 
     fp1 = fopen(filename, "r");
     printf("\ncontent of file \n");
-    print_file(fp1);
+   // print_file(fp1);
     rewind(fp1);
     printf("\n enter line number to dele \n");
     scanf("%d", &del_line_no);
@@ -254,15 +254,13 @@ void delete_client() {
     fp2 = fopen("replica.txt", "w");
 
 
+    while (fgets(str, 99, fp1) != NULL) {
+        line_no++;
 
-    while ( fgets(str, 99, fp1) != NULL)
-    {
-            line_no++;
-
-            if(line_no != del_line_no) {
-                fputs(str, fp2);
-            }
-}
+        if (line_no != del_line_no) {
+            fputs(str, fp2);
+        }
+    }
 
     fclose(fp1);
     fclose(fp2);
@@ -277,13 +275,11 @@ void delete_client() {
 
 }
 
-void print_file( FILE *fp )
-{
+void print_file(FILE *fp) {
 
     char ch;
 
-    while (( ch = fgetc(fp)) != EOF )
-    {
+    while ((ch = fgetc(fp)) != EOF) {
         printf("%c", ch);
     }
-}
+}*/
