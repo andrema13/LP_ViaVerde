@@ -31,11 +31,11 @@ void client_screen() {
             case 3:
                 system("clear");
                 //printf("Viagens");
-                toll_id();
                 break;
             case 4:
                 system("clear");
                 printf("Extratos");
+                client_id();
                 break;
             case 5:
                 system("clear");
@@ -57,7 +57,6 @@ void client_screen() {
 void client_menu() {
 
     int choice;
-    int id = 1;
     do {
         printf("\n---Initial Menu---\n\n");
         printf("1. Login\n");
@@ -76,7 +75,6 @@ void client_menu() {
                 printf("\nEnter your data: \n");
                 new_client();
                 printf("\nRegistered successfully!\n");
-                id++;
                 break;
             case 3:
                 system("clear");//menu anterior
@@ -92,26 +90,49 @@ void client_menu() {
     } while (choice != 3);
 }
 
+int client_id() {
+
+    struct Client client;
+    FILE *file;
+    char line[256];
+    file = fopen("../info_cliente.txt", "r");
+
+    if (file == NULL) {
+        perror("Error: ");
+        return -1;
+    }
+    while (fgets(line, sizeof(line), file)) {
+        fscanf(file, "%d", &client.ID);
+        printf("%d", client.ID);
+    }
+    fclose(file);
+
+    return 0;
+}
+
 void new_client() {
 
     struct Client client;
     int c;
     FILE *file;
 
-    readString(client.name, 20, "Name: ");
+    readString(client.name, 20, "Name: ");//Pede informaçoes pessoais ao utilizador
     readString(client.NIF, 10, "NIF: ");
     readString(client.CC, 9, "CC: ");
     readString(client.NIB, 22, "NIB: ");
-    readString(client.street, 20, "Street: ");
+    readString(client.street, 40, "Street: ");
     file = fopen("../info_cliente.txt", "a");
 
-    fprintf(file, "%d,%s,%s,%s,%s,%s", client.ID, client.name, client.NIF, client.CC, client.NIB,
-            client.street);
-    if (file) {
-        while ((c = fgetc(file)) != EOF) {
-            putchar(c);
+    if (file != NULL) {
+        fprintf(file, "%d\t%s\t%s\t%s\t%s\t%s", client_id(), client.name, client.NIF, client.CC, client.NIB,
+                client.street);
+        if (ferror(file)) {
+            perror("Error: ");
         }
         fclose(file);
     }
-    register_vehicle();
+    while ((c = fgetc(file)) != EOF) {//escreve no ficheiro as informaçoes dadas pelo utilizador
+        putchar(c);
+    }
+    register_vehicle(); // vai pedir as informaçoes do veiculo ao utilizador
 }

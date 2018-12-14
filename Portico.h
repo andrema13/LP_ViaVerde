@@ -4,8 +4,3 @@
 #endif
 
 void toll_id();
-
-struct portico {
-
-    float ID[30];
-};
