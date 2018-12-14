@@ -93,6 +93,7 @@ void client_menu() {
 int client_id() {
 
     struct Client client;
+    int id = 0;
     FILE *file;
     char line[256];
     file = fopen("../info_cliente.txt", "r");
@@ -103,11 +104,16 @@ int client_id() {
     }
     while (fgets(line, sizeof(line), file)) {
         fscanf(file, "%d", &client.ID);
-        printf("%d", client.ID);
+        if(client.ID == 0){
+            id++;
+        } else{
+            id = client.ID++;
+        }
+
     }
     fclose(file);
 
-    return 0;
+    return id;
 }
 
 void new_client() {
