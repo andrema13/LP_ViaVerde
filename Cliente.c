@@ -5,34 +5,7 @@
 #include "API_Leitura.h"
 #include "Portico.h"
 
-void client_login() {
-
-    struct Client client;
-    char username[11];
-    char password[11];
-    int attempts = 3;
-    printf("---Login---\n\n");
-    readString(username, 11, "Username: \n");
-    readString(password, 11, "Password: \n");
-
-
-    if (username == client.username && password == client.password && attempts > 0) {
-        printf("Login Sucessfully!");
-        client_screen();
-
-    } else {
-        printf("Wrong data!");
-        attempts--;
-        printf("You have %d more attemps.", attempts);
-        client_login();
-        if (attempts == 0) {
-            printf("Wrong login. Goodbye!");
-            exit(0);
-        }
-    }
-}
-
-void client_screen() {
+void customer_area() {
 
     int choice;
     do {
@@ -86,7 +59,7 @@ void client_menu() {
     int choice;
     do {
         printf("\n---Initial Menu---\n\n");
-        printf("1. Login\n");
+        printf("1. Enter to your account\n");
         printf("2. Register new client\n");
         printf("3. Previous Menu\n");
         printf("4. Exit\n");
@@ -95,7 +68,7 @@ void client_menu() {
         switch (choice) {
             case 1:
                 system("clear");
-                client_login();
+                customer_area();
                 break; // Login
             case 2:
                 system("clear");

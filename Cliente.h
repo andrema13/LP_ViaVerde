@@ -3,7 +3,7 @@
 #include "Veiculo.h"
 
 void client_login();
-void client_screen();
+void customer_area();
 void client_menu();
 void new_client();
 int client_id();
