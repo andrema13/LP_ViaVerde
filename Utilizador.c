@@ -31,6 +31,7 @@ void user_management() {
                 break;
             case 3:
                 system("clear");
+                delete_client();
                 //remover utili
                 break;
             case 4:
@@ -229,5 +230,60 @@ void show_prices() {
             printf("%f\t ", matrix[i * NUM_PORTAGENS + j].price);
         }
         printf("\n");
+    }
+}
+
+void delete_client() {
+    // Write program do delete from file
+    char filename[100];
+    char str[100];
+    FILE * fp1, * fp2;
+    int del_line_no;
+    int line_no = 0;
+
+    printf("Enter file name");
+    scanf("%s", &filename);
+
+    fp1 = fopen(filename, "r");
+    printf("\ncontent of file \n");
+    print_file(fp1);
+    rewind(fp1);
+    printf("\n enter line number to dele \n");
+    scanf("%d", &del_line_no);
+
+    fp2 = fopen("replica.txt", "w");
+
+
+
+    while ( fgets(str, 99, fp1) != NULL)
+    {
+            line_no++;
+
+            if(line_no != del_line_no) {
+                fputs(str, fp2);
+            }
+}
+
+    fclose(fp1);
+    fclose(fp2);
+
+    remove(filename);
+    rename("replica.txt", filename);
+
+    fp1 = fopen(filename, "r");
+    printf("\ncontent of file after \n");
+    pprint_file(fp1);
+    fclose(fp1);
+
+}
+
+void print_file( FILE *fp )
+{
+
+    char ch;
+
+    while (( ch = fgetc(fp)) != EOF )
+    {
+        printf("%c", ch);
     }
 }
