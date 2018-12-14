@@ -110,6 +110,7 @@ void price_management() {
 }
 
 void invoice_generation() {
+
     int choice;
     do {
         printf("---Invoice Generation---\n\n");
@@ -148,10 +149,9 @@ void user_screen() {
         printf("2. Travel Management\n");
         printf("3. Price Management\n");
         printf("4. Invoice Generation\n");
-        printf("5. Data Persistence\n");
-        printf("6. Previous Menu\n");
-        printf("7. Exit\n");
-        readInt(&choice, 1, 7, "Choose an option: ");
+        printf("5. Previous Menu\n");
+        printf("6. Exit\n");
+        readInt(&choice, 1, 6, "Choose an option: ");
 
         switch (choice) {
             case 1:
@@ -172,19 +172,15 @@ void user_screen() {
                 break;
             case 5:
                 system("clear");
-                printf("persistencia dados");
                 break;
             case 6:
-                system("clear");
-                break;
-            case 7:
                 printf("\nSee you soon! ;\051");
-                exit(0);//sair
+                exit(0);
             default:
                 printf("Wrong choice. Try again\n");
                 break;
         }
-    } while (choice != 6);
+    } while (choice != 5);
 }
 
 void edit_prices() {

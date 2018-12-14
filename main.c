@@ -1,4 +1,8 @@
-#include "Headers.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "API_Leitura.h"
+#include "Cliente.h"
+#include "Utilizador.h"
 
 void main_menu() {
 
