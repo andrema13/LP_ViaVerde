@@ -103,13 +103,8 @@ int client_id() {
         return -1;
     }
     while (fgets(line, sizeof(line), file)) {
-        fscanf(file, "%d", &client.ID);
-        if(client.ID == 0){
-            id++;
-        } else{
-            id = client.ID++;
-        }
-
+        fscanf(file, "%d", &client.ID);//pesquisa pelo ultimo id
+        id = client.ID++; // acrescenta o id
     }
     fclose(file);
 

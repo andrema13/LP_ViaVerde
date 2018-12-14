@@ -1,4 +1,4 @@
 Id	Nome	NIF	CC	NIB	Morada	Marca	Modelo	Matricula	PontosVV
-1	Andre MArtins	245667753	32223i47	123874829174294329074	eyruwhufdijldf	wertyui	retgyu	123456	0
-2	wedfhjfdbk	wqedfgred	wergfdew	qwerdfredgfrewrgffgfb	ewfwrfrefgbrg	wefrewregfg	werfervgfrg	erfrref	0
-3	tdfyguhjkl	345678965	65786873	213456789000807632414	xdfcgvhjbk	sdtfghjkl	rtdyfguhjkl	rtdyguhj	0
+0	esrtdyu	345678974	53678653	435678654325678654356	dfghjkljhdsgh	trfgyu	rdtyfguh	trtyfug	0
+2	esdf	ew	qwedf	ewdf	wedf	df	ewdf	wesd	0
+3	wasd	esdf	wedf	ewdf	wedf	wedf	wedf	wedf	0
