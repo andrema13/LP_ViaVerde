@@ -30,7 +30,7 @@ void client_info() {
             printf("NIF: %s\n", client.NIF);
             printf("CC: %s\n", client.CC);
             printf("NIB: %s\n", client.NIB);
-            printf("Street: %s\n", client.street);
+            printf("Street: %s\n\n", client.street);
         }
     }
     fclose(file);
@@ -60,7 +60,7 @@ void vehicle_info() {
             printf("Manufacturer: %s\n", client.vehicle.manufacturer);
             printf("Model: %s\n", client.vehicle.model);
             printf("Registration: %s\n", client.vehicle.registration);
-            printf("VV Points: %d\n", client.VVPoints);
+
         }
     }
     fclose(file);
@@ -76,6 +76,30 @@ void extracts_info() {
 
 void points_info() {
 
+    struct Client client;
+    FILE *file;
+    char line[256];
+    file = fopen("../info_cliente.txt", "r");
+
+    if (file == NULL) {
+        perror("Error: ");
+    }
+    else {
+        while (fgets(line, sizeof line, file) != NULL) {
+
+            fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
+                   &client.ID, client.name, client.NIF,
+                   client.CC, client.NIB, client.street, client.vehicle.manufacturer,
+                   client.vehicle.model, client.vehicle.registration, &client.VVPoints);//pesquisa a info do carro
+        }
+        if (client.ID == client_id()- 1) {
+
+            printf("---Points Info---\n");
+            printf("VV Points: %d\n\n", client.VVPoints);
+
+        }
+    }
+    fclose(file);
 }
 
 void customer_area() {
