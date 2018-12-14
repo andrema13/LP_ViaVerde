@@ -1,4 +1,2 @@
-Id	Nome	NIF	CC	NIB	Morada	Marca	Modelo	Matricula	PontosVV
-0	esrtdyu	345678974	53678653	435678654325678654356	dfghjkljhdsgh	trfgyu	rdtyfguh	trtyfug	0
-2	esdf	ew	qwedf	ewdf	wedf	df	ewdf	wesd	0
-3	wasd	esdf	wedf	ewdf	wedf	wedf	wedf	wedf	0
+Id  Username    Password    Nome	NIF	CC	NIB	Morada	Marca	Modelo	Matricula	PontosVV
+0	andre	1234	atdsfd	edfg	werdfg	sdfg	wert	sdfg	sdrf	grdfg	0

@@ -5,6 +5,33 @@
 #include "API_Leitura.h"
 #include "Portico.h"
 
+void client_login() {
+
+    struct Client client;
+    char username[11];
+    char password[11];
+    int attempts = 3;
+    printf("---Login---\n\n");
+    readString(username, 11, "Username: \n");
+    readString(password, 11, "Password: \n");
+
+
+    if (username == client.username && password == client.password && attempts > 0) {
+        printf("Login Sucessfully!");
+        client_screen();
+
+    } else {
+        printf("Wrong data!");
+        attempts--;
+        printf("You have %d more attemps.", attempts);
+        client_login();
+        if (attempts == 0) {
+            printf("Wrong login. Goodbye!");
+            exit(0);
+        }
+    }
+}
+
 void client_screen() {
 
     int choice;
@@ -68,7 +95,7 @@ void client_menu() {
         switch (choice) {
             case 1:
                 system("clear");
-                client_screen();
+                client_login();
                 break; // Login
             case 2:
                 system("clear");
@@ -107,7 +134,6 @@ int client_id() {
         id = client.ID++; // acrescenta o id
     }
     fclose(file);
-
     return id;
 }
 
@@ -117,6 +143,8 @@ void new_client() {
     int c;
     FILE *file;
 
+    readString(client.username, 11, "Username: ");
+    readString(client.password, 11, "Password: ");
     readString(client.name, 20, "Name: ");//Pede informaçoes pessoais ao utilizador
     readString(client.NIF, 10, "NIF: ");
     readString(client.CC, 9, "CC: ");
@@ -125,8 +153,8 @@ void new_client() {
     file = fopen("../info_cliente.txt", "a");
 
     if (file != NULL) {
-        fprintf(file, "%d\t%s\t%s\t%s\t%s\t%s", client_id(), client.name, client.NIF, client.CC, client.NIB,
-                client.street);
+        fprintf(file, "%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s", client_id(), client.username, client.password,
+                client.name, client.NIF, client.CC, client.NIB, client.street);
         if (ferror(file)) {
             perror("Error: ");
         }
