@@ -3,6 +3,7 @@
 #include "Utilizador.h"
 #include "API_Leitura.h"
 #include "Utils.h"
+#include "Cliente.h"
 
 void user_management() {
 
@@ -19,7 +20,10 @@ void user_management() {
         switch (choice) {
             case 1:
                 system("clear");
-                //criar utili.
+                printf("\nEnter new client data: \n");
+                client_id();
+                new_client();
+                printf("\nRegistered successfully!\n");
                 break;
             case 2:
                 system("clear");
