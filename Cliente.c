@@ -34,7 +34,7 @@ void client_info() {
         }
     }
     fclose(file);
-}
+} // ver info cliente ( penso que seja uma funcionalidade p/relatorio)
 
 void vehicle_info() {
 
@@ -59,12 +59,12 @@ void vehicle_info() {
             printf("---Vehicle Info---\n");
             printf("Manufacturer: %s\n", client.vehicle.manufacturer);
             printf("Model: %s\n", client.vehicle.model);
-            printf("Registration: %s\n", client.vehicle.registration);
+            printf("Registration: %s\n\n", client.vehicle.registration);
 
         }
     }
     fclose(file);
-}
+}// ver info carro ( penso que seja uma funcionalidade p/relatorio)
 
 void travel_info() {
 
@@ -96,11 +96,10 @@ void points_info() {
 
             printf("---Points Info---\n");
             printf("VV Points: %d\n\n", client.VVPoints);
-
         }
     }
     fclose(file);
-}
+}// ver info pontos ( penso que seja uma funcionalidade p/relatorio)
 
 void customer_area() {
 

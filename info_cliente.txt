@@ -2,3 +2,4 @@ Id  Nome    NIF CC  NIB Morada  Marca	Modelo	Matricula	PontosVV
 0	andre	234345678	35467897	356788654324567665434	rua de snsusd	merdedes	amg	23-tr-08	0
 1	cris	245789187	21345678	213467546789653445879	rua de sas	ehjs	fyghj	98-or-90	0
 2	Filadagoda	696969696	69696969	PT50SEMGUITO	favelas	fiat	la pata	1900	0
+3	admin	245237678	32456786	235465768767564565768	Rua sem magia	Nissan	Qahsaqui	21-TY-09	0
