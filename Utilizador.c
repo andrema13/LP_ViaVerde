@@ -234,64 +234,55 @@ void show_prices() {
     }
 }
 
+int delete_client()
+{
+    FILE * fileptr1, * fileptr2;
+    char ch;
+    int delete_id, temp = 1;
 
-/*void print_file() {
-    FILE *fptr;
-    char c;
-    // Open file
-    fptr = fopen("../info_cliente.txt", "r");
-    if (fptr == NULL) {
-        printf("Cannot open file \n");
-        exit(0);
+    //open file in read mode
+    fileptr1 = fopen("/Users/filinto/Documents/GitHub1/LP_ViaVerde/info_cliente.txt", "r");
+    ch = getc(fileptr1);
+    while (ch != EOF)
+    {
+        printf("%c", ch);
+        ch = getc(fileptr1);
     }
-
-    // Read contents from file
-    c = fgetc(fptr);
-    while (c != EOF) {
-        printf("%c", c);
-        c = fgetc(fptr);
-    }
-
-    fclose(fptr);
-}
-
-
-void delete_client() {
-    // Write program do delete from file
-    char str[100];
-    FILE *fp1, *fp2;
-    int del_line_no;
-    int line_no = 0;
-
-    printf("Enter file name");
-
-    fp1 = fopen("../info_cliente.txt", "r");
-    printf("\ncontent of file \n");
-   // print_file(fp1);
-    rewind(fp1);
-    printf("\n enter line number to dele \n");
-    scanf("%d", &del_line_no);
-
-    fp2 = fopen("replica.txt", "w");
-
-
-    while (fgets(str, 99, fp1) != NULL) {
-        line_no++;
-
-        if (line_no != del_line_no) {
-            fputs(str, fp2);
+    //rewind
+    rewind(fileptr1);
+    printf(" \n Enter client's ID to be deleted:");
+    scanf("%d", &delete_id);
+    //open new file in write mode
+    fileptr2 = fopen("replica.txt", "w");
+    ch = getc(fileptr1);
+    while (ch != EOF)
+    {
+        ch = getc(fileptr1);
+        if (ch == '\n')
+        {
+            temp++;
+        }
+        //except the line to be deleted
+        if (temp != delete_id)
+        {
+            //copy all lines in file replica.c
+            putc(ch, fileptr2);
         }
     }
-
-    fclose(fp1);
-    fclose(fp2);
-
-    remove("info_cliente.txt");
-    rename("replica.txt", "info_cliente.txt");
-
-    fp1 = fopen("../info_cliente.txt", "r");
-    printf("\ncontent of file after \n");
-    print_file(fp1);
-    fclose(fp1);
+    fclose(fileptr1);
+    fclose(fileptr2);
+    remove("/Users/filinto/Documents/GitHub1/LP_ViaVerde/info_cliente.txt");
+    //rename the file replica.txt to original name
+    rename("replica.txt", "/Users/filinto/Documents/GitHub1/LP_ViaVerde/info_cliente.txt");
+    printf("\n Client sucessfully deleted. There's the updated list of clients. \n");
+    fileptr1 = fopen("/Users/filinto/Documents/GitHub1/LP_ViaVerde/info_cliente.txt", "r");
+    ch = getc(fileptr1);
+    while (ch != EOF)
+    {
+        printf("%c", ch);
+        ch = getc(fileptr1);
+    }
+    fclose(fileptr1);
+    return 0;
 
 }
