@@ -28,7 +28,7 @@ void add_travel() {
         printf("Please try another one.\n");
         add_travel();
     } else {
-        printf("Sucess! Trip registered.");
+        printf("Sucess! Trip registered.\n");
         travel_cost = matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
         printf("Price: %f\n", travel_cost);
         printf("time: %d-%d-%d %d:%d:%d\n", tm.tm_mday,
