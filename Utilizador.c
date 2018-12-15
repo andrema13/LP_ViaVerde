@@ -31,6 +31,7 @@ void user_management() {
                 break;
             case 3:
                 system("clear");
+                delete_client();
                 //delete_client();
                 //remover utili
                 break;
@@ -233,18 +234,38 @@ void show_prices() {
     }
 }
 
-/*void delete_client() {
+
+/*void print_file() {
+    FILE *fptr;
+    char c;
+    // Open file
+    fptr = fopen("../info_cliente.txt", "r");
+    if (fptr == NULL) {
+        printf("Cannot open file \n");
+        exit(0);
+    }
+
+    // Read contents from file
+    c = fgetc(fptr);
+    while (c != EOF) {
+        printf("%c", c);
+        c = fgetc(fptr);
+    }
+
+    fclose(fptr);
+}
+
+
+void delete_client() {
     // Write program do delete from file
-    char filename[100];
     char str[100];
     FILE *fp1, *fp2;
     int del_line_no;
     int line_no = 0;
 
     printf("Enter file name");
-    scanf("%s", &filename);
 
-    fp1 = fopen(filename, "r");
+    fp1 = fopen("../info_cliente.txt", "r");
     printf("\ncontent of file \n");
    // print_file(fp1);
     rewind(fp1);
@@ -265,21 +286,12 @@ void show_prices() {
     fclose(fp1);
     fclose(fp2);
 
-    remove(filename);
-    rename("replica.txt", filename);
+    remove("info_cliente.txt");
+    rename("replica.txt", "info_cliente.txt");
 
-    fp1 = fopen(filename, "r");
+    fp1 = fopen("../info_cliente.txt", "r");
     printf("\ncontent of file after \n");
-    pprint_file(fp1);
+    print_file(fp1);
     fclose(fp1);
 
 }
-
-void print_file(FILE *fp) {
-
-    char ch;
-
-    while ((ch = fgetc(fp)) != EOF) {
-        printf("%c", ch);
-    }
-}*/
