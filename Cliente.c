@@ -4,12 +4,43 @@
 #include "Veiculo.h"
 #include "API_Leitura.h"
 #include "Portico.h"
-void add_travel(){
-    printf("add travel");
+#include "Utils.h"
+#include "time.h"
+#include "Utilizador.h"
+
+void add_travel() {
+
+    struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
+    struct Client client;
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    int choice_x, choice_y;
+    float travel_cost;
+
+    fill_matrix(matrix, "../Precos.txt", false);
+    show_prices();
+    printf("Enter where you want to go:\n");
+    readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:");
+    readInt(&choice_y, 1, NUM_PORTAGENS, "Choose between 1-5:\nY:");
+
+    if (choice_x == choice_y) {
+        printf("Cannot go to the same place!\n");
+        printf("Please try another one.\n");
+        add_travel();
+    } else {
+        printf("Sucess! Trip registered.");
+        travel_cost = matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
+        printf("Price: %f\n", travel_cost);
+        printf("time: %d-%d-%d %d:%d:%d\n", tm.tm_mday,
+               tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec);
+        printf("%d", client_id()-1);
+    }
 }
-void travel_history(){
+
+void travel_history() {
     printf("travel history");
 }
+
 void client_info() {
     struct Client client;
     FILE *file;
@@ -19,7 +50,7 @@ void client_info() {
     if (file == NULL) {
         perror("Error: ");
     } else {
-        while (fgets(line, sizeof(line), file)!= NULL) {
+        while (fgets(line, sizeof(line), file) != NULL) {
 
             fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
                    &client.ID, client.name, client.NIF,
@@ -27,7 +58,7 @@ void client_info() {
                    client.vehicle.model, client.vehicle.registration, &client.VVPoints);
             //pesquisa a info pessoal
         }
-        if (client.ID == client_id()- 1) {
+        if (client.ID == client_id() - 1) {
 
             printf("---Personal Info---\n");//imprime as info do cliente (ultimo da lista)
             printf("ID: %d\n", client.ID);
@@ -50,8 +81,7 @@ void vehicle_info() {
 
     if (file == NULL) {
         perror("Error: ");
-    }
-    else {
+    } else {
         while (fgets(line, sizeof line, file) != NULL) {
 
             fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
@@ -59,7 +89,7 @@ void vehicle_info() {
                    client.CC, client.NIB, client.street, client.vehicle.manufacturer,
                    client.vehicle.model, client.vehicle.registration, &client.VVPoints);//pesquisa a info do carro
         }
-        if (client.ID == client_id()- 1) {
+        if (client.ID == client_id() - 1) {
 
             printf("---Vehicle Info---\n");
             printf("Manufacturer: %s\n", client.vehicle.manufacturer);
@@ -115,8 +145,7 @@ void points_info() {
 
     if (file == NULL) {
         perror("Error: ");
-    }
-    else {
+    } else {
         while (fgets(line, sizeof line, file) != NULL) {
 
             fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
@@ -124,7 +153,7 @@ void points_info() {
                    client.CC, client.NIB, client.street, client.vehicle.manufacturer,
                    client.vehicle.model, client.vehicle.registration, &client.VVPoints);//pesquisa a info do carro
         }
-        if (client.ID == client_id()- 1) {
+        if (client.ID == client_id() - 1) {
 
             printf("---Points Info---\n");
             printf("VV Points: %d\n\n", client.VVPoints);

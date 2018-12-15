@@ -214,23 +214,26 @@ void edit_prices() {
     }
 }
 
+
 void show_prices() {
 
     //TODO meter a matriz em memoria para toda a aplicaçao
     struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
-
     fill_matrix(matrix, "../Precos.txt", false);
-
-    int i, j;
+    int i, j, num = 1;
 
     printf("---Prices---\n\n");
+    printf("Y/X\t\t1\t\t\t2\t\t\t3\t\t\t4\t\t\t5\n");
 
     for (i = 0; i < NUM_PORTAGENS; i++) {
+        printf("%d\t", num);
+        num++;
         for (j = 0; j < NUM_PORTAGENS; j++) {
             printf("%f\t ", matrix[i * NUM_PORTAGENS + j].price);
         }
         printf("\n");
     }
+    printf("-Legenda-\n1-Braga  2-Porto  3-Coimbra  4-Lisboa  5-Algarve\n");
 }
 
 int delete_client() {

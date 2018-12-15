@@ -12,11 +12,9 @@ bool fill_matrix(struct lanco *matrix, char *file, bool is_distance) {
     fp = fopen(file, "r");
     if (fp == NULL)
         return false;
-
     while ((getline(&line, &len, fp)) != -1) {
         j = 0;
         token = strtok(line, s);
-
         if (is_distance) matrix[i * NUM_PORTAGENS + j].dist = atof(token);
         else matrix[i * NUM_PORTAGENS + j].price = atof(token);
 
