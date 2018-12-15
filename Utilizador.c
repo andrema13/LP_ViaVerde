@@ -32,7 +32,6 @@ void user_management() {
             case 3:
                 system("clear");
                 delete_client();
-                //delete_client();
                 //remover utili
                 break;
             case 4:
@@ -234,17 +233,15 @@ void show_prices() {
     }
 }
 
-int delete_client()
-{
-    FILE * fileptr1, * fileptr2;
+int delete_client() {
+    FILE *fileptr1, *fileptr2;
     char ch;
     int delete_id, temp = 1;
 
     //open file in read mode
     fileptr1 = fopen("../info_cliente.txt", "r");
     ch = getc(fileptr1);
-    while (ch != EOF)
-    {
+    while (ch != EOF) {
         printf("%c", ch);
         ch = getc(fileptr1);
     }
@@ -255,16 +252,13 @@ int delete_client()
     //open new file in write mode
     fileptr2 = fopen("replica.txt", "w");
     ch = getc(fileptr1);
-    while (ch != EOF)
-    {
+    while (ch != EOF) {
         ch = getc(fileptr1);
-        if (ch == '\n')
-        {
+        if (ch == '\n') {
             temp++;
         }
         //except the line to be deleted
-        if (temp != delete_id)
-        {
+        if (temp != delete_id) {
             //copy all lines in file replica.c
             putc(ch, fileptr2);
         }
@@ -275,14 +269,12 @@ int delete_client()
     //rename the file replica.txt to original name
     rename("replica.txt", "../info_cliente.txt");
     printf("\n Client sucessfully deleted. There's the updated list of clients. \n");
-    fileptr1 = fopen("/Users/filinto/Documents/GitHub1/LP_ViaVerde/info_cliente.txt", "r");
+    fileptr1 = fopen("../info_cliente.txt", "r");
     ch = getc(fileptr1);
-    while (ch != EOF)
-    {
+    while (ch != EOF) {
         printf("%c", ch);
         ch = getc(fileptr1);
     }
     fclose(fileptr1);
     return 0;
-
 }

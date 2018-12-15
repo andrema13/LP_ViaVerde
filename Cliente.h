@@ -4,6 +4,8 @@
 
 void client_info();
 void travel_info();
+void add_travel();
+void travel_history();
 void points_info();
 void extracts_info();
 void vehicle_info();

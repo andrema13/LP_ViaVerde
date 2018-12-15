@@ -4,7 +4,12 @@
 #include "Veiculo.h"
 #include "API_Leitura.h"
 #include "Portico.h"
-
+void add_travel(){
+    printf("add travel");
+}
+void travel_history(){
+    printf("travel history");
+}
 void client_info() {
     struct Client client;
     FILE *file;
@@ -68,6 +73,33 @@ void vehicle_info() {
 
 void travel_info() {
 
+    int choice;
+    do {
+        printf("---Travels---\n\n");
+        printf("1. Add travel\n");
+        printf("2. Travel history\n");
+        printf("3. Exit\n");
+        readInt(&choice, 1, 4, "Choose an option: ");
+
+        switch (choice) {
+            case 1:
+                system("clear");
+                add_travel();
+                break;
+            case 2:
+                system("clear");
+                travel_history();
+                break;
+            case 3:
+                system("clear");
+            case 4:
+                printf("\nSee you soon! ;\051");
+                exit(0);
+            default:
+                printf("Wrong choice. Try Again\n");
+                break;
+        }
+    } while (choice != 3);
 }
 
 void extracts_info() {
