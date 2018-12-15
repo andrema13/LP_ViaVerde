@@ -241,7 +241,7 @@ int delete_client()
     int delete_id, temp = 1;
 
     //open file in read mode
-    fileptr1 = fopen("/Users/filinto/Documents/GitHub1/LP_ViaVerde/info_cliente.txt", "r");
+    fileptr1 = fopen("../info_cliente.txt", "r");
     ch = getc(fileptr1);
     while (ch != EOF)
     {
@@ -271,9 +271,9 @@ int delete_client()
     }
     fclose(fileptr1);
     fclose(fileptr2);
-    remove("/Users/filinto/Documents/GitHub1/LP_ViaVerde/info_cliente.txt");
+    remove("../info_cliente.txt");
     //rename the file replica.txt to original name
-    rename("replica.txt", "/Users/filinto/Documents/GitHub1/LP_ViaVerde/info_cliente.txt");
+    rename("replica.txt", "../info_cliente.txt");
     printf("\n Client sucessfully deleted. There's the updated list of clients. \n");
     fileptr1 = fopen("/Users/filinto/Documents/GitHub1/LP_ViaVerde/info_cliente.txt", "r");
     ch = getc(fileptr1);

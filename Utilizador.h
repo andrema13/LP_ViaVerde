@@ -8,5 +8,6 @@ void price_management();
 void invoice_generation();
 void edit_prices();
 void show_prices();
+int delete_client();
 
 #endif
