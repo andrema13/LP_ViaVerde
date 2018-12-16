@@ -5,6 +5,7 @@
 #include "Utils.h"
 #include "Cliente.h"
 
+
 void user_management() {
 
     int choice;
@@ -250,7 +251,7 @@ int delete_client() {
     }
     //rewind
     rewind(fileptr1);
-    printf(" \n Enter client's ID to be deleted:");
+    printf(" \n Enter client's ID to be deleted:"); // está a eliminar linhas REVER
     scanf("%d", &delete_id);
     //open new file in write mode
     fileptr2 = fopen("replica.txt", "w");
@@ -281,3 +282,12 @@ int delete_client() {
     fclose(fileptr1);
     return 0;
 }
+
+/*int edit_client(){
+    printf("");
+    delete_client();
+    client_id();
+    new_client();
+    printf("\nRegistered successfully!\n");
+
+}*/
