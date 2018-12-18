@@ -34,6 +34,28 @@ void main_menu() {
 }
 
 int main() {
+
+    int i;
+    struct Client client[client_id()];
+    FILE *file;
+    char line[256];
+    file = fopen("../info_cliente.txt", "r");
+
+    if (file == NULL) {
+        perror("Error: ");
+    } else {
+        for(i=0;i <= client_id();i++){
+
+            while (fgets(line, sizeof(line), file) != NULL) {//pesquisa a info pessoal e do veiculo
+
+                fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
+                       &client[i].ID, client[i].name, client[i].NIF,
+                       client[i].CC, client[i].NIB, client[i].street, client[i].vehicle.manufacturer,
+                       client[i].vehicle.model, client[i].vehicle.registration, &client[i].VVPoints);
+            }
+        }
+    }
+    fclose(file);
     main_menu();
     return 0;
 }

@@ -8,10 +8,12 @@
 #include "time.h"
 #include "Utilizador.h"
 
+int global_id;
+FILE *file;
+
 void add_travel() {
 
     struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
-    struct Client client;
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     int choice_x, choice_y;
@@ -33,7 +35,7 @@ void add_travel() {
         printf("Price: %f\n", travel_cost);
         printf("time: %d-%d-%d %d:%d:%d\n", tm.tm_mday,
                tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec);
-        printf("%d", client_id()-1);
+        printf("%d", client_id() - 1);
     }
 }
 
@@ -42,8 +44,7 @@ void travel_history() {
 }
 
 void client_info() {
-    struct Client client;
-    FILE *file;
+
     char line[256];
     file = fopen("../info_cliente.txt", "r");
 
@@ -58,7 +59,7 @@ void client_info() {
                    client.vehicle.model, client.vehicle.registration, &client.VVPoints);
             //pesquisa a info pessoal
         }
-        if (client.ID == client_id() - 1) {
+        if (client.ID == global_id) {
 
             printf("---Personal Info---\n");//imprime as info do cliente (ultimo da lista)
             printf("ID: %d\n", client.ID);
@@ -74,9 +75,7 @@ void client_info() {
 
 void vehicle_info() {
 
-    struct Client client;
-    FILE *file;
-    char line[256];
+    /*char line[256];
     file = fopen("../info_cliente.txt", "r");
 
     if (file == NULL) {
@@ -89,7 +88,7 @@ void vehicle_info() {
                    client.CC, client.NIB, client.street, client.vehicle.manufacturer,
                    client.vehicle.model, client.vehicle.registration, &client.VVPoints);//pesquisa a info do carro
         }
-        if (client.ID == client_id() - 1) {
+        if (client.ID == global_id) {
 
             printf("---Vehicle Info---\n");
             printf("Manufacturer: %s\n", client.vehicle.manufacturer);
@@ -98,7 +97,7 @@ void vehicle_info() {
 
         }
     }
-    fclose(file);
+    fclose(file);*/
 }// ver info carro ( penso que seja uma funcionalidade p/relatorio)
 
 void travel_info() {
@@ -153,7 +152,7 @@ void points_info() {
                    client.CC, client.NIB, client.street, client.vehicle.manufacturer,
                    client.vehicle.model, client.vehicle.registration, &client.VVPoints);//pesquisa a info do carro
         }
-        if (client.ID == client_id() - 1) {
+        if (client.ID == global_id) {
 
             printf("---Points Info---\n");
             printf("VV Points: %d\n\n", client.VVPoints);
@@ -214,7 +213,7 @@ void client_menu() {
 
     int choice;
     do {
-        printf("\n---Initial Menu---\n\n");
+        printf("\n---Client Menu---\n\n");
         printf("1. Enter to your account\n");
         printf("2. Register new client\n");
         printf("3. Previous Menu\n");
@@ -224,8 +223,12 @@ void client_menu() {
         switch (choice) {
             case 1:
                 system("clear");
+                //TODO pedir o id para aceder aos dados da conta
+                printf("\n--Tell me your ID--\n");
+                printf("Choose between 0 and %d\n", client_id());
+                readInt(&global_id, 0, client_id(), "Choose your ID: ");
                 customer_area();
-                break; // Login
+                break;
             case 2:
                 system("clear");
                 printf("\nEnter your data: \n");
@@ -238,7 +241,7 @@ void client_menu() {
                 break;
             case 4:
                 printf("\nSee you soon! ;\051");
-                exit(0);//sair da aplicacao
+                exit(0);
 
             default:
                 printf("Wrong choice. Try again\n");
@@ -249,9 +252,7 @@ void client_menu() {
 
 int client_id() {
 
-    struct Client client;
     int id = 0;
-    FILE *file;
     char line[256];
     file = fopen("../info_cliente.txt", "r");
 
@@ -269,9 +270,7 @@ int client_id() {
 
 void new_client() {
 
-    struct Client client;
     int c;
-    FILE *file;
 
     readString(client.name, 20, "Name: ");//Pede informaçoes pessoais ao utilizador
     readString(client.NIF, 10, "NIF: ");
@@ -292,4 +291,5 @@ void new_client() {
         putchar(c);
     }
     register_vehicle(); // vai pedir as informaçoes do veiculo ao utilizador
+    printf("\nYour ID is: %d\n", client_id());//mostra o id do novo cliente
 }
