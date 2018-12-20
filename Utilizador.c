@@ -28,6 +28,7 @@ void user_management() {
                 break;
             case 2:
                 system("clear");
+                int edit_client();
                 //editar utili
                 break;
             case 3:
@@ -37,6 +38,7 @@ void user_management() {
                 break;
             case 4:
                 system("clear");
+                //search_user();
                 //pesquisar utili
                 break;
             case 5:
@@ -240,7 +242,7 @@ void show_prices() {
 int delete_client() {
     FILE *fileptr1, *fileptr2;
     char ch;
-    int delete_id, temp = 1;
+    int delete_id, temp = 1, cont = delete_id;
 
     //open file in read mode
     fileptr1 = fopen("../info_cliente.txt", "r");
@@ -251,7 +253,7 @@ int delete_client() {
     }
     //rewind
     rewind(fileptr1);
-    printf(" \n Enter client's ID to be deleted:"); // está a eliminar linhas REVER
+    printf(" \n Enter client's ID to be deleted:");
     scanf("%d", &delete_id);
     //open new file in write mode
     fileptr2 = fopen("replica.txt", "w");
@@ -262,9 +264,16 @@ int delete_client() {
             temp++;
         }
         //except the line to be deleted
-        if (temp != delete_id) {
+        if (temp < delete_id) {
             //copy all lines in file replica.c
             putc(ch, fileptr2);
+        }
+        if (temp > delete_id){
+            // copiar tudo menos id
+            // id = contador
+        }
+        if (temp == delete_id){
+            temp++;
         }
     }
     fclose(fileptr1);
@@ -283,11 +292,71 @@ int delete_client() {
     return 0;
 }
 
-/*int edit_client(){
-    printf("");
-    delete_client();
-    client_id();
-    new_client();
-    printf("\nRegistered successfully!\n");
+int edit_client() {
+    FILE *fileptr1, *fileptr2;
+    char ch;
+    int edit_id, temp = 1, cont = edit_id;
 
-}*/
+    //open file in read mode
+    fileptr1 = fopen("../info_cliente.txt", "r");
+    ch = getc(fileptr1);
+    while (ch != EOF) {
+        printf("%c", ch);
+        ch = getc(fileptr1);
+    }
+    //rewind
+    rewind(fileptr1);
+    printf(" \n Enter client's ID to be edited:");
+    scanf("%d", &edit_id);
+    //open new file in write mode
+    fileptr2 = fopen("replica.txt", "w");
+    ch = getc(fileptr1);
+    while (ch != EOF) {
+        ch = getc(fileptr1);
+        if (ch == '\n') {
+            temp++;
+        }
+        //except the line to be deleted
+        if (temp != edit_id) {
+            //copy all lines in file replica.c
+            putc(ch, fileptr2);
+        }
+        if (temp = edit_id) {
+            // copiar ID , voltar a pedir o resto
+            // PEDIR TUDO OU PERGUNTAR O QUE QUER EDITAR?!!?!?!?!??
+        }
+    }
+    fclose(fileptr1);
+    fclose(fileptr2);
+    remove("../info_cliente.txt");
+    //rename the file replica.txt to original name
+    rename("replica.txt", "../info_cliente.txt");
+    printf("\n Client sucessfully edited. There's the updated list of clients. \n");
+    fileptr1 = fopen("../info_cliente.txt", "r");
+    ch = getc(fileptr1);
+    while (ch != EOF) {
+        printf("%c", ch);
+        ch = getc(fileptr1);
+    }
+    fclose(fileptr1);
+    return 0;
+}
+
+/*int search_user() {
+    int search_id;
+    char ch;
+    FILE *fileptr1;
+    printf("What's the ID you want to search?");
+    scanf("%d", &search_id);
+    fileptr1 = fopen("../info_cliente.txt", "r");
+    ch = getc(fileptr1);
+    while (ch < search_id) {
+        ch++;
+    }
+    if ( ch == search_id ){
+        printf("%c", ch);
+        ch = getc(fileptr1);
+    }
+    fclose(fileptr1);
+    return 0;
+}
