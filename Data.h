@@ -1,11 +1,6 @@
-//
-// Created by a-mar on 19/12/2018.
-//
-
-#include "Cliente.h"
-
 #ifndef VIAVERDE_DATA_H
 #define VIAVERDE_DATA_H
+#include "Cliente.h"
 
 extern struct Client clients_list[1000];
 extern int client_list_size;

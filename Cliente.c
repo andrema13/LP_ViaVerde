@@ -261,12 +261,7 @@ void new_client() {
     readString(client.street, 40, "Street: ");
 
     register_vehicle(); // vai pedir as informaçoes do veiculo ao utilizador
-
-    // Adicionar ao fim do crl do array
-    clients_list[client_list_size] = client;
-
-    //Aumentar o tamanho daquela merda
-    client_list_size = client_list_size + 1;
+    clients_list[client_list_size++] = client;
 
     printf("\nYour ID is: %d\n", client.ID);//mostra o id do novo cliente
 }

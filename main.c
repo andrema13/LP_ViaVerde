@@ -35,7 +35,8 @@
 }*/
 
 int main() {
-    read_client_file();
+
+    //read_client_file();
     new_client();
     //main_menu();
     return 0;
