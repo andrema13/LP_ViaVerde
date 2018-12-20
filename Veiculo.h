@@ -2,8 +2,6 @@
 #define VEICULO_H
 #include <string.h>
 
-void register_vehicle();
-
 struct Vehicle {
 
     char registration[10];

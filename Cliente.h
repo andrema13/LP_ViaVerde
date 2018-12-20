@@ -24,7 +24,6 @@ struct Client{
         char street[40];
         int VVPoints;
         struct Vehicle vehicle;
-       
     };
     
 #endif

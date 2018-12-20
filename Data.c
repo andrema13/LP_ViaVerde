@@ -1,7 +1,3 @@
-//
-// Created by a-mar on 19/12/2018.
-//
-
 #include <stdio.h>
 #include "Data.h"
 
