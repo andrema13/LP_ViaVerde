@@ -1,2 +1,1 @@
-ID	Name    NIF CC  NIB Street  Manufacturer    Model   Vehicle Registration    VVPoints
-3	admin	245237678	32456786	235465768767564565768	Rua sem magia	Nissan	Qahsaqui	21-TY-09	04	Andre	234554345	54365566	532454433646436346347	Rua gyusdfih	opel	corsa	34-op-98	0
+0	Andre	123	123	123	Morada	Merda	Merda	Merda	12-12-12	100	merda	merda	merda	0

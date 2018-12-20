@@ -22,7 +22,7 @@ void user_management() {
             case 1:
                 system("clear");
                 printf("\nEnter new client data: \n");
-                client_id();
+                //client_id();
                 new_client();
                 printf("\nRegistered successfully!\n");
                 break;

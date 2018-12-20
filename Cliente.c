@@ -7,11 +7,9 @@
 #include "Utils.h"
 #include "time.h"
 #include "Utilizador.h"
+#include "Data.h"
 
-int global_id;
-FILE *file;
-
-void add_travel() {
+/*void add_travel() {
 
     struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
     time_t t = time(NULL);
@@ -30,7 +28,7 @@ void add_travel() {
         printf("Please try another one.\n");
         add_travel();
     } else {
-        printf("Sucess! Trip registered.\n");
+        printf("Success! Trip registered.\n");
         travel_cost = matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
         printf("Price: %f\n", travel_cost);
         printf("time: %d-%d-%d %d:%d:%d\n", tm.tm_mday,
@@ -75,7 +73,7 @@ void client_info() {
 
 void vehicle_info() {
 
-    /*char line[256];
+    *//*char line[256];
     file = fopen("../info_cliente.txt", "r");
 
     if (file == NULL) {
@@ -97,7 +95,7 @@ void vehicle_info() {
 
         }
     }
-    fclose(file);*/
+    fclose(file);*//*
 }// ver info carro ( penso que seja uma funcionalidade p/relatorio)
 
 void travel_info() {
@@ -250,46 +248,25 @@ void client_menu() {
     } while (choice != 3);
 }
 
-int client_id() {
-
-    int id = 0;
-    char line[256];
-    file = fopen("../info_cliente.txt", "r");
-
-    if (file == NULL) {
-        perror("Error: ");
-        return -1;
-    }
-    while (fgets(line, sizeof(line), file)) {
-        fscanf(file, "%d", &client.ID);//pesquisa pelo ultimo id
-        id = client.ID++; // acrescenta o id
-    }
-    fclose(file);
-    return id;
-}
+*/
 
 void new_client() {
 
-    int c;
-
+    struct Client client;
+    client.ID = clients_list[client_list_size - 1].ID++;
     readString(client.name, 20, "Name: ");//Pede informaçoes pessoais ao utilizador
     readString(client.NIF, 10, "NIF: ");
     readString(client.CC, 9, "CC: ");
     readString(client.NIB, 22, "NIB: ");
     readString(client.street, 40, "Street: ");
-    file = fopen("../info_cliente.txt", "a");
 
-    if (file != NULL) {
-        fprintf(file, "%d\t%s\t%s\t%s\t%s\t%s", client_id(), client.name, client.NIF,
-                client.CC, client.NIB, client.street);
-        if (ferror(file)) {
-            perror("Error: ");
-        }
-        fclose(file);
-    }
-    while ((c = fgetc(file)) != EOF) {//escreve no ficheiro as informaçoes dadas pelo utilizador
-        putchar(c);
-    }
     register_vehicle(); // vai pedir as informaçoes do veiculo ao utilizador
-    printf("\nYour ID is: %d\n", client_id());//mostra o id do novo cliente
+
+    // Adicionar ao fim do crl do array
+    clients_list[client_list_size] = client;
+
+    //Aumentar o tamanho daquela merda
+    client_list_size = client_list_size + 1;
+
+    printf("\nYour ID is: %d\n", client.ID);//mostra o id do novo cliente
 }

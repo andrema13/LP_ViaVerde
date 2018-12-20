@@ -6,6 +6,7 @@
 
 void register_vehicle() {
 
+    //passar por parametro
     struct Client client;
     int c;
     FILE *file;
