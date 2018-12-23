@@ -240,6 +240,7 @@ void show_prices() {
 }
 
 int delete_client() {
+
     FILE *fileptr1, *fileptr2;
     char ch;
     int delete_id, temp = 1, cont = delete_id;
@@ -293,6 +294,7 @@ int delete_client() {
 }
 
 int edit_client() {
+
     FILE *fileptr1, *fileptr2;
     char ch;
     int edit_id, temp = 1, cont = edit_id;
@@ -359,4 +361,4 @@ int edit_client() {
     }
     fclose(fileptr1);
     return 0;
-}
+}*/

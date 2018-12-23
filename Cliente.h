@@ -18,9 +18,9 @@ struct Client{
 
         int ID;
         char name[20];
-        char NIF[10];
-        char CC[9];
-        char NIB[22];
+        char NIF[9];
+        char CC[8];
+        char NIB[20];
         char street[40];
         int VVPoints;
         struct Vehicle vehicle;

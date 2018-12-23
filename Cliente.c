@@ -253,43 +253,20 @@ void client_menu() {
 void new_client() {
 
     struct Client client;
-    FILE *file;
-    int c;
 
+    //TODO if client list size == 0 use zero else use client list size -1
     client.ID = clients_list[client_list_size - 1].ID++;
     readString(client.name, 20, "Name: ");//Pede informaçoes pessoais ao utilizador
-    readString(client.NIF, 10, "NIF: ");
-    readString(client.CC, 9, "CC: ");
-    readString(client.NIB, 22, "NIB: ");
+    readString(client.NIF, 9, "NIF: ");
+    readString(client.CC, 8, "CC: ");
+    readString(client.NIB, 20, "NIB: ");
     readString(client.street, 40, "Street: ");
     printf("\nEnter your vehicle information: \n ");
     readString(client.vehicle.manufacturer, 12, "Manufacturer: ");
     readString(client.vehicle.model, 12, "Model: ");
     readString(client.vehicle.registration, 10, "Registration: ");
     client.VVPoints = 0;
-    file = fopen("../info_cliente.txt", "a");
 
-    if (file != NULL) {
-        fprintf(file, "%d,%s,%s,%s,%s,%s,%s,%s,%s,%d\n",
-                client.ID,
-                client.name,
-                client.NIF,
-                client.CC,
-                client.NIB,
-                client.street,
-                client.vehicle.manufacturer,
-                client.vehicle.model,
-                client.vehicle.registration,
-                client.VVPoints);
-        if (ferror(file)) {
-            perror("Error: ");
-        }
-        fclose(file);
-    }
-    while ((c = fgetc(file)) != EOF) {
-        putchar(c);
-    }
     clients_list[client_list_size++] = client;
-
-    printf("\nYour ID is: %d\n", client.ID);//mostra o id do novo cliente
+    write_client_file();
 }
