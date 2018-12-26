@@ -209,7 +209,7 @@ void edit_prices() {
         edit_prices();
     } else {
         printf("Enter the new price:\n");
-        readFloat(&new_price, 1, 100, "Choose between 1-100: ");
+        readFloat(&new_price, 0, 100, "Choose between 0-100: ");
         matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price = new_price;
         write_matrix(matrix, "../Precos.txt");
         system("clear");
@@ -226,7 +226,7 @@ void show_prices() {
     int i, j;
 
     printf("---Prices---\n\n");
-    printf("Y/X\t\t1\t\t\t2\t\t\t3\t\t\t4\t\t\t5\n");
+    printf("X/Y\t\t1\t\t\t2\t\t\t3\t\t\t4\t\t\t5\n");
 
     for (i = 0; i < NUM_PORTAGENS; i++) {
         printf("%d\t", i + 1);

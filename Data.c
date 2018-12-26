@@ -3,7 +3,7 @@
 
 struct Client clients_list[100];
 struct Trip trips_list[100];
-int client_list_size = 0;
+int client_list_size = 0, trip_list_size = 0;
 
 void read_client_file() {
 
@@ -80,4 +80,45 @@ int count_file_line_numbers() {
 
     fclose(file);
     return lines;
+}
+
+void read_trip_file() {
+
+    FILE *file;
+    int i = 0;
+    file = fopen("../travel_registration.txt", "r");
+    if (file == NULL) {
+        perror("Error: ");
+    } else {
+        struct Trip trip;
+
+        while (fscanf(file, "%d",
+                      &trip.client_id
+        ) != EOF) {
+            trips_list[i] = trip;
+            i++;
+        }
+    }
+    trip_list_size = i;
+
+    fclose(file);
+}
+
+void write_trip_file() {
+
+    int i, c;
+    FILE *file;
+
+    file = fopen("../travel_registration.txt", "w");//Creates an empty file for writing. If a file with the same name already exists,
+    // its content is erased and the file is considered as a new empty file.
+
+    for (i = 0; i < trip_list_size; i++) {
+
+        fprintf(file, "%d\n",
+                trips_list[i].client_id);
+    }
+    while ((c = fgetc(file)) != EOF) {
+        putchar(c);
+    }
+    fclose(file);
 }

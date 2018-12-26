@@ -37,7 +37,12 @@ bool fill_matrix(struct lanco *matrix, char *file, bool is_distance) {
 
     return true;
 }
-
+/**
+ * 
+ * @param matrix
+ * @param file
+ * @return
+ */
 bool write_matrix(struct lanco *matrix, char *file) {
 
     FILE *fp;

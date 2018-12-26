@@ -44,6 +44,7 @@ int main() {
 //    fclose(file);
 
     read_client_file();
+    read_trip_file();
     //new_client();
     //printf("%d",count_file_line_numbers());
     main_menu();

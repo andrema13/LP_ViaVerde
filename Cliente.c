@@ -16,20 +16,28 @@ void add_trip() {
     struct tm tm = *localtime(&t);
     int choice_x, choice_y;
     float travel_cost;
+    struct Trip trip;
 
     fill_matrix(matrix, "../Precos.txt", false);
     show_prices();
     printf("Enter where you want to go:\n");
     readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:");
     readInt(&choice_y, 1, NUM_PORTAGENS, "Choose between 1-5:\nY:");
+    travel_cost = matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
 
-    if (choice_x == choice_y) {
-        printf("Cannot go to the same place!\n");
+    if (travel_cost == 0) {
+        printf("\nThis trip is not valid!\n");
         printf("Please try another one.\n");
         add_trip();
-    } else {
+    }
+    else {
+        trip.client_id = current_client_id;
+        trip.travel_cost = travel_cost;
+        trip.date = tm;
+        trips_list[trip_list_size++] = trip;
+        write_trip_file();
+
         printf("Success! Trip registered.\n");
-        travel_cost = matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
         printf("Price: %f\n", travel_cost);
         printf("time: %d-%d-%d %d:%d:%d\n", tm.tm_mday,
                tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec);
@@ -41,7 +49,7 @@ void travel_history() {
 }
 
 void client_info() {
-    
+
     for(int i = 0; i < client_list_size; i++){
         if(current_client_id == clients_list[i].ID){
             printf("Id : %d\n",clients_list[i].ID);
@@ -200,7 +208,9 @@ void client_menu() {
         }
     } while (choice != 3);
 }
-
+/**
+ *
+ */
 void new_client() {
 
     struct Client client;
