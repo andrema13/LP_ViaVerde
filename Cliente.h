@@ -4,7 +4,7 @@
 
 void client_info();
 void travel_info();
-void add_travel();
+void add_trip();
 void travel_history();
 void points_info();
 void extracts_info();
@@ -12,7 +12,6 @@ void vehicle_info();
 void customer_area();
 void client_menu();
 void new_client();
-int client_id();
 
 struct Client{
 

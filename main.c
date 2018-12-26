@@ -5,7 +5,7 @@
 #include "Utilizador.h"
 #include "Data.h"
 
-/*void main_menu() {
+void main_menu() {
 
     int choice;
     do {
@@ -32,12 +32,21 @@
                 break;
         }
     } while (choice != 3);
-}*/
+}
 
 int main() {
+//
+//    FILE *file;
+//    file = fopen("../info_cliente.txt", "w");
+//    if (file == NULL) {
+//        perror("Error: ");
+//    }
+//    fclose(file);
+
     read_client_file();
     //new_client();
-    //main_menu();
+    //printf("%d",count_file_line_numbers());
+    main_menu();
     //printf("%d",client_list_size);
     //printf("%s",clients_list[0].name);
     return 0;

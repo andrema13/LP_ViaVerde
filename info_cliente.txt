@@ -1,3 +1,4 @@
-0,andre,245775285,14249360,514563726178273654561,Rua de s.miguel,mercedes,amg,21-09-to,0
-1,ashgsdgh,25376375,1328721,2376353273253273273,ggfdgs,sdgds,sdghhgds,ewtyy87,0
-2,Andre Martins,34358737,3948478,3498438834843789347,Rua de serfuidh,dfuudh,dfhjdsfs,3478843,0
+1,a,a,a,a,a,a,a,a,0
+2,b,b,b,b,b,b,b,b,0
+3,c,c,c,c,c,c,c,c,0
+4,d,d,d,d,d,d,d,d,0

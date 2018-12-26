@@ -5,3 +5,7 @@ struct Trip {
     int client_id;
 
 };
+
+//char Toll[] = {
+//    "Braga", "Porto", "Coimbra", "Lisboa", "Algarve"
+//};

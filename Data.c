@@ -7,15 +7,14 @@ int client_list_size = 0;
 
 void read_client_file() {
 
-    int i = 0;
     FILE *file;
+    int i = 0;
     file = fopen("../info_cliente.txt", "r");
-
     if (file == NULL) {
         perror("Error: ");
     } else {
-        client_list_size = count_file_line_numbers();
         struct Client client;
+
         while (fscanf(file, "%d,%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%d",
                       &client.ID, client.name, client.NIF,
                       client.CC, client.NIB, client.street,
@@ -27,16 +26,18 @@ void read_client_file() {
             i++;
         }
     }
+    client_list_size = i;
 
     fclose(file);
 }
 
 void write_client_file() {
 
-    int i,c;
+    int i, c;
+    FILE *file;
 
-    FILE *file = fopen("../info_cliente.txt", "a");
-    //TODO limpar ficheiro antes de escrever no ficheiro
+    file = fopen("../info_cliente.txt", "w");//Creates an empty file for writing. If a file with the same name already exists,
+                                            // its content is erased and the file is considered as a new empty file.
 
     for (i = 0; i < client_list_size; i++) {
 
@@ -67,7 +68,7 @@ int count_file_line_numbers() {
 
     if (file == NULL) {
         perror("Error: ");
-        return -1;
+        return lines;
     }
 
     while (!feof(file)) {

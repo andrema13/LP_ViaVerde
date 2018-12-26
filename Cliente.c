@@ -9,7 +9,7 @@
 #include "Utilizador.h"
 #include "Data.h"
 
-/*void add_travel() {
+void add_trip() {
 
     struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
     time_t t = time(NULL);
@@ -26,14 +26,13 @@
     if (choice_x == choice_y) {
         printf("Cannot go to the same place!\n");
         printf("Please try another one.\n");
-        add_travel();
+        add_trip();
     } else {
         printf("Success! Trip registered.\n");
         travel_cost = matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
         printf("Price: %f\n", travel_cost);
         printf("time: %d-%d-%d %d:%d:%d\n", tm.tm_mday,
                tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec);
-        printf("%d", client_id() - 1);
     }
 }
 
@@ -42,60 +41,22 @@ void travel_history() {
 }
 
 void client_info() {
-
-    char line[256];
-    file = fopen("../info_cliente.txt", "r");
-
-    if (file == NULL) {
-        perror("Error: ");
-    } else {
-        while (fgets(line, sizeof(line), file) != NULL) {
-
-            fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
-                   &client.ID, client.name, client.NIF,
-                   client.CC, client.NIB, client.street, client.vehicle.manufacturer,
-                   client.vehicle.model, client.vehicle.registration, &client.VVPoints);
-            //pesquisa a info pessoal
-        }
-        if (client.ID == global_id) {
-
-            printf("---Personal Info---\n");//imprime as info do cliente (ultimo da lista)
-            printf("ID: %d\n", client.ID);
-            printf("Nome: %s\n", client.name);
-            printf("NIF: %s\n", client.NIF);
-            printf("CC: %s\n", client.CC);
-            printf("NIB: %s\n", client.NIB);
-            printf("Street: %s\n\n", client.street);
+    
+    for(int i = 0; i < client_list_size; i++){
+        if(current_client_id == clients_list[i].ID){
+            printf("Id : %d\n",clients_list[i].ID);
+            printf("Name : %s\n",clients_list[i].name);
         }
     }
-    fclose(file);
-} // ver info cliente ( penso que seja uma funcionalidade p/relatorio)
+
+
+
+}
+
 
 void vehicle_info() {
 
-    *//*char line[256];
-    file = fopen("../info_cliente.txt", "r");
 
-    if (file == NULL) {
-        perror("Error: ");
-    } else {
-        while (fgets(line, sizeof line, file) != NULL) {
-
-            fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
-                   &client.ID, client.name, client.NIF,
-                   client.CC, client.NIB, client.street, client.vehicle.manufacturer,
-                   client.vehicle.model, client.vehicle.registration, &client.VVPoints);//pesquisa a info do carro
-        }
-        if (client.ID == global_id) {
-
-            printf("---Vehicle Info---\n");
-            printf("Manufacturer: %s\n", client.vehicle.manufacturer);
-            printf("Model: %s\n", client.vehicle.model);
-            printf("Registration: %s\n\n", client.vehicle.registration);
-
-        }
-    }
-    fclose(file);*//*
 }// ver info carro ( penso que seja uma funcionalidade p/relatorio)
 
 void travel_info() {
@@ -111,7 +72,7 @@ void travel_info() {
         switch (choice) {
             case 1:
                 system("clear");
-                add_travel();
+                add_trip();
                 break;
             case 2:
                 system("clear");
@@ -135,28 +96,6 @@ void extracts_info() {
 
 void points_info() {
 
-    struct Client client;
-    FILE *file;
-    char line[256];
-    file = fopen("../info_cliente.txt", "r");
-
-    if (file == NULL) {
-        perror("Error: ");
-    } else {
-        while (fgets(line, sizeof line, file) != NULL) {
-
-            fscanf(file, "%d\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%d",
-                   &client.ID, client.name, client.NIF,
-                   client.CC, client.NIB, client.street, client.vehicle.manufacturer,
-                   client.vehicle.model, client.vehicle.registration, &client.VVPoints);//pesquisa a info do carro
-        }
-        if (client.ID == global_id) {
-
-            printf("---Points Info---\n");
-            printf("VV Points: %d\n\n", client.VVPoints);
-        }
-    }
-    fclose(file);
 }// ver info pontos ( penso que seja uma funcionalidade p/relatorio)
 
 void customer_area() {
@@ -221,16 +160,30 @@ void client_menu() {
         switch (choice) {
             case 1:
                 system("clear");
-                //TODO pedir o id para aceder aos dados da conta
-                printf("\n--Tell me your ID--\n");
-                printf("Choose between 0 and %d\n", client_id());
-                readInt(&global_id, 0, client_id(), "Choose your ID: ");
-                customer_area();
-                break;
+                if (client_list_size == 0) {
+                    printf("No clients yet!");
+                    client_menu();
+                }
+                else {
+                    for (int i = 0; i < client_list_size; i++) {
+                        printf("Id: %d - Name: %s\n", clients_list[i].ID, clients_list[i].name);
+                    }
+
+                    printf("\n--Tell me your ID--\n");
+                    scanf("%d",&current_client_id);
+
+                    for (int i = 0; i < client_list_size; i++) {
+                        if (current_client_id == clients_list[i].ID) {
+                            customer_area();
+                        }
+                    }
+                    printf("\n-- 404 - Client not found --\n");
+                    client_menu();
+                }
+
             case 2:
                 system("clear");
                 printf("\nEnter your data: \n");
-                client_id();
                 new_client();
                 printf("\nRegistered successfully!\n");
                 break;
@@ -248,14 +201,17 @@ void client_menu() {
     } while (choice != 3);
 }
 
-*/
-
 void new_client() {
 
     struct Client client;
 
-    //TODO if client list size == 0 use zero else use client list size -1
-    client.ID = clients_list[client_list_size - 1].ID++;
+    if(client_list_size == 0) {
+        client.ID = 1;
+    }
+    else {
+        client.ID = clients_list[client_list_size - 1].ID + 1;//incrementa id do cliente
+    }
+
     readString(client.name, 20, "Name: ");//Pede informaçoes pessoais ao utilizador
     readString(client.NIF, 9, "NIF: ");
     readString(client.CC, 8, "CC: ");
@@ -269,4 +225,5 @@ void new_client() {
 
     clients_list[client_list_size++] = client;
     write_client_file();
+    printf("Your ID is: %d", client.ID);
 }
