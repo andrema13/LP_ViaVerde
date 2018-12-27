@@ -226,7 +226,7 @@ void show_prices() {
     int i, j;
 
     printf("---Prices---\n\n");
-    printf("X/Y\t\t1\t\t\t2\t\t\t3\t\t\t4\t\t\t5\n");
+    printf("X/Y     1           2           3           4          5\n");
 
     for (i = 0; i < NUM_PORTAGENS; i++) {
         printf("%d\t", i + 1);

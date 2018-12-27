@@ -14,7 +14,7 @@ void read_client_file() {
         perror("Error: ");
     } else {
         struct Client client;
-
+        //TODO tratar das virgulas no input
         while (fscanf(file, "%d,%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%d",
                       &client.ID, client.name, client.NIF,
                       client.CC, client.NIB, client.street,
@@ -36,8 +36,9 @@ void write_client_file() {
     int i, c;
     FILE *file;
 
-    file = fopen("../info_cliente.txt", "w");//Creates an empty file for writing. If a file with the same name already exists,
-                                            // its content is erased and the file is considered as a new empty file.
+    file = fopen("../info_cliente.txt",
+                 "w");//Creates an empty file for writing. If a file with the same name already exists,
+    // its content is erased and the file is considered as a new empty file.
 
     for (i = 0; i < client_list_size; i++) {
 
@@ -91,9 +92,18 @@ void read_trip_file() {
         perror("Error: ");
     } else {
         struct Trip trip;
-
-        while (fscanf(file, "%d",
-                      &trip.client_id
+        //TODO tratar das virgulas no input
+        while (fscanf(file, "%d,%d,%d,%d/%d/%d,%d:%d:%d,%f",
+                      &trip.client_id,
+                      &trip.choice_x,
+                      &trip.choice_y,
+                      &trip.date.tm_mday,
+                      &trip.date.tm_mon,
+                      &trip.date.tm_year,
+                      &trip.date.tm_hour,
+                      &trip.date.tm_min,
+                      &trip.date.tm_sec,
+                      &trip.travel_cost
         ) != EOF) {
             trips_list[i] = trip;
             i++;
@@ -109,13 +119,23 @@ void write_trip_file() {
     int i, c;
     FILE *file;
 
-    file = fopen("../travel_registration.txt", "w");//Creates an empty file for writing. If a file with the same name already exists,
+    file = fopen("../travel_registration.txt", "w");//Creates an empty file for writing.
+    // If a file with the same name already exists,
     // its content is erased and the file is considered as a new empty file.
 
     for (i = 0; i < trip_list_size; i++) {
 
-        fprintf(file, "%d\n",
-                trips_list[i].client_id);
+        fprintf(file, "%d,%d,%d,%d/%d/%d,%d:%d:%d,%f\n",
+                trips_list[i].client_id,
+                trips_list[i].choice_x,
+                trips_list[i].choice_y,
+                trips_list[i].date.tm_mday,
+                trips_list[i].date.tm_mon + 1,
+                trips_list[i].date.tm_year + 1900,
+                trips_list[i].date.tm_hour,
+                trips_list[i].date.tm_min,
+                trips_list[i].date.tm_sec,
+                trips_list[i].travel_cost);
     }
     while ((c = fgetc(file)) != EOF) {
         putchar(c);

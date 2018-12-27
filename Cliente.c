@@ -5,76 +5,47 @@
 #include "API_Leitura.h"
 #include "Portico.h"
 #include "Utils.h"
-#include "time.h"
 #include "Utilizador.h"
 #include "Data.h"
-
-void add_trip() {
-
-    struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
-    int choice_x, choice_y;
-    float travel_cost;
-    struct Trip trip;
-
-    fill_matrix(matrix, "../Precos.txt", false);
-    show_prices();
-    printf("Enter where you want to go:\n");
-    readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:");
-    readInt(&choice_y, 1, NUM_PORTAGENS, "Choose between 1-5:\nY:");
-    travel_cost = matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
-
-    if (travel_cost == 0) {
-        printf("\nThis trip is not valid!\n");
-        printf("Please try another one.\n");
-        add_trip();
-    }
-    else {
-        trip.client_id = current_client_id;
-        trip.travel_cost = travel_cost;
-        trip.date = tm;
-        trips_list[trip_list_size++] = trip;
-        write_trip_file();
-
-        printf("Success! Trip registered.\n");
-        printf("Price: %f\n", travel_cost);
-        printf("time: %d-%d-%d %d:%d:%d\n", tm.tm_mday,
-               tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec);
-    }
-}
-
-void travel_history() {
-    printf("travel history");
-}
+#include "Viagem.h"
 
 void client_info() {
 
-    for(int i = 0; i < client_list_size; i++){
-        if(current_client_id == clients_list[i].ID){
-            printf("Id : %d\n",clients_list[i].ID);
-            printf("Name : %s\n",clients_list[i].name);
+    for (int i = 0; i < client_list_size; i++) {
+        if (current_client_id == clients_list[i].ID) {
+            printf("--Client Info--\n\n");
+            printf("ID : %d\n", clients_list[i].ID);
+            printf("Name : %s\n", clients_list[i].name);
+            printf("NIF : %s\n", clients_list[i].NIF);
+            printf("CC : %s\n", clients_list[i].CC);
+            printf("NIB : %s\n",clients_list[i].NIB);
+            printf("Street : %s\n",clients_list[i].street);
         }
     }
-
-
-
 }
-
 
 void vehicle_info() {
 
+    for (int i = 0; i < client_list_size; i++) {
+        if (current_client_id == clients_list[i].ID) {
+            printf("--Vehicle Info--\n\n");
+            printf("Manufacturer : %s\n", clients_list[i].vehicle.manufacturer);
+            printf("Model : %s\n",clients_list[i].vehicle.model);
+            printf("Registration : %s\n",clients_list[i].vehicle.registration);
+        }
+    }
 
 }// ver info carro ( penso que seja uma funcionalidade p/relatorio)
 
-void travel_info() {
+void trip_info() {
 
     int choice;
     do {
         printf("---Travels---\n\n");
-        printf("1. Add travel\n");
-        printf("2. Travel history\n");
-        printf("3. Exit\n");
+        printf("1. Add trip\n");
+        printf("2. Trip history\n");
+        printf("3. Previous Menu \n");
+        printf("4. Exit\n");
         readInt(&choice, 1, 4, "Choose an option: ");
 
         switch (choice) {
@@ -84,7 +55,7 @@ void travel_info() {
                 break;
             case 2:
                 system("clear");
-                travel_history();
+                trip_history();
                 break;
             case 3:
                 system("clear");
@@ -104,6 +75,12 @@ void extracts_info() {
 
 void points_info() {
 
+    for (int i = 0; i < client_list_size; i++) {
+        if (current_client_id == clients_list[i].ID) {
+            printf("--Points Info--\n\n");
+            printf("Points : %d\n",clients_list[i].VVPoints);
+        }
+    }
 }// ver info pontos ( penso que seja uma funcionalidade p/relatorio)
 
 void customer_area() {
@@ -113,7 +90,7 @@ void customer_area() {
         printf("---Customer area---\n\n");
         printf("1. Costumer\n");
         printf("2. Vehicle\n");
-        printf("3. Travels\n");
+        printf("3. Trips\n");
         printf("4. Extracts\n");
         printf("5. Points\n");
         printf("6. Previous Menu\n");
@@ -127,11 +104,11 @@ void customer_area() {
                 break;
             case 2:
                 system("clear");
-                vehicle_info();// aqui o cliente podera ver o registo do seu carro(s)
+                vehicle_info();// aqui o cliente podera ver o registo do seu carro
                 break;
             case 3:
                 system("clear");
-                travel_info();// aqui o cliente podera ver o registo das suas viagens
+                trip_info();// aqui o cliente podera ver o registo das suas viagens
                 break;
             case 4:
                 system("clear");
@@ -143,6 +120,7 @@ void customer_area() {
                 break;
             case 6:
                 system("clear");
+                client_menu();
                 break;//menu anterior
             case 7:
                 printf("\nSee you soon! ;\051");
@@ -168,27 +146,26 @@ void client_menu() {
         switch (choice) {
             case 1:
                 system("clear");
-                if (client_list_size == 0) {
+                if (client_list_size == 0) {//se nao existir clientes
                     printf("No clients yet!");
                     client_menu();
-                }
-                else {
-                    for (int i = 0; i < client_list_size; i++) {
+                } else {
+                    for (int i = 0; i < client_list_size; i++) {//mostra os clientes id/nome
                         printf("Id: %d - Name: %s\n", clients_list[i].ID, clients_list[i].name);
                     }
 
                     printf("\n--Tell me your ID--\n");
-                    scanf("%d",&current_client_id);
+                    scanf("%d", &current_client_id);
 
                     for (int i = 0; i < client_list_size; i++) {
-                        if (current_client_id == clients_list[i].ID) {
+                        if (current_client_id == clients_list[i].ID) {//entra na conta se o Id estiver
+                                                                //correcto.
                             customer_area();
                         }
                     }
                     printf("\n-- 404 - Client not found --\n");
                     client_menu();
                 }
-
             case 2:
                 system("clear");
                 printf("\nEnter your data: \n");
@@ -208,17 +185,14 @@ void client_menu() {
         }
     } while (choice != 3);
 }
-/**
- *
- */
+
 void new_client() {
 
     struct Client client;
 
-    if(client_list_size == 0) {
+    if (client_list_size == 0) {
         client.ID = 1;
-    }
-    else {
+    } else {
         client.ID = clients_list[client_list_size - 1].ID + 1;//incrementa id do cliente
     }
 

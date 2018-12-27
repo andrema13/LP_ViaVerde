@@ -3,9 +3,7 @@
 #include "Veiculo.h"
 
 void client_info();
-void travel_info();
-void add_trip();
-void travel_history();
+void trip_info();
 void points_info();
 void extracts_info();
 void vehicle_info();
