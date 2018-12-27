@@ -1,5 +1,0 @@
-1,a,a,a,a,a,a,a,a,0
-2,b,b,b,b,b,b,b,b,0
-3,c,c,c,c,c,c,c,c,0
-4,d,d,d,d,d,d,d,d,0
-5,Andre,24577528,1424936,1672156712567126251,Rua de S.Miguel,Mercedes,AMG,23-09-TI,0

@@ -5,7 +5,6 @@
 #include "API_Leitura.h"
 #include "Data.h"
 
-
 void add_trip() {
 
     struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
@@ -70,6 +69,4 @@ void trip_history() {
                         //o trip count sera 1 portanto nao existem viagens ainda
         printf("No trips registered yet!\n");
     }
-
-
 }

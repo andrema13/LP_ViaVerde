@@ -56,3 +56,4 @@ dkms.conf
 cmake-build-debug/
 
 *.txt___jb_old___
+*.txt
