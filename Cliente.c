@@ -18,8 +18,8 @@ void client_info() {
             printf("Name : %s\n", clients_list[i].name);
             printf("NIF : %s\n", clients_list[i].NIF);
             printf("CC : %s\n", clients_list[i].CC);
-            printf("NIB : %s\n",clients_list[i].NIB);
-            printf("Street : %s\n",clients_list[i].street);
+            printf("NIB : %s\n", clients_list[i].NIB);
+            printf("Street : %s\n", clients_list[i].street);
         }
     }
 }
@@ -30,8 +30,8 @@ void vehicle_info() {
         if (current_client_id == clients_list[i].ID) {
             printf("--Vehicle Info--\n\n");
             printf("Manufacturer : %s\n", clients_list[i].vehicle.manufacturer);
-            printf("Model : %s\n",clients_list[i].vehicle.model);
-            printf("Registration : %s\n",clients_list[i].vehicle.registration);
+            printf("Model : %s\n", clients_list[i].vehicle.model);
+            printf("Registration : %s\n", clients_list[i].vehicle.registration);
         }
     }
 
@@ -41,7 +41,7 @@ void trip_info() {
 
     int choice;
     do {
-        printf("---Travels---\n\n");
+        printf("---Trips---\n\n");
         printf("1. Add trip\n");
         printf("2. Trip history\n");
         printf("3. Previous Menu \n");
@@ -59,6 +59,7 @@ void trip_info() {
                 break;
             case 3:
                 system("clear");
+                break;
             case 4:
                 printf("\nSee you soon! ;\051");
                 exit(0);
@@ -78,7 +79,7 @@ void points_info() {
     for (int i = 0; i < client_list_size; i++) {
         if (current_client_id == clients_list[i].ID) {
             printf("--Points Info--\n\n");
-            printf("Points : %d\n",clients_list[i].VVPoints);
+            printf("Points : %d\n", clients_list[i].VVPoints);
         }
     }
 }// ver info pontos ( penso que seja uma funcionalidade p/relatorio)
@@ -136,7 +137,7 @@ void client_menu() {
 
     int choice;
     do {
-        printf("\n---Client Menu---\n\n");
+        printf("---Client Menu---\n\n");
         printf("1. Enter to your account\n");
         printf("2. Register new client\n");
         printf("3. Previous Menu\n");
@@ -150,22 +151,10 @@ void client_menu() {
                     printf("No clients yet!");
                     client_menu();
                 } else {
-                    for (int i = 0; i < client_list_size; i++) {//mostra os clientes id/nome
-                        printf("Id: %d - Name: %s\n", clients_list[i].ID, clients_list[i].name);
-                    }
-
-                    printf("\n--Tell me your ID--\n");
-                    scanf("%d", &current_client_id);
-
-                    for (int i = 0; i < client_list_size; i++) {
-                        if (current_client_id == clients_list[i].ID) {//entra na conta se o Id estiver
-                                                                //correcto.
-                            customer_area();
-                        }
-                    }
-                    printf("\n-- 404 - Client not found --\n");
-                    client_menu();
+                    id_verification();//verifica se o id dado existe nos clientes registados
                 }
+                break;
+
             case 2:
                 system("clear");
                 printf("\nEnter your data: \n");
@@ -184,6 +173,31 @@ void client_menu() {
                 break;
         }
     } while (choice != 3);
+}
+
+void id_verification() {
+
+    printf("--Registered Clients--\n");
+    for (int i = 0; i < client_list_size; i++) {//mostra os clientes id/nome
+        printf("Id: %d - Name: %s\n", clients_list[i].ID, clients_list[i].name);
+    }
+    printf("**Press 0 to exit**\n");
+    printf("\n--Tell me your ID--\n");
+    scanf("%d", &current_client_id);
+
+    if (current_client_id == 0) {
+        system("clear");
+        client_menu();
+    } else {
+        for (int i = 0; i < client_list_size; i++) {//verifica se exite o id
+            if (current_client_id == clients_list[i].ID) {
+                customer_area();
+            }
+        }//se chega aqui entao nao existe o id , logo volta a pedir um novo id
+        printf("** 404 - Client not found **\n");
+        system("clear");
+        id_verification();
+    }
 }
 
 void new_client() {

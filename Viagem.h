@@ -7,7 +7,7 @@ struct Trip {
     struct tm date;
     int choice_x;
     int choice_y;
-    float travel_cost;
+    float trip_cost;
 };
 void add_trip();
 void add_trip();

@@ -103,7 +103,7 @@ void read_trip_file() {
                       &trip.date.tm_hour,
                       &trip.date.tm_min,
                       &trip.date.tm_sec,
-                      &trip.travel_cost
+                      &trip.trip_cost
         ) != EOF) {
             trips_list[i] = trip;
             i++;
@@ -135,7 +135,7 @@ void write_trip_file() {
                 trips_list[i].date.tm_hour,
                 trips_list[i].date.tm_min,
                 trips_list[i].date.tm_sec,
-                trips_list[i].travel_cost);
+                trips_list[i].trip_cost);
     }
     while ((c = fgetc(file)) != EOF) {
         putchar(c);

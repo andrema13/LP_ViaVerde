@@ -32,7 +32,7 @@ void add_trip() {
         trip.choice_x = choice_x;
         trip.choice_y = choice_y;
         trip.date = tm;
-        trip.travel_cost = travel_cost;
+        trip.trip_cost = travel_cost;
         trips_list[trip_list_size++] = trip;
         write_trip_file();
 
@@ -46,11 +46,13 @@ void add_trip() {
 void trip_history() {
 
     int i;
+    int trip_count = 1;
     printf("--Trip History--\n\n");
+
     for (i = 0; i < trip_list_size; i++) {
 
         if (current_client_id == trips_list[i].client_id) {
-            printf("** Trip nº%d **\n", i + 1);//adiciona-se o 1 para nao existir a viagem 0
+            printf("** Trip nº%d **\n", trip_count++);//mostra o numero de viagens ordenado p/cliente
             printf("Input Toll : %d\n", trips_list[i].choice_x);
             printf("Exit Toll : %d\n", trips_list[i].choice_y);
             printf("Date : %d/%d/%d\n",
@@ -61,7 +63,13 @@ void trip_history() {
                    trips_list[i].date.tm_hour,
                    trips_list[i].date.tm_min,
                    trips_list[i].date.tm_sec);
-            printf("Cost : %f€\n", trips_list[i].travel_cost);
+            printf("Cost : %f€\n", trips_list[i].trip_cost);
         }
     }
+    if (trip_count == 1) {//chegando aqui e dado que se nao houver viagens registadas
+                        //o trip count sera 1 portanto nao existem viagens ainda
+        printf("No trips registered yet!\n");
+    }
+
+
 }

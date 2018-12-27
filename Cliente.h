@@ -10,6 +10,7 @@ void vehicle_info();
 void customer_area();
 void client_menu();
 void new_client();
+void id_verification();
 
 struct Client{
 
