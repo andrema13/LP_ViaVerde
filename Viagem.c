@@ -73,7 +73,7 @@ void trip_history() {
 
 void extracts_page() {
 
-    int month, year, get_year = trips_list->date.tm_year + 1900,results = 0;
+    int month, year, get_year = trips_list->date.tm_year + 1900, results = 0;
     float total_price = 0;
 
     printf("--Extract Page--\n\n");
@@ -83,32 +83,32 @@ void extracts_page() {
 
     for (int i = 0; i < trip_list_size; i++) {
 
-        if (current_client_id == trips_list[i].client_id) {//verifica o id do cliente
-            if (trips_list[i].date.tm_mon + 1 == month && //pesquisa pelo mes e ano
-                trips_list[i].date.tm_year + 1900 == year) {
-                system("clear");
-                if (results == 0) {//apenas para imprimir o cabeçalho uma vez
-                    printf("*** Extract %d/%d ***\n\n", month, year);
-                    printf("Client ID  Input-Exit      Date       Hour        Price\n");
-                }
-                printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
-                       trips_list[i].client_id,
-                       trips_list[i].choice_x,
-                       trips_list[i].choice_y,
-                       trips_list[i].date.tm_mday,
-                       trips_list[i].date.tm_mon + 1,
-                       trips_list[i].date.tm_year + 1900,
-                       trips_list[i].date.tm_hour,
-                       trips_list[i].date.tm_min,
-                       trips_list[i].date.tm_sec,
-                       trips_list[i].trip_cost);
-                total_price += trips_list[i].trip_cost;
-                results++;
+        if (current_client_id == trips_list[i].client_id && //verifica o id do cliente
+            trips_list[i].date.tm_mon + 1 == month &&      // pesquisa pelo mes e ano
+            trips_list[i].date.tm_year + 1900 == year) {
+
+            system("clear");
+            if (results == 0) {//apenas para imprimir o cabeçalho uma vez
+                printf("*** Extract %d/%d ***\n\n", month, year);
+                printf("Client ID  Input-Exit      Date       Hour        Price\n");
             }
+            printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
+                   trips_list[i].client_id,
+                   trips_list[i].choice_x,
+                   trips_list[i].choice_y,
+                   trips_list[i].date.tm_mday,
+                   trips_list[i].date.tm_mon + 1,
+                   trips_list[i].date.tm_year + 1900,
+                   trips_list[i].date.tm_hour,
+                   trips_list[i].date.tm_min,
+                   trips_list[i].date.tm_sec,
+                   trips_list[i].trip_cost);
+            total_price += trips_list[i].trip_cost;
+            results++;
         }
     }
     if (results == 0) {
-        printf("\n-- 404-No extracts available!--\n");
+        printf("\n** 404 - Extract not found **\n");
     } else {
         printf("\n                                         Total: %f€\n\n", total_price);
     }
