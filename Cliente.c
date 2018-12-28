@@ -8,6 +8,7 @@
 #include "Utilizador.h"
 #include "Data.h"
 #include "Viagem.h"
+int current_client_id = 0;
 
 void client_info() {
 
@@ -72,6 +73,32 @@ void trip_info() {
 
 void extracts_info() {
 
+    int choice;
+    do {
+        printf("--Extracts--\n\n");
+        printf("1. See extract  \n");
+        printf("2. Previous Menu\n");
+        printf("3. Exit\n");
+        readInt(&choice, 1, 3, "Choose an option: ");
+
+        switch (choice) {
+
+            case 1:
+                system("clear");
+                extracts_page();
+                break;
+            case 2:
+                system("clear");//menu anterior
+                break;
+            case 3:
+                printf("\nSee you soon! ;\051");
+                exit(0);
+
+            default:
+                printf("Wrong choice. Try again\n");
+                break;
+        }
+    } while (choice != 2);
 }
 
 void points_info() {
@@ -191,6 +218,7 @@ void id_verification() {
     } else {
         for (int i = 0; i < client_list_size; i++) {//verifica se exite o id
             if (current_client_id == clients_list[i].ID) {
+                system("clear");
                 customer_area();
             }
         }//se chega aqui entao nao existe o id , logo volta a pedir um novo id

@@ -11,7 +11,7 @@ void add_trip() {
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     int choice_x, choice_y;
-    float travel_cost;
+    float trip_cost;
     struct Trip trip;
 
     fill_matrix(matrix, "../Precos.txt", false);
@@ -19,9 +19,9 @@ void add_trip() {
     printf("Enter where you want to go:\n");
     readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:");
     readInt(&choice_y, 1, NUM_PORTAGENS, "Choose between 1-5:\nY:");
-    travel_cost = matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
+    trip_cost = matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
 
-    if (travel_cost == 0) {/*verifica se o preço é = 0 e tambem verifica
+    if (trip_cost == 0) {/*verifica se o preço é = 0 e tambem verifica
                             se estamos a ir para o mesmo destino, ja que o preco tambem é 0*/
         printf("\nThis trip is not valid!\n");
         printf("Please try another one.\n");
@@ -31,12 +31,12 @@ void add_trip() {
         trip.choice_x = choice_x;
         trip.choice_y = choice_y;
         trip.date = tm;
-        trip.trip_cost = travel_cost;
+        trip.trip_cost = trip_cost;
         trips_list[trip_list_size++] = trip;
         write_trip_file();
 
         printf("Success! Trip registered.\n");
-        printf("Price: %f\n", travel_cost);
+        printf("Price: %f\n", trip_cost);
         printf("time: %d-%d-%d %d:%d:%d\n", tm.tm_mday,
                tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec);
     }
@@ -56,17 +56,60 @@ void trip_history() {
             printf("Exit Toll : %d\n", trips_list[i].choice_y);
             printf("Date : %d/%d/%d\n",
                    trips_list[i].date.tm_mday,
-                   trips_list[i].date.tm_mon,
-                   trips_list[i].date.tm_year);
+                   trips_list[i].date.tm_mon + 1,
+                   trips_list[i].date.tm_year + 1900);
             printf("Hour: %d:%d:%d\n",
                    trips_list[i].date.tm_hour,
                    trips_list[i].date.tm_min,
                    trips_list[i].date.tm_sec);
-            printf("Cost : %f€\n", trips_list[i].trip_cost);
+            printf("Cost : %f€\n\n", trips_list[i].trip_cost);
         }
     }
     if (trip_count == 1) {//chegando aqui e dado que se nao houver viagens registadas
-                        //o trip count sera 1 portanto nao existem viagens ainda
+        //o trip count sera 1 portanto nao existem viagens ainda
         printf("No trips registered yet!\n");
+    }
+}
+
+void extracts_page() {
+
+    int month, year, get_year = trips_list->date.tm_year + 1900,results = 0;
+    float total_price = 0;
+
+    printf("--Extract Page--\n\n");
+    printf("Tell me the month : ");
+    readInt(&month, 1, 12, "Between 1-12 : ");
+    readInt(&year, 1900, get_year, "Tell me the year : ");
+
+    for (int i = 0; i < trip_list_size; i++) {
+
+        if (current_client_id == trips_list[i].client_id) {//verifica o id do cliente
+            if (trips_list[i].date.tm_mon + 1 == month && //pesquisa pelo mes e ano
+                trips_list[i].date.tm_year + 1900 == year) {
+                system("clear");
+                if (results == 0) {//apenas para imprimir o cabeçalho uma vez
+                    printf("*** Extract %d/%d ***\n\n", month, year);
+                    printf("Client ID  Input-Exit      Date       Hour        Price\n");
+                }
+                printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
+                       trips_list[i].client_id,
+                       trips_list[i].choice_x,
+                       trips_list[i].choice_y,
+                       trips_list[i].date.tm_mday,
+                       trips_list[i].date.tm_mon + 1,
+                       trips_list[i].date.tm_year + 1900,
+                       trips_list[i].date.tm_hour,
+                       trips_list[i].date.tm_min,
+                       trips_list[i].date.tm_sec,
+                       trips_list[i].trip_cost);
+                total_price += trips_list[i].trip_cost;
+                results++;
+            }
+        }
+    }
+    if (results == 0) {
+        printf("\n-- 404-No extracts available!--\n");
+    } else {
+        printf("\n                                         Total: %f€\n\n", total_price);
     }
 }

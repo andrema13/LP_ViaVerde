@@ -12,4 +12,5 @@ struct Trip {
 void add_trip();
 void add_trip();
 void trip_history();
+void extracts_page();
 #endif

@@ -4,6 +4,7 @@
 #include "Cliente.h"
 #include "Utilizador.h"
 #include "Data.h"
+#include "Viagem.h"
 
 void main_menu() {
 
@@ -45,10 +46,6 @@ int main() {
 
     read_client_file();
     read_trip_file();
-    //new_client();
-    //printf("%d",count_file_line_numbers());
     main_menu();
-    //printf("%d",client_list_size);
-    //printf("%s",clients_list[0].name);
     return 0;
 }

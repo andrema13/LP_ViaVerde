@@ -130,8 +130,8 @@ void write_trip_file() {
                 trips_list[i].choice_x,
                 trips_list[i].choice_y,
                 trips_list[i].date.tm_mday,
-                trips_list[i].date.tm_mon + 1,
-                trips_list[i].date.tm_year + 1900,
+                trips_list[i].date.tm_mon ,//somar +1
+                trips_list[i].date.tm_year ,//somar +1900
                 trips_list[i].date.tm_hour,
                 trips_list[i].date.tm_min,
                 trips_list[i].date.tm_sec,
