@@ -23,7 +23,7 @@ void main_menu() {
                 break;
             case 2:
                 system("clear");
-                user_screen();
+                id_verification(main_menu,user_screen);
                 break;
             case 3: // Exit
                 printf("\nSee you soon! ;\051");

@@ -4,6 +4,7 @@
 #include "API_Leitura.h"
 #include "Utils.h"
 #include "Cliente.h"
+#include "Viagem.h"
 
 
 void user_management() {
@@ -22,13 +23,12 @@ void user_management() {
             case 1:
                 system("clear");
                 printf("\nEnter new client data: \n");
-                //client_id();
                 new_client();
                 printf("\nRegistered successfully!\n");
                 break;
             case 2:
                 system("clear");
-                int edit_client();
+                //edit_client();
                 //editar utili
                 break;
             case 3:
@@ -55,6 +55,7 @@ void user_management() {
 }
 
 void travel_management() {
+
     int choice;
     do {
         printf("---Travel Management---\n\n");
@@ -66,7 +67,7 @@ void travel_management() {
         switch (choice) {
             case 1:
                 system("clear");
-                //acrescentar viagens( ver enunciado)
+                add_trip();
                 break;
             case 2:
                 system("clear");

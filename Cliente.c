@@ -8,7 +8,6 @@
 #include "Utilizador.h"
 #include "Data.h"
 #include "Viagem.h"
-int current_client_id = 0;
 
 void client_info() {
 
@@ -44,7 +43,7 @@ void trip_info() {
     do {
         printf("---Trips---\n\n");
         printf("1. Add trip\n");
-        printf("2. Trip history\n");
+        printf("2. Trip history\n");//funcionalidade nova
         printf("3. Previous Menu \n");
         printf("4. Exit\n");
         readInt(&choice, 1, 4, "Choose an option: ");
@@ -178,7 +177,8 @@ void client_menu() {
                     printf("No clients yet!");
                     client_menu();
                 } else {
-                    id_verification();//verifica se o id dado existe nos clientes registados
+                    id_verification(client_menu,customer_area);
+                    //verifica se o id dado existe nos clientes registados
                 }
                 break;
 
@@ -202,7 +202,7 @@ void client_menu() {
     } while (choice != 3);
 }
 
-void id_verification() {
+void id_verification(void (*f)(void),void (*e)(void)) {//para passar duas funçoes sem argumentos
 
     printf("--Registered Clients--\n");
     for (int i = 0; i < client_list_size; i++) {//mostra os clientes id/nome
@@ -214,17 +214,17 @@ void id_verification() {
 
     if (current_client_id == 0) {
         system("clear");
-        client_menu();
+        (*f)();
     } else {
         for (int i = 0; i < client_list_size; i++) {//verifica se exite o id
             if (current_client_id == clients_list[i].ID) {
                 system("clear");
-                customer_area();
+                (*e)();
             }
         }//se chega aqui entao nao existe o id , logo volta a pedir um novo id
         printf("** 404 - Client not found **\n");
         system("clear");
-        id_verification();
+        id_verification(client_menu,customer_area);
     }
 }
 
