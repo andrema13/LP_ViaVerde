@@ -174,10 +174,10 @@ void client_menu() {
             case 1:
                 system("clear");
                 if (client_list_size == 0) {//se nao existir clientes
-                    printf("No clients yet!");
+                    printf("\nNo clients yet!\n");
                     client_menu();
                 } else {
-                    id_verification(client_menu,customer_area);
+                    id_verification(client_menu, customer_area);
                     //verifica se o id dado existe nos clientes registados
                 }
                 break;
@@ -202,30 +202,28 @@ void client_menu() {
     } while (choice != 3);
 }
 
-void id_verification(void (*f)(void),void (*e)(void)) {//para passar duas funçoes sem argumentos
+void id_verification(void (*f)(void), void (*e)(void)) {//para passar duas funçoes sem argumentos
 
     printf("--Registered Clients--\n");
     for (int i = 0; i < client_list_size; i++) {//mostra os clientes id/nome
         printf("Id: %d - Name: %s\n", clients_list[i].ID, clients_list[i].name);
     }
-    printf("**Press 0 to exit**\n");
-    printf("\n--Tell me your ID--\n");
-    scanf("%d", &current_client_id);
 
-    if (current_client_id == 0) {
-        system("clear");
-        (*f)();
-    } else {
-        for (int i = 0; i < client_list_size; i++) {//verifica se exite o id
-            if (current_client_id == clients_list[i].ID) {
-                system("clear");
-                (*e)();
-            }
-        }//se chega aqui entao nao existe o id , logo volta a pedir um novo id
-        printf("** 404 - Client not found **\n");
-        system("clear");
-        id_verification(client_menu,customer_area);
-    }
+    printf("\n--Tell me your ID--\n");
+    current_client_id = 0;
+    scanf(" %d", &current_client_id);
+
+    for (int i = 0; i < client_list_size; i++) {//verifica se exite o id
+        if (current_client_id == clients_list[i].ID) {
+            system("clear");
+            (*e)();
+            return;
+        }
+    }//se chega aqui entao nao existe o id , logo volta a pedir um novo id
+    printf("** 404 - Client not found **\n");
+    system("clear");
+    clear_buffer();//limpa o input anterior e espera um novo scanf
+    id_verification((*f), (*e));
 }
 
 void new_client() {

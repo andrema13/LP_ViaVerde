@@ -6,6 +6,7 @@
 #include "Data.h"
 #include "Viagem.h"
 
+
 void main_menu() {
 
     int choice;
@@ -23,7 +24,13 @@ void main_menu() {
                 break;
             case 2:
                 system("clear");
-                id_verification(main_menu,user_screen);
+                if (client_list_size == 0) {//se nao existir clientes
+                    printf("\nNo clients yet!\n");
+                    main_menu();
+                } else {
+                    id_verification(main_menu, user_menu);
+                    //verifica se o id dado existe nos clientes registados
+                }
                 break;
             case 3: // Exit
                 printf("\nSee you soon! ;\051");
@@ -43,6 +50,9 @@ int main() {
 //        perror("Error: ");
 //    }
 //    fclose(file);
+
+    clients_list = (struct Client*) malloc(client_list_max_size * sizeof(struct Client));
+
 
     read_client_file();
     read_trip_file();

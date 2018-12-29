@@ -63,3 +63,8 @@ bool write_matrix(struct lanco *matrix, char *file) {
 
     return true;
 }
+
+void clear_buffer(){
+    int ch;
+    while ((ch = getchar()) != '\n' && ch != EOF);
+}

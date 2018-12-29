@@ -58,8 +58,8 @@ void travel_management() {
 
     int choice;
     do {
-        printf("---Travel Management---\n\n");
-        printf("1. Add travel\n");
+        printf("---Trip Management---\n\n");
+        printf("1. Add trip\n");
         printf("2. Search travel\n");
         printf("3. Previous Menu\n");
         printf("4. Exit\n");
@@ -118,38 +118,7 @@ void price_management() {
     } while (choice != 3);
 }
 
-void invoice_generation() {
-
-    int choice;
-    do {
-        printf("---Invoice Generation---\n\n");
-        printf("1. Invoice Generation\n");
-        printf("2. Invoice Search\n");// nova funcionalidade (relatorio)
-        printf("3. Previous Menu\n");
-        printf("4. Exit\n");
-        readInt(&choice, 1, 4, "Choose an option: ");
-        switch (choice) {
-            case 1:
-                system("clear");
-                //gerar fatura para um utiliz especifico num dado mes
-                break;
-            case 2:
-                system("clear");
-                //Pesquisar por faturas anteriores
-            case 3:
-                system("clear");//menu anterior
-                break;
-            case 4:
-                printf("\nSee you soon! ;\051");
-                exit(0);//sair
-            default:
-                printf("Wrong choice. Try Again\n");
-                break;
-        }
-    } while (choice != 3);
-}
-
-void user_screen() {
+void user_menu() {
 
     int choice;
     do {
@@ -177,13 +146,14 @@ void user_screen() {
                 break;
             case 4:
                 system("clear");
-                invoice_generation();
+                extracts_page();
                 break;
             case 5:
                 system("clear");
                 break;
             case 6:
                 printf("\nSee you soon! ;\051");
+                //free(*__alloc_align())
                 exit(0);
             default:
                 printf("Wrong choice. Try again\n");

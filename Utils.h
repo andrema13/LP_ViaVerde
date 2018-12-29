@@ -29,7 +29,7 @@ struct lanco {
  */
 bool fill_matrix(struct lanco *matrix, char *file, bool is_distance);
 bool write_matrix(struct lanco *matrix, char *file);
-
+void clear_buffer();
 
 #ifdef __cplusplus
 }

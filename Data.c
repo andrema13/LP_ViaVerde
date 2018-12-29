@@ -1,7 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "Data.h"
 
-struct Client clients_list[100];
+int client_list_max_size = LIST_SIZE;
+struct Client *clients_list = NULL;
+struct Client *temp = NULL;
+//struct Client clients_list[100];
 struct Trip trips_list[100];
 int client_list_size = 0, trip_list_size = 0;
 
@@ -10,6 +14,7 @@ void read_client_file() {
     FILE *file;
     int i = 0;
     file = fopen("../info_cliente.txt", "r");
+
     if (file == NULL) {
         perror("Error: ");
     } else {
@@ -22,6 +27,22 @@ void read_client_file() {
                       client.vehicle.registration,
                       &client.VVPoints
         ) != EOF) {
+
+            if (i + 1 > client_list_max_size) {//memoria dinamica, limite 10, soma mais 10
+                temp = (struct Client *) realloc(clients_list,//se necessario
+                        client_list_max_size * sizeof(struct Client) +
+                                LIST_SIZE * sizeof(struct Client));
+
+                if (temp == NULL) {
+
+                    printf("Memory failed!");
+                    break;
+                } else {
+                    clients_list = temp;
+                    client_list_max_size += LIST_SIZE;
+                }
+            }
+
             clients_list[i] = client;
             i++;
         }
@@ -130,8 +151,8 @@ void write_trip_file() {
                 trips_list[i].choice_x,
                 trips_list[i].choice_y,
                 trips_list[i].date.tm_mday,
-                trips_list[i].date.tm_mon ,//somar +1
-                trips_list[i].date.tm_year ,//somar +1900
+                trips_list[i].date.tm_mon,//somar +1
+                trips_list[i].date.tm_year,//somar +1900
                 trips_list[i].date.tm_hour,
                 trips_list[i].date.tm_min,
                 trips_list[i].date.tm_sec,

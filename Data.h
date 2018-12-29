@@ -1,10 +1,12 @@
 #ifndef VIAVERDE_DATA_H
 #define VIAVERDE_DATA_H
+#define LIST_SIZE 10
 #include "Cliente.h"
 #include "Viagem.h"
 
-extern struct Client clients_list[100];
+extern struct Client *clients_list;
 extern struct Trip trips_list[100];
+extern int client_list_max_size;
 extern int client_list_size;
 extern int trip_list_size;
 int current_client_id;
