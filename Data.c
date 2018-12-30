@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Data.h"
+#include "Utils.h"
 
 int client_list_max_size = LIST_SIZE;
 struct Client *clients_list = NULL;
 struct Client *temp = NULL;
 //struct Client clients_list[100];
+struct Lanco price_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];
+struct Lanco distance_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];//servira para medir as distancias percorridas
 struct Trip trips_list[100];
 int client_list_size = 0, trip_list_size = 0;
 
@@ -163,3 +166,42 @@ void write_trip_file() {
     }
     fclose(file);
 }
+
+void show_prices() {
+
+    fill_matrix(price_matrix_list, "../Precos.txt", false);
+    int i, j;
+
+    printf("---Prices---\n\n");
+    printf("X/Y     1           2           3           4          5\n");
+
+    for (i = 0; i < NUM_PORTAGENS; i++) {
+        printf("%d\t", i + 1);
+
+        for (j = 0; j < NUM_PORTAGENS; j++) {
+            printf("%f\t ", price_matrix_list[i * NUM_PORTAGENS + j].price);
+        }
+        printf("\n");
+    }
+    printf("-Legenda-\n1-Braga  2-Porto  3-Coimbra  4-Lisboa  5-Algarve\n");
+}
+
+void show_distances(){
+
+    fill_matrix(distance_matrix_list, "../Distancias.txt", true);
+    int i, j;
+
+    printf("---Distances---\n\n");
+    printf("X/Y     1           2           3           4          5\n");
+
+    for (i = 0; i < NUM_PORTAGENS; i++) {
+        printf("%d\t", i + 1);
+
+        for (j = 0; j < NUM_PORTAGENS; j++) {
+            printf("%f\t ", distance_matrix_list[i * NUM_PORTAGENS + j].distance);
+        }
+        printf("\n");
+    }
+    printf("-Legenda-\n1-Braga  2-Porto  3-Coimbra  4-Lisboa  5-Algarve\n");
+}
+

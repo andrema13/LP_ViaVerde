@@ -11,9 +11,9 @@ extern "C" {
 #include <string.h>
 
 #define NUM_PORTAGENS 5
-    
-struct lanco {
-    float price, dist;
+
+struct Lanco {
+    float price, distance;
 };
 
 /**
@@ -27,8 +27,10 @@ struct lanco {
  * 
  * @return Indica se a função terminou com sucesso
  */
-bool fill_matrix(struct lanco *matrix, char *file, bool is_distance);
-bool write_matrix(struct lanco *matrix, char *file);
+bool fill_matrix(struct Lanco *f, char *file, bool is_distance);
+
+bool write_matrix(struct Lanco *f, char *file, bool is_price);
+
 void clear_buffer();
 
 #ifdef __cplusplus

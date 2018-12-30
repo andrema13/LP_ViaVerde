@@ -1,6 +1,6 @@
 #include "Utils.h"
 
-bool fill_matrix(struct lanco *matrix, char *file, bool is_distance) {
+bool fill_matrix(struct Lanco *f, char *file, bool is_distance) {
 
     FILE *fp;
     char *line = NULL;
@@ -15,16 +15,22 @@ bool fill_matrix(struct lanco *matrix, char *file, bool is_distance) {
     while ((getline(&line, &len, fp)) != -1) {
         j = 0;
         token = strtok(line, s);
-        if (is_distance) matrix[i * NUM_PORTAGENS + j].dist = atof(token);
-        else matrix[i * NUM_PORTAGENS + j].price = atof(token);
+        if (is_distance) {
+            f[i * NUM_PORTAGENS + j].distance = atof(token);
+        } else {
+            f[i * NUM_PORTAGENS + j].price = atof(token);
+        }
 
         j++;
         while (token != NULL) {
             token = strtok(NULL, s);
 
             if (token != NULL) {
-                if (is_distance) matrix[i * NUM_PORTAGENS + j].dist = atof(token);
-                else matrix[i * NUM_PORTAGENS + j].price = atof(token);
+                if (is_distance) {
+                    f[i * NUM_PORTAGENS + j].distance = atof(token);
+                } else {
+                    f[i * NUM_PORTAGENS + j].price = atof(token);
+                }
             }
             j++;
         }
@@ -43,18 +49,23 @@ bool fill_matrix(struct lanco *matrix, char *file, bool is_distance) {
  * @param file
  * @return
  */
-bool write_matrix(struct lanco *matrix, char *file) {
+bool write_matrix(struct Lanco *f, char *file, bool is_price) {
 
     FILE *fp;
+    int i, j;
 
     fp = fopen(file, "w");
-    if (fp == NULL)
+    if (fp == NULL) {
         return false;
+    }
 
-    int i, j;
     for (i = 0; i < NUM_PORTAGENS; i++) {
         for (j = 0; j < NUM_PORTAGENS; j++) {
-            fprintf(fp, "%f\t", matrix[i * NUM_PORTAGENS + j].price);
+            if (is_price) {
+                fprintf(fp, "%f\t", f[i * NUM_PORTAGENS + j].price);
+            } else {
+                fprintf(fp, "%f\t", f[i * NUM_PORTAGENS + j].distance);
+            }
         }
         fprintf(fp, "\n");
     }
@@ -64,7 +75,7 @@ bool write_matrix(struct lanco *matrix, char *file) {
     return true;
 }
 
-void clear_buffer(){
+void clear_buffer() {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 }

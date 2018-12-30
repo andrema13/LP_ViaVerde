@@ -10,7 +10,6 @@ struct Trip {
     float trip_cost;
 };
 void add_trip();
-void add_trip();
 void trip_history();
 void extracts_page();
 #endif

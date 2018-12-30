@@ -53,9 +53,9 @@ int main() {
 
     clients_list = (struct Client*) malloc(client_list_max_size * sizeof(struct Client));
 
-
     read_client_file();
     read_trip_file();
     main_menu();
+
     return 0;
 }

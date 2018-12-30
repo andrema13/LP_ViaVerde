@@ -7,19 +7,18 @@
 
 void add_trip() {
 
-    struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     int choice_x, choice_y;
     float trip_cost;
     struct Trip trip;
 
-    fill_matrix(matrix, "../Precos.txt", false);
+    fill_matrix(price_matrix_list, "../Precos.txt", false);
     show_prices();
     printf("Enter where you want to go:\n");
     readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:");
     readInt(&choice_y, 1, NUM_PORTAGENS, "Choose between 1-5:\nY:");
-    trip_cost = matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
+    trip_cost = price_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
 
     if (trip_cost == 0) {/*verifica se o preço é = 0 e tambem verifica
                             se estamos a ir para o mesmo destino, ja que o preco tambem é 0*/

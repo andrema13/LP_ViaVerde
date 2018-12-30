@@ -5,6 +5,7 @@
 #include "Utils.h"
 #include "Cliente.h"
 #include "Viagem.h"
+#include "Data.h"
 
 
 void user_management() {
@@ -118,18 +119,45 @@ void price_management() {
     } while (choice != 3);
 }
 
+void distance_management(){
+
+    int choice_x, choice_y;
+    float new_distance;
+
+    fill_matrix(distance_matrix_list, "../Distancias.txt",true);
+    printf("\n---Distance Management---\n\n");
+    show_distances();
+    printf("Enter the distance to edit:\n");
+    readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:\n");
+    readInt(&choice_y, 1, NUM_PORTAGENS, "Choose between 1-5:\nY:\n");
+
+    if (choice_x == choice_y) {
+        printf("Cannot edit this distance.\n");
+        printf("Please try another one.\n");
+        distance_management();
+    } else {
+        printf("Enter the new distance:\n");
+        readFloat(&new_distance, 0, 100, "Choose between 0-100: ");
+        distance_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].distance = new_distance;
+        write_matrix(distance_matrix_list, "../Distancias.txt",false);
+        system("clear");
+        show_distances();
+    }
+}
+
 void user_menu() {
 
     int choice;
     do {
         printf("---User Area---\n\n");
         printf("1. User Management\n");
-        printf("2. Travel Management\n");
+        printf("2. Trip Management\n");
         printf("3. Price Management\n");
-        printf("4. Invoice Generation\n");
-        printf("5. Previous Menu\n");
-        printf("6. Exit\n");
-        readInt(&choice, 1, 6, "Choose an option: ");
+        printf("4. Distance Management\n");
+        printf("5. Invoice Generation\n");
+        printf("6. Previous Menu\n");
+        printf("7. Exit\n");
+        readInt(&choice, 1, 7, "Choose an option: ");
 
         switch (choice) {
             case 1:
@@ -146,12 +174,16 @@ void user_menu() {
                 break;
             case 4:
                 system("clear");
-                extracts_page();
+                distance_management();
                 break;
             case 5:
                 system("clear");
+                extracts_page();
                 break;
             case 6:
+                system("clear");
+                break;
+            case 7:
                 printf("\nSee you soon! ;\051");
                 //free(*__alloc_align())
                 exit(0);
@@ -159,16 +191,15 @@ void user_menu() {
                 printf("Wrong choice. Try again\n");
                 break;
         }
-    } while (choice != 5);
+    } while (choice != 6);
 }
 
 void edit_prices() {
 
-    struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
     int choice_x, choice_y;
     float new_price;
 
-    fill_matrix(matrix, "../Precos.txt", false);
+    fill_matrix(price_matrix_list, "../Precos.txt", false);
     show_prices();
     printf("Enter the price to edit:\n");
     readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:\n");
@@ -181,33 +212,11 @@ void edit_prices() {
     } else {
         printf("Enter the new price:\n");
         readFloat(&new_price, 0, 100, "Choose between 0-100: ");
-        matrix[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price = new_price;
-        write_matrix(matrix, "../Precos.txt");
+        price_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price = new_price;
+        write_matrix(price_matrix_list, "../Precos.txt",true);
         system("clear");
         show_prices();
     }
-}
-
-
-void show_prices() {
-
-    //TODO meter a matriz em memoria para toda a aplicaçao
-    struct lanco matrix[NUM_PORTAGENS * NUM_PORTAGENS];
-    fill_matrix(matrix, "../Precos.txt", false);
-    int i, j;
-
-    printf("---Prices---\n\n");
-    printf("X/Y     1           2           3           4          5\n");
-
-    for (i = 0; i < NUM_PORTAGENS; i++) {
-        printf("%d\t", i + 1);
-
-        for (j = 0; j < NUM_PORTAGENS; j++) {
-            printf("%f\t ", matrix[i * NUM_PORTAGENS + j].price);
-        }
-        printf("\n");
-    }
-    printf("-Legenda-\n1-Braga  2-Porto  3-Coimbra  4-Lisboa  5-Algarve\n");
 }
 
 int delete_client() {
