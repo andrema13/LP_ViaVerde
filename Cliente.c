@@ -44,9 +44,10 @@ void trip_info() {
         printf("---Trips---\n\n");
         printf("1. Add trip\n");
         printf("2. Trip history\n");//funcionalidade nova
-        printf("3. Previous Menu \n");
-        printf("4. Exit\n");
-        readInt(&choice, 1, 4, "Choose an option: ");
+        printf("3. Total Distance\n");//funcionalidade nova
+        printf("4. Previous Menu \n");
+        printf("5. Exit\n");
+        readInt(&choice, 1, 5, "Choose an option: ");
 
         switch (choice) {
             case 1:
@@ -59,15 +60,19 @@ void trip_info() {
                 break;
             case 3:
                 system("clear");
+                show_distance();
                 break;
             case 4:
+                system("clear");
+                break;
+            case 5:
                 printf("\nSee you soon! ;\051");
                 exit(0);
             default:
                 printf("Wrong choice. Try Again\n");
                 break;
         }
-    } while (choice != 3);
+    } while (choice != 4);
 }
 
 void extracts_info() {
@@ -100,14 +105,18 @@ void extracts_info() {
     } while (choice != 2);
 }
 
-void points_info() {
+int points_info() {
 
-    for (int i = 0; i < client_list_size; i++) {
-        if (current_client_id == clients_list[i].ID) {
-            printf("--Points Info--\n\n");
-            printf("Points : %d\n", clients_list[i].VVPoints);
+    int total_points = 0;
+    for (int i = 0; i < trip_list_size; i++) {
+        if (current_client_id == trips_list[i].client_id) {
+            total_points += (int) trips_list[i].trip_cost;
         }
     }
+    printf("--Points Info--\n\n");
+    printf("Points : %d\n", total_points);
+
+    return total_points;
 }// ver info pontos ( penso que seja uma funcionalidade p/relatorio)
 
 void customer_area() {
@@ -245,7 +254,7 @@ void new_client() {
     readString(client.vehicle.manufacturer, 12, "Manufacturer: ");
     readString(client.vehicle.model, 12, "Model: ");
     readString(client.vehicle.registration, 10, "Registration: ");
-    client.VVPoints = 0;
+    client.VVPoints = points_info();
 
     clients_list[client_list_size++] = client;
     write_client_file();

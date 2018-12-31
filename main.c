@@ -57,5 +57,6 @@ int main() {
     read_trip_file();
     main_menu();
 
+
     return 0;
 }

@@ -117,7 +117,7 @@ void read_trip_file() {
     } else {
         struct Trip trip;
         //TODO tratar das virgulas no input
-        while (fscanf(file, "%d,%d,%d,%d/%d/%d,%d:%d:%d,%f",
+        while (fscanf(file, "%d,%d,%d,%d/%d/%d,%d:%d:%d,%f,%f",
                       &trip.client_id,
                       &trip.choice_x,
                       &trip.choice_y,
@@ -127,6 +127,7 @@ void read_trip_file() {
                       &trip.date.tm_hour,
                       &trip.date.tm_min,
                       &trip.date.tm_sec,
+                      &trip.distance,
                       &trip.trip_cost
         ) != EOF) {
             trips_list[i] = trip;
@@ -149,7 +150,7 @@ void write_trip_file() {
 
     for (i = 0; i < trip_list_size; i++) {
 
-        fprintf(file, "%d,%d,%d,%d/%d/%d,%d:%d:%d,%f\n",
+        fprintf(file, "%d,%d,%d,%d/%d/%d,%d:%d:%d,%f,%f\n",
                 trips_list[i].client_id,
                 trips_list[i].choice_x,
                 trips_list[i].choice_y,
@@ -159,6 +160,7 @@ void write_trip_file() {
                 trips_list[i].date.tm_hour,
                 trips_list[i].date.tm_min,
                 trips_list[i].date.tm_sec,
+                trips_list[i].distance,
                 trips_list[i].trip_cost);
     }
     while ((c = fgetc(file)) != EOF) {

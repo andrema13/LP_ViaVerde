@@ -10,15 +10,17 @@ void add_trip() {
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     int choice_x, choice_y;
-    float trip_cost;
+    float trip_cost, total_distance;
     struct Trip trip;
 
     fill_matrix(price_matrix_list, "../Precos.txt", false);
+    fill_matrix(distance_matrix_list,"../Distancias.txt",true);
     show_prices();
     printf("Enter where you want to go:\n");
     readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:");
     readInt(&choice_y, 1, NUM_PORTAGENS, "Choose between 1-5:\nY:");
     trip_cost = price_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
+    total_distance = distance_matrix_list[(choice_x -1) * NUM_PORTAGENS + (choice_y -1)].distance;
 
     if (trip_cost == 0) {/*verifica se o preço é = 0 e tambem verifica
                             se estamos a ir para o mesmo destino, ja que o preco tambem é 0*/
@@ -31,14 +33,29 @@ void add_trip() {
         trip.choice_y = choice_y;
         trip.date = tm;
         trip.trip_cost = trip_cost;
+        trip.distance = total_distance;//soma a distancia percorrida por este cliente
+        clients_list[current_client_id - 1].VVPoints = (int) trip_cost;//converte para int e soma os pontos
         trips_list[trip_list_size++] = trip;
+        write_client_file();//para atualizar no ficheiro do cliente os pontos
         write_trip_file();
 
         printf("Success! Trip registered.\n");
         printf("Price: %f\n", trip_cost);
-        printf("time: %d-%d-%d %d:%d:%d\n", tm.tm_mday,
+        printf("Time: %d-%d-%d %d:%d:%d\n", tm.tm_mday,
                tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec);
+        printf("Earned Points: %d\n", (int) trip_cost);
     }
+}
+void show_distance(){
+    printf("--Total Distance--\n\n");
+    float add_distance = 0;
+
+    for(int i= 0; i < trip_list_size;i++){
+        if (current_client_id == trips_list[i].client_id) {
+            add_distance += trips_list[i].distance;
+        }
+    }
+    printf("You already have made %f km's in ViaVerde!\n",add_distance);
 }
 
 void trip_history() {

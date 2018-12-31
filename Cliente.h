@@ -4,7 +4,7 @@
 
 void client_info();
 void trip_info();
-void points_info();
+int points_info();
 void extracts_info();
 void vehicle_info();
 void customer_area();

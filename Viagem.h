@@ -8,8 +8,10 @@ struct Trip {
     int choice_x;
     int choice_y;
     float trip_cost;
+    float distance;
 };
 void add_trip();
+void show_distance();
 void trip_history();
 void extracts_page();
 #endif
