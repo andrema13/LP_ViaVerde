@@ -6,7 +6,13 @@
 #include "Data.h"
 #include "Viagem.h"
 
-
+/**
+ * @brief Menu incial da aplicaçao
+ * Menu com a escolha para a parte do cliente ou do utilizador, ou da saida do programa
+ * Na opçao 2 é verificado se existem clientes senao é imprimido uma mensagem a dizer que nao existem
+ * clientes e é voltado a ser mostrado o menu inicial.
+ * Se existir clientes é entao verificado se o id dado existe nos clientes registados
+ */
 void main_menu() {
 
     int choice;
@@ -32,7 +38,7 @@ void main_menu() {
                     //verifica se o id dado existe nos clientes registados
                 }
                 break;
-            case 3: // Exit
+            case 3:
                 printf("\nSee you soon! ;\051");
                 exit(0);
             default:
@@ -41,7 +47,14 @@ void main_menu() {
         }
     } while (choice != 3);
 }
-
+/**
+ *@brief Funçao main
+ * Executa as funçoes necessarias á execuçao do programa
+ * É alocado memoria para a lista dos clientes
+ * É lido o ficheiro dos clientes
+ * É lido o ficheiro das viagens
+ * @return 0 em caso de sucesso
+ */
 int main() {
 //
 //    FILE *file;

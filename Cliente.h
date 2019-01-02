@@ -1,6 +1,5 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
-#include "Veiculo.h"
 
 void client_info();
 void trip_info();
@@ -11,6 +10,13 @@ void customer_area();
 void client_menu();
 void new_client();
 void id_verification(void (*f)(void),void (*e)(void));
+struct Vehicle {
+
+    char registration[10];
+    char manufacturer[12];
+    char model[12];
+
+};
 struct Client{
 
         int ID;
@@ -22,5 +28,6 @@ struct Client{
         int VVPoints;
         struct Vehicle vehicle;
     };
+
     
 #endif

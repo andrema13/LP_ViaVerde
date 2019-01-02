@@ -32,7 +32,7 @@ struct Trip trips_list[100];
 int client_list_size = 0, trip_list_size = 0;
 /**
  * @brief Leitura do ficheiro dos clientes registados
- * É aberto o ficheiro
+ * É aberto o ficheiro em modo de leitura
  * Verificado se ele realmente exite senao ocorre um erro
  * Declarado a estrutura indicada e enquanto nao chegar ao fim do ficheiro é lido as informaçoes
  * pelos campos correspondentes
@@ -86,15 +86,19 @@ void read_client_file() {
     fclose(file);
 }
 /**
- * 
+ * @brief Escrita no ficheiro dos clientes
+ * É aberto o ficheiro dos clientes em modo de escrita
+ * É entao escrito as informaçoes do cliente e do respetivo veiculo por cada campo separado por virgulas
+ * Enquanto nao chegar ao fim do ficheiro escreve as informaçoes
+ * É fechado o ficheiro
  */
 void write_client_file() {
 
     int i, c;
     FILE *file;
 
-    file = fopen("../info_cliente.txt",
-                 "w");//Creates an empty file for writing. If a file with the same name already exists,
+    file = fopen("../info_cliente.txt","w");//Creates an empty file for writing.
+    // If a file with the same name already exists,
     // its content is erased and the file is considered as a new empty file.
 
     for (i = 0; i < client_list_size; i++) {
@@ -116,7 +120,7 @@ void write_client_file() {
     }
     fclose(file);
 }
-
+// Nao sera utilizado em principio
 int count_file_line_numbers() {
 
     int lines = 0;
@@ -139,7 +143,19 @@ int count_file_line_numbers() {
     fclose(file);
     return lines;
 }
-
+/**
+ * @brief Leitura do ficheiro das viagens registados
+ * É aberto o ficheiro em modo de leitura
+ * Verificado se ele realmente exite senao ocorre um erro
+ * Declarado a estrutura indicada e enquanto nao chegar ao fim do ficheiro é lido as informaçoes
+ * pelos campos correspondentes
+ * É alocado memoria para o limite estipulado(100) e se for necessario é alocado mais 100 neste caso
+ * Se nao chegar a existir realocaçao é imprimido uma mensagem de erro
+ * Se for bem sucedido é entao realocado o espaço de memoria
+ * A viagem é adicionada  á lista de viagens e é incrementado o valor do array
+ * É atribuido o valor do tamanho do array das viagens á variavel trip_list_size
+ * É fechado por fim o ficheiro.
+ */
 void read_trip_file() {
 
     FILE *file;
@@ -171,7 +187,13 @@ void read_trip_file() {
 
     fclose(file);
 }
-
+/**
+ * @brief Escrita no ficheiro das viagens
+ * É aberto o ficheiro dos clientes em modo de escrita
+ * É entao escrito as viagens do cliente por cada campo separado por virgulas
+ * Enquanto nao chegar ao fim do ficheiro escreve as informaçoes
+ * É fechado o ficheiro
+ */
 void write_trip_file() {
 
     int i, c;
@@ -201,7 +223,11 @@ void write_trip_file() {
     }
     fclose(file);
 }
-
+/**
+ * @brief Mostra a matriz dos preços no ecrã
+ * Preenche a matriz dos preços e o false é relativo ao parametro isDistance
+ * É entao imprimido no ecra a matriz bem como a respetiva legenda na parte inferior e o seu cabeçalho
+ */
 void show_prices() {
 
     fill_matrix(price_matrix_list, "../Precos.txt", false);
@@ -220,7 +246,11 @@ void show_prices() {
     }
     printf("-Legenda-\n1-Braga  2-Porto  3-Coimbra  4-Lisboa  5-Algarve\n");
 }
-
+/**
+ * @brief Mostra a matriz da distancia no ecrã
+ * Preenche a matriz da distancia e o true é relativo ao parametro isDistance
+ * É entao imprimido no ecra a matriz bem como a respetiva legenda na parte inferior e o seu cabeçalho
+ */
 void show_distances(){
 
     fill_matrix(distance_matrix_list, "../Distancias.txt", true);

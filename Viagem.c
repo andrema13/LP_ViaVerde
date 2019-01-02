@@ -4,7 +4,21 @@
 #include "Utilizador.h"
 #include "API_Leitura.h"
 #include "Data.h"
-
+/**
+ * @brief Adicionar uma viagem
+ * Funçao que adiciona uma viagem e regista a hora , a data e os pontos ganhos com a mesma.
+ * É pedido para escolher uma viagem entre x e y
+ * É atribuido um preço a essa escolha e a respetiva distancia efetuada
+ * Se o preço da viagem for 0 entao entao estamos a ir para o mesmo destino ou nao é possivel viajar no
+ * entre x e y dados.
+ * Se for efetuada uma viagem com sucesso entao é registado o id do cliente, o portico de entrada,
+ * o portico de saida, a data, a hora, o custo da viagem, a distancia efetuada e  é feita a conversao
+ * do custo da viagem para int e é atribuido esse valor aos pontos ganhos com a viagem
+ * A viagem é adicionada ao array das viagens e é encrementada a posiçao para a proxima viagem
+ * Escreve no ficheiro dos clientes para atualizar os pontos
+ * Escreve no ficheiro das viagens a viagem registada
+ * Mostra os dados do resgisto da viagem
+ */
 void add_trip() {
 
     time_t t = time(NULL);
@@ -46,6 +60,10 @@ void add_trip() {
         printf("Earned Points: %d\n", (int) trip_cost);
     }
 }
+/**
+ * @brief Mostra a matriz das distancias no ecra
+ * Imprime os km's efetuados no total pelo cliente seleccionado
+ */
 void show_distance(){
     printf("--Total Distance--\n\n");
     float add_distance = 0;
@@ -57,7 +75,11 @@ void show_distance(){
     }
     printf("You already have made %f km's in ViaVerde!\n",add_distance);
 }
-
+/**
+ * @brief Historico das viagens registadas
+ * Imprime as viagens registadas pelo cliente atual
+ * É imprimido tambem uma mensagem caso nao existam viagens registadas ainda
+ */
 void trip_history() {
 
     int i;
@@ -86,7 +108,15 @@ void trip_history() {
         printf("No trips registered yet!\n");
     }
 }
-
+/**
+ * @brief Extracto gerado
+ * É pedido um mes e um ano especifico
+ * É verificado se existe viagens do cliente atual
+ * Pesquisa pelo mes e o ano dados
+ * É imprimido o cabeçalho dos resultados encontrados
+ * Se nao forem encontradas viagens é imprimido uma mensagem
+ * No final é tambem imprimido o preço total das viagens encontradas
+ */
 void extracts_page() {
 
     int month, year, get_year = trips_list->date.tm_year + 1900, results = 0;

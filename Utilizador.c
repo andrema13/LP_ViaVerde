@@ -6,9 +6,15 @@
 #include "Cliente.h"
 #include "Viagem.h"
 #include "Data.h"
-
+/**
+ * Array de resultados do tipo struct Resultado
+ */
 struct Results results_list[100];
-
+/**
+ * @brief Menu de gestao de utilizadores
+ * É possivel : Criar um novo cliente, Editar um cliente, Remover um cliente, Pesquisar um cliente
+ * Ir para o menu anterior ou sair da aplicaçao
+ */
 void user_management() {
 
     int choice;
@@ -55,7 +61,13 @@ void user_management() {
         }
     } while (choice != 5);
 }
-
+/**
+ * @brief Gestao de viagens
+ * Adicionar uma nova viagem
+ * Pesquisar por viagens ja efetuadas
+ * Menu anterior
+ * Sair do programa
+ */
 void trip_management() {
 
     int choice;
@@ -87,7 +99,10 @@ void trip_management() {
         }
     } while (choice != 3);
 }
-
+/**
+ * @brief Pesquisa de viagens
+ * É possivel pesquisar por diferentes filtros bem como utilizar a combinaçao de dois filtros
+ */
 void search_trip() {
 
     int choice_1, choice_2, choice_3, input_id,
@@ -226,7 +241,10 @@ void search_trip() {
         }
     }
 }
-
+/**
+ * @brief Imprimir resultados da primeira pesquisa do primeiro filtro
+ * @param print_id - Id da viagem no array das viagens
+ */
 void print_results(int print_id) {
 
     printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
@@ -241,7 +259,11 @@ void print_results(int print_id) {
            results_list[print_id - 1].date.tm_sec,
            results_list[print_id - 1].trip_cost);
 }
-
+/**
+ * @brief Pesquisa pelas viagens registadas ( client ID)
+ * O id fornecido terá de ser igual a um dos registados nas viagens
+ * @param id - id fornecido na escolha dos filtros
+ */
 void id_search(int id) {
 
     int results = 0;
@@ -266,7 +288,11 @@ void id_search(int id) {
         results++;
     }
 }
-
+/**
+ * @brief Pesquisa pelas viagens registadas (dia)
+ * O id fornecido terá de ser igual a um dos registados nas viagens
+ * @param day - dia fornecido na escolha dos filtros
+ */
 void day_search(int day) {
 
     for (int i = 0; i < trip_list_size; i++) {
@@ -284,7 +310,11 @@ void day_search(int day) {
         }
     }
 }
-
+/**
+ * @brief Pesquisa pelas viagens registadas (mes)
+ * O id fornecido terá de ser igual a um dos registados nas viagens
+ * @param month - mes fornecido na escolha dos filtros
+ */
 void month_search(int month) {
 
     for (int i = 0; i < trip_list_size; i++) {
@@ -302,7 +332,11 @@ void month_search(int month) {
         }
     }
 }
-
+/**
+ * @brief Pesquisa pelas viagens registadas (ano)
+ * O id fornecido terá de ser igual a um dos registados nas viagens
+ * @param year - ano fornecido na escolha dos filtros
+ */
 void year_search(int year) {
 
     for (int i = 0; i < trip_list_size; i++) {
@@ -320,7 +354,11 @@ void year_search(int year) {
         }
     }
 }
-
+/**
+ * @brief Pesquisa pelas viagens registadas (portico de entrada)
+ * O id fornecido terá de ser igual a um dos registados nas viagens
+ * @param in_toll - portico de entrada fornecido na escolha dos filtros
+ */
 void input_toll_search(int in_toll) {
 
     for (int i = 0; i < trip_list_size; i++) {
@@ -338,7 +376,11 @@ void input_toll_search(int in_toll) {
         }
     }
 }
-
+/**
+ * @brief Pesquisa pelas viagens registadas (portico de saida)
+ * O id fornecido terá de ser igual a um dos registados nas viagens
+ * @param out_toll - portico de saida fornecido na escolha dos filtros
+ */
 void exit_toll_search(int out_toll) {
 
     for (int i = 0; i < trip_list_size; i++) {
@@ -356,7 +398,11 @@ void exit_toll_search(int out_toll) {
         }
     }
 }
-
+/**
+ * @brief Pesquisa pelas viagens registadas (preço da viagem)
+ * O id fornecido terá de ser igual a um dos registados nas viagens
+ * @param price - preço fornecido na escolha dos filtros
+ */
 void price_search(float price) {
 
     for (int i = 0; i < trip_list_size; i++) {
@@ -374,7 +420,13 @@ void price_search(float price) {
         }
     }
 }
-
+/**
+ * @brief Gestao de preços
+ * Ver a tabela de preços atual
+ * Editar a tabela de preços
+ * Menu anterior
+ * Sair do programa
+ */
 void price_management() {
     int choice;
     do {
@@ -406,7 +458,16 @@ void price_management() {
         }
     } while (choice != 3);
 }
-
+/**
+ * @brief Gestao da distancia
+ * É preenchido a matriz da distancia, isDistance? true(Param)
+ * Mostra a matriz no ecra
+ * É pedido para escolher qual a distancia a ser editado pelos eixos x e y
+ * Se as escolhas de x e y forem iguais nao é permitido editar, e é voltado a mostrar a matriz no ecra
+ * Se forem escolhas diferentes é pedido para introduzir um numero entre 0-100 como nova distancia
+ * É escrito na matriz a nova distancia substituindo a antiga
+ * Volta a mostrar a matriz com as distancias atualizadas
+ */
 void distance_management() {
 
     int choice_x, choice_y;
@@ -432,7 +493,16 @@ void distance_management() {
         show_distances();
     }
 }
-
+/**
+ * @brief Menu do utlizador
+ * Gestao dos clientes
+ * Gestao das viagens
+ * Gestao dos preços
+ * Gestao das viagens
+ * Geraçao de faturas
+ * Menu anterior
+ * Sair do programa
+ */
 void user_menu() {
 
     int choice;
@@ -481,7 +551,16 @@ void user_menu() {
         }
     } while (choice != 6);
 }
-
+/**
+ * @brief Editar os preços tabelados
+ * É preenchido a matriz dos preços , isDistance? false(Param)
+ * Mostra a matriz no ecra
+ * É pedido para escolher qual o preço a ser editado pelos eixos x e y
+ * Se as escolhas de x e y forem iguais nao é permitido editar, e é voltado a mostrar a matriz no ecra
+ * Se forem escolhas diferentes é pedido para introduzir um numero entre 0-100 como novo preço
+ * É escrito na matriz o novo preço substituindo o antigo
+ * Volta a mostrar a matriz com os preços atualizados
+ */
 void edit_prices() {
 
     int choice_x, choice_y;
@@ -506,7 +585,11 @@ void edit_prices() {
         show_prices();
     }
 }
-
+/**
+ * @brief Apagar um cliente registado
+ * (completar)
+ * @return 0
+ */
 int delete_client() {
 
     FILE *fileptr1, *fileptr2;
@@ -560,7 +643,11 @@ int delete_client() {
     fclose(fileptr1);
     return 0;
 }
-
+/**
+ * @brief Editar um cliente registado
+ * (completar)
+ * @return 0
+ */
 int edit_client() {
 
     FILE *fileptr1, *fileptr2;

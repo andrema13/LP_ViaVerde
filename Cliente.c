@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Cliente.h"
-#include "Veiculo.h"
 #include "API_Leitura.h"
 #include "API_Utils.h"
-#include "Portico.h"
 #include "Utils.h"
 #include "Utilizador.h"
 #include "Data.h"
