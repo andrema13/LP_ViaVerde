@@ -75,7 +75,3 @@ bool write_matrix(struct Lanco *f, char *file, bool is_price) {
     return true;
 }
 
-void clear_buffer() {
-    int ch;
-    while ((ch = getchar()) != '\n' && ch != EOF);
-}

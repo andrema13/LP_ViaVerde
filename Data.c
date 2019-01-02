@@ -2,16 +2,47 @@
 #include <stdlib.h>
 #include "Data.h"
 #include "Utils.h"
-
+/**
+ * Tamanho maximo que é alocado de memoria em nº de clientes
+ */
 int client_list_max_size = LIST_SIZE;
+/**
+ * Apontador para a lista de clientes
+ */
 struct Client *clients_list = NULL;
+/**
+ * Apontador para uma variavel temporaria do tipo struct
+ */
 struct Client *temp = NULL;
-//struct Client clients_list[100];
+/**
+ * Matriz dos preços que é uma matriz global com o numero de portagens atual(pode ser mudado)
+ */
 struct Lanco price_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];
-struct Lanco distance_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];//servira para medir as distancias percorridas
+/**
+ * Matriz das distancias que é uma matriz global com o numero de portagens atual(pode ser mudado)
+ */
+struct Lanco distance_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];
+/**
+ * Matriz das viagens
+ */
 struct Trip trips_list[100];
+/**
+ * Variaveis globais que irao conter o tamanho do array dos cliente e das viagens, respetivamente.
+ */
 int client_list_size = 0, trip_list_size = 0;
-
+/**
+ * @brief Leitura do ficheiro dos clientes registados
+ * É aberto o ficheiro
+ * Verificado se ele realmente exite senao ocorre um erro
+ * Declarado a estrutura indicada e enquanto nao chegar ao fim do ficheiro é lido as informaçoes
+ * pelos campos correspondentes
+ * É alocado memoria para o limite estipulado(10) e se for necessario é alocado mais 10 neste caso
+ * Se nao chegar a existir realocaçao é imprimido uma mensagem de erro
+ * Se for bem sucedido é entao realocado o espaço de memoria
+ * O cliente é adicionado á lista de clientes e é incrementado o valor do array
+ * É atribuido o valor do tamanho do array dos clientes á variavel client_list_size
+ * É fechado por fim o ficheiro.
+ */
 void read_client_file() {
 
     FILE *file;
@@ -54,7 +85,9 @@ void read_client_file() {
 
     fclose(file);
 }
-
+/**
+ * 
+ */
 void write_client_file() {
 
     int i, c;

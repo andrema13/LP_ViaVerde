@@ -3,12 +3,15 @@
 #include "Cliente.h"
 #include "Veiculo.h"
 #include "API_Leitura.h"
+#include "API_Utils.h"
 #include "Portico.h"
 #include "Utils.h"
 #include "Utilizador.h"
 #include "Data.h"
 #include "Viagem.h"
-
+/**
+ *@brief Mostra as informaçoes do cliente caso o seu id seja igual a um id da lista de clientes
+ */
 void client_info() {
 
     for (int i = 0; i < client_list_size; i++) {
@@ -23,7 +26,10 @@ void client_info() {
         }
     }
 }
-
+/**
+ * @brief Mostra as informaçoes do veiculo asssociado ao cliente,
+ * caso o id do cliente seja igual a um id da lista de clientes
+ */
 void vehicle_info() {
 
     for (int i = 0; i < client_list_size; i++) {
@@ -36,7 +42,14 @@ void vehicle_info() {
     }
 
 }// ver info carro ( penso que seja uma funcionalidade p/relatorio)
-
+/**
+ * @brief Nesta funçao temos um menu em que é possivel  :
+ * Adicionar uma nova viagem ao cliente atual
+ * Ver o historico de viagens do cliente que esta no programa atualmente
+ * Ver o total de km's percorrido pelo cliente em toda a sua utilizaçao da Via Verde
+ * Voltar ao menu anterior
+ * Sair do programa
+ */
 void trip_info() {
 
     int choice;
@@ -74,7 +87,11 @@ void trip_info() {
         }
     } while (choice != 4);
 }
-
+/**
+ * @brief Verificar os extratos disponiveis para o cliente que esta no programa atualmente
+ * Voltar ao menu anterior
+ * Sair do programa
+ */
 void extracts_info() {
 
     int choice;
@@ -104,7 +121,11 @@ void extracts_info() {
         }
     } while (choice != 2);
 }
-
+/**
+ * Faz o somatorio dos pontos obtidos das viagens efetuadas pelo cliente atual
+ * Verifica o total de pontos acumulado pelo cliente atual
+ * @return o numero de pontos atual do cliente
+ */
 int points_info() {
 
     int total_points = 0;
@@ -118,14 +139,23 @@ int points_info() {
 
     return total_points;
 }// ver info pontos ( penso que seja uma funcionalidade p/relatorio)
-
+/**
+ * @brief Trata-se do menu inicial do cliente assim que efetua o respetivo login, pelo que podera ver:
+ * Os seus dados pessoais registados
+ * Os dados do seu veiculo associado
+ * Entrar no menu de viagens, pelo que podera adicionar viagens e verificar o seu historico
+ * Gerar um extrato das viagens ja efetuadas
+ * Verificar os seus pontos acumulados
+ * Voltar ao menu anterior(menu do cliente)
+ * Sair do programa
+ */
 void customer_area() {
 
     int choice;
     do {
         printf("---Customer area---\n\n");
-        printf("1. Costumer\n");
-        printf("2. Vehicle\n");
+        printf("1. Costumer Data\n");
+        printf("2. Vehicle Data\n");
         printf("3. Trips\n");
         printf("4. Extracts\n");
         printf("5. Points\n");
@@ -136,28 +166,28 @@ void customer_area() {
         switch (choice) {
             case 1:
                 system("clear");
-                client_info();// aqui o cliente podera ver o  registo dos seus dados pessoais
+                client_info();
                 break;
             case 2:
                 system("clear");
-                vehicle_info();// aqui o cliente podera ver o registo do seu carro
+                vehicle_info();
                 break;
             case 3:
                 system("clear");
-                trip_info();// aqui o cliente podera ver o registo das suas viagens
+                trip_info();
                 break;
             case 4:
                 system("clear");
-                extracts_info();// aqui o cliente podera ver o extrato das viagens ja efetuadas
+                extracts_info();
                 break;
             case 5:
                 system("clear");
-                points_info();// aqui o cliente podera ver o registo dos seus pontos
+                points_info();
                 break;
             case 6:
                 system("clear");
                 client_menu();
-                break;//menu anterior
+                break;
             case 7:
                 printf("\nSee you soon! ;\051");
                 exit(0);
@@ -167,7 +197,13 @@ void customer_area() {
         }
     } while (choice != 6);
 }
-
+/**
+ * @brief Menu da parte do cliente
+ * Entrar na sua conta atraves do id indicado
+ * Registar um novo cliente
+ * Voltar ao menu anterior(ecra inicial)
+ * Sair do programa
+ */
 void client_menu() {
 
     int choice;
@@ -198,7 +234,7 @@ void client_menu() {
                 printf("\nRegistered successfully!\n");
                 break;
             case 3:
-                system("clear");//menu anterior
+                system("clear");
                 break;
             case 4:
                 printf("\nSee you soon! ;\051");
@@ -210,7 +246,18 @@ void client_menu() {
         }
     } while (choice != 3);
 }
-
+/**
+ * @brief Trata-se de uma funçao que verifica se o id dado existe nos clientes ja registados, se nao existir,
+ * será pedido um novo id
+ * @param f - Apontador que espera uma funçao sem argumentos e sem return
+ * @param e - Apontador que espera uma funçao sem argumenos e sem return
+ * Será primeiramente imprimido os clientes já registados
+ * Será posteriormente pedido um id ao utilizador
+ * É verificado se o id corresponde aos id ja registados no programa
+ * Se exitir o utilizador entra na sua conta (cliente/Utilizador)
+ * Se nao corresponder , imprime uma mensagem e é pedido um novo id
+ * É tambem efetuada a respetiva limpeza do input para que seja efetuado uma nova tentativa de login
+ */
 void id_verification(void (*f)(void), void (*e)(void)) {//para passar duas funçoes sem argumentos
 
     printf("--Registered Clients--\n");
@@ -231,10 +278,22 @@ void id_verification(void (*f)(void), void (*e)(void)) {//para passar duas funç
     }//se chega aqui entao nao existe o id , logo volta a pedir um novo id
     printf("** 404 - Client not found **\n");
     system("clear");
-    clear_buffer();//limpa o input anterior e espera um novo scanf
+    cleanInputBuffer();//limpa o input anterior e espera um novo scanf
     id_verification((*f), (*e));
 }
-
+/**
+ * @brief Registo de um novo cliente
+ * É atribuido um id unico , caso ainda nao exista clientes o id atribuido a este novo
+ * registo sera 1 . Se já existir clientes, é verificado o ultimo cliente(posiçao que ocupa no array)
+ * e é adicionado 1.
+ * É pedido informaçoes para ser registado um novo cliente, tais como:
+ * Nome, NIF, Cartao de Cidadão, NIB, Rua, Marca do veiculo, Modelo e a matricula do veiculo .
+ * É atribuido os pontos correspondentes pelo que começará em 0 , no caso de um novo cliente .
+ * É entao inserido no array dos clientes o novo cliente com as informaçoes dadas e é incrmentado
+ * uma posicao para o proximo cliente a ser registado
+ * write_cliente_file() é a funçao responsavel por escrever no ficheiro dos cliente o seu registo
+ * É ainda mostrado no ecrã o id atribuido a este novo cliente
+ */
 void new_client() {
 
     struct Client client;

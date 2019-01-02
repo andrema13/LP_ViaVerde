@@ -31,8 +31,6 @@ bool fill_matrix(struct Lanco *f, char *file, bool is_distance);
 
 bool write_matrix(struct Lanco *f, char *file, bool is_price);
 
-void clear_buffer();
-
 #ifdef __cplusplus
 }
 #endif

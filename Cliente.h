@@ -11,7 +11,6 @@ void customer_area();
 void client_menu();
 void new_client();
 void id_verification(void (*f)(void),void (*e)(void));
-
 struct Client{
 
         int ID;
