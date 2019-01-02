@@ -55,13 +55,13 @@ void user_management() {
     } while (choice != 5);
 }
 
-void travel_management() {
+void trip_management() {
 
     int choice;
     do {
         printf("---Trip Management---\n\n");
         printf("1. Add trip\n");
-        printf("2. Search travel\n");
+        printf("2. Search trips\n");
         printf("3. Previous Menu\n");
         printf("4. Exit\n");
         readInt(&choice, 1, 4, "Choose an option: ");
@@ -72,19 +72,304 @@ void travel_management() {
                 break;
             case 2:
                 system("clear");
-                //pesquisar por viagens de varios modos
+                search_trip();
                 break;
             case 3:
                 system("clear");
                 break;
             case 4:
                 printf("\nSee you soon!;\051");
-                exit(0);//sair
+                exit(0);
             default:
                 printf("Wrong choice. Try again\n");
                 break;
         }
     } while (choice != 3);
+}
+
+void search_trip() {
+
+    int choice_1, choice_2, choice_3, input_id,
+            day, month, year,
+            input_toll, exit_toll, total_filters, max_filters = 3;
+    float price;
+
+    do {
+
+        printf("--Search Trips--\n\n"
+               "-Filters-\n"
+               "1.Client ID(Vehicle)\n"
+               "2.Day\n"
+               "3.Month\n"
+               "4.Year\n"
+               "5.Input toll\n"
+               "6.Exit toll\n"
+               "7.Price\n"
+               "0.No more filters\n"
+               "Note : You only can choose 3 filters(max) to do the search.\n"
+        );
+
+        readInt(&choice_1, 1, 7, "Tell me your 1st option :");
+
+        switch (choice_1) {
+            case 0:
+                system("clear");
+                break;
+
+            case 1:
+                system("clear");
+                printf("Client ID: \n");
+                scanf("%d", &input_id);
+                id_search(input_id);
+                max_filters--;
+                break;
+            case 2:
+                system("clear");
+                printf("Day : \n");
+                scanf("%d", &day);
+                day_search(day);
+                max_filters--;
+                break;
+            case 3:
+                system("clear");
+                printf("Month : \n");
+                scanf("%d", &month);
+                month_search(month);
+                max_filters--;
+                break;
+            case 4:
+                system("clear");
+                printf("Year : \n");
+                scanf("%d", &year);
+                year_search(year);
+                max_filters--;
+                break;
+
+            case 5:
+                system("clear");
+                printf("Input toll : \n");
+                scanf("%d", &input_toll);
+                input_toll_search(input_toll);
+                max_filters--;
+                break;
+            case 6:
+                system("clear");
+                printf("Exit toll : \n");
+                scanf("%d", &exit_toll);
+                exit_toll_search(exit_toll);
+                max_filters--;
+                break;
+            case 7:
+                system("clear");
+                printf("Price : \n");
+                scanf("%f", &price);
+                price_search(price);
+                max_filters--;
+                break;
+            default:
+                printf("Wrong choice. Try again\n");
+                break;
+        }
+    } while (max_filters > 0);
+
+}
+
+void id_search(int id) {
+
+    int results = 0;
+
+    for (int i = 0; i < trip_list_size; i++) {
+        if (id == trips_list[i].client_id) {
+            if (results == 0) {
+                printf("-Results- \n\n");
+                printf("Client ID  Input-Exit      Date       Hour        Price\n");
+            }
+            printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
+                   trips_list[i].client_id,
+                   trips_list[i].choice_x,
+                   trips_list[i].choice_y,
+                   trips_list[i].date.tm_mday,
+                   trips_list[i].date.tm_mon + 1,
+                   trips_list[i].date.tm_year + 1900,
+                   trips_list[i].date.tm_hour,
+                   trips_list[i].date.tm_min,
+                   trips_list[i].date.tm_sec,
+                   trips_list[i].trip_cost);
+            results++;
+        }
+    }
+    if (results == 0) {
+        printf("\n** 404 - No results **\n");
+    }
+}
+
+void day_search(int day) {
+    int results = 0;
+
+    for (int i = 0; i < trip_list_size; i++) {
+        if (day == trips_list[i].date.tm_mday) {
+            if (results == 0) {
+                printf("-Results- \n\n");
+                printf("Client ID  Input-Exit      Date       Hour        Price\n");
+            }
+            printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
+                   trips_list[i].client_id,
+                   trips_list[i].choice_x,
+                   trips_list[i].choice_y,
+                   trips_list[i].date.tm_mday,
+                   trips_list[i].date.tm_mon + 1,
+                   trips_list[i].date.tm_year + 1900,
+                   trips_list[i].date.tm_hour,
+                   trips_list[i].date.tm_min,
+                   trips_list[i].date.tm_sec,
+                   trips_list[i].trip_cost);
+            results++;
+        }
+    }
+    if (results == 0) {
+        printf("\n** 404 - No results **\n");
+    }
+}
+
+void month_search(int month){
+    int results = 0;
+
+    for (int i = 0; i < trip_list_size; i++) {
+        if (month == trips_list[i].date.tm_mon + 1) {
+            if (results == 0) {
+                printf("-Results- \n\n");
+                printf("Client ID  Input-Exit      Date       Hour        Price\n");
+            }
+            printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
+                   trips_list[i].client_id,
+                   trips_list[i].choice_x,
+                   trips_list[i].choice_y,
+                   trips_list[i].date.tm_mday,
+                   trips_list[i].date.tm_mon + 1,
+                   trips_list[i].date.tm_year + 1900,
+                   trips_list[i].date.tm_hour,
+                   trips_list[i].date.tm_min,
+                   trips_list[i].date.tm_sec,
+                   trips_list[i].trip_cost);
+            results++;
+        }
+    }
+    if (results == 0) {
+        printf("\n** 404 - No results **\n");
+    }
+}
+
+void year_search(int year){
+
+    int results = 0;
+
+    for (int i = 0; i < trip_list_size; i++) {
+        if (year == trips_list[i].date.tm_year + 1900) {
+            if (results == 0) {
+                printf("-Results- \n\n");
+                printf("Client ID  Input-Exit      Date       Hour        Price\n");
+            }
+            printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
+                   trips_list[i].client_id,
+                   trips_list[i].choice_x,
+                   trips_list[i].choice_y,
+                   trips_list[i].date.tm_mday,
+                   trips_list[i].date.tm_mon + 1,
+                   trips_list[i].date.tm_year + 1900,
+                   trips_list[i].date.tm_hour,
+                   trips_list[i].date.tm_min,
+                   trips_list[i].date.tm_sec,
+                   trips_list[i].trip_cost);
+            results++;
+        }
+    }
+    if (results == 0) {
+        printf("\n** 404 - No results **\n");
+    }
+}
+
+void input_toll_search(int in_toll) {
+    int results = 0;
+
+    for (int i = 0; i < trip_list_size; i++) {
+        if (in_toll == trips_list[i].choice_x) {
+            if (results == 0) {
+                printf("-Results- \n\n");
+                printf("Client ID  Input-Exit      Date       Hour        Price\n");
+            }
+            printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
+                   trips_list[i].client_id,
+                   trips_list[i].choice_x,
+                   trips_list[i].choice_y,
+                   trips_list[i].date.tm_mday,
+                   trips_list[i].date.tm_mon + 1,
+                   trips_list[i].date.tm_year + 1900,
+                   trips_list[i].date.tm_hour,
+                   trips_list[i].date.tm_min,
+                   trips_list[i].date.tm_sec,
+                   trips_list[i].trip_cost);
+            results++;
+        }
+    }
+    if (results == 0) {
+        printf("\n** 404 - No results **\n");
+    }
+}
+
+void exit_toll_search(int out_toll) {
+    int results = 0;
+
+    for (int i = 0; i < trip_list_size; i++) {
+        if (out_toll == trips_list[i].choice_y) {
+            if (results == 0) {
+                printf("-Results- \n\n");
+                printf("Client ID  Input-Exit      Date       Hour        Price\n");
+            }
+            printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
+                   trips_list[i].client_id,
+                   trips_list[i].choice_x,
+                   trips_list[i].choice_y,
+                   trips_list[i].date.tm_mday,
+                   trips_list[i].date.tm_mon + 1,
+                   trips_list[i].date.tm_year + 1900,
+                   trips_list[i].date.tm_hour,
+                   trips_list[i].date.tm_min,
+                   trips_list[i].date.tm_sec,
+                   trips_list[i].trip_cost);
+            results++;
+        }
+    }
+    if (results == 0) {
+        printf("\n** 404 - No results **\n");
+    }
+}
+
+void price_search(float price) {
+    int results = 0;
+
+    for (int i = 0; i < trip_list_size; i++) {
+        if (price == trips_list[i].trip_cost) {
+            if (results == 0) {
+                printf("-Results- \n\n");
+                printf("Client ID  Input-Exit      Date       Hour        Price\n");
+            }
+            printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
+                   trips_list[i].client_id,
+                   trips_list[i].choice_x,
+                   trips_list[i].choice_y,
+                   trips_list[i].date.tm_mday,
+                   trips_list[i].date.tm_mon + 1,
+                   trips_list[i].date.tm_year + 1900,
+                   trips_list[i].date.tm_hour,
+                   trips_list[i].date.tm_min,
+                   trips_list[i].date.tm_sec,
+                   trips_list[i].trip_cost);
+            results++;
+        }
+    }
+    if (results == 0) {
+        printf("\n** 404 - No results **\n");
+    }
 }
 
 void price_management() {
@@ -119,12 +404,12 @@ void price_management() {
     } while (choice != 3);
 }
 
-void distance_management(){
+void distance_management() {
 
     int choice_x, choice_y;
     float new_distance;
 
-    fill_matrix(distance_matrix_list, "../Distancias.txt",true);
+    fill_matrix(distance_matrix_list, "../Distancias.txt", true);
     printf("\n---Distance Management---\n\n");
     show_distances();
     printf("Enter the distance to edit:\n");
@@ -139,7 +424,7 @@ void distance_management(){
         printf("Enter the new distance:\n");
         readFloat(&new_distance, 0, 100, "Choose between 0-100: ");
         distance_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].distance = new_distance;
-        write_matrix(distance_matrix_list, "../Distancias.txt",false);
+        write_matrix(distance_matrix_list, "../Distancias.txt", false);
         system("clear");
         show_distances();
     }
@@ -166,7 +451,7 @@ void user_menu() {
                 break;
             case 2:
                 system("clear");
-                travel_management();
+                trip_management();
                 break;
             case 3:
                 system("clear");
@@ -213,7 +498,7 @@ void edit_prices() {
         printf("Enter the new price:\n");
         readFloat(&new_price, 0, 100, "Choose between 0-100: ");
         price_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price = new_price;
-        write_matrix(price_matrix_list, "../Precos.txt",true);
+        write_matrix(price_matrix_list, "../Precos.txt", true);
         system("clear");
         show_prices();
     }
@@ -249,11 +534,11 @@ int delete_client() {
             //copy all lines in file replica.c
             putc(ch, fileptr2);
         }
-        if (temp > delete_id){
+        if (temp > delete_id) {
             // copiar tudo menos id
             // id = contador
         }
-        if (temp == delete_id){
+        if (temp == delete_id) {
             temp++;
         }
     }
