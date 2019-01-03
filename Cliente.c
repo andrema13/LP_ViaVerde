@@ -295,6 +295,8 @@ void id_verification(void (*f)(void), void (*e)(void)) {//para passar duas funç
 void new_client() {
 
     struct Client client;
+    char comma[1] = ",";
+    char space[1] = " ";
 
     if (client_list_size == 0) {
         client.ID = 1;
@@ -303,20 +305,37 @@ void new_client() {
     }
 
     readString(client.name, 20, "Name: ");//Pede informaçoes pessoais ao utilizador
-    if(strstr(client.name,",") != NULL){
-        
-    }
+    string_replace(client.name,*comma,*space);
     readString(client.NIF, 9, "NIF: ");
+    //TODO verificar se tem so numeros
     readString(client.CC, 8, "CC: ");
+    //TODO verificar se tem so numeros
     readString(client.NIB, 20, "NIB: ");
+    //TODO verificar se tem so numeros
     readString(client.street, 40, "Street: ");
+    string_replace(client.street,*comma,*space);
     printf("\nEnter your vehicle information: \n ");
     readString(client.vehicle.manufacturer, 12, "Manufacturer: ");
+    string_replace(client.vehicle.manufacturer,*comma,*space);
     readString(client.vehicle.model, 12, "Model: ");
+    string_replace(client.vehicle.model,*comma,*space);
     readString(client.vehicle.registration, 10, "Registration: ");
-    client.VVPoints = points_info();
+    string_replace(client.vehicle.registration,*comma,*space);
+    client.VVPoints = 0 ;
 
     clients_list[client_list_size++] = client;
     write_client_file();
     printf("Your ID is: %d", client.ID);
+}
+void string_replace(char s[], char chr, char repl_chr){
+
+    int i=0;
+    while(s[i]!='\0')
+    {
+        if(s[i]==chr)
+        {
+            s[i]=repl_chr;
+        }
+        i++;
+    }
 }
