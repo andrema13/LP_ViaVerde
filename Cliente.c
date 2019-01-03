@@ -303,6 +303,9 @@ void new_client() {
     }
 
     readString(client.name, 20, "Name: ");//Pede informaçoes pessoais ao utilizador
+    if(strstr(client.name,",") != NULL){
+        
+    }
     readString(client.NIF, 9, "NIF: ");
     readString(client.CC, 8, "CC: ");
     readString(client.NIB, 20, "NIB: ");

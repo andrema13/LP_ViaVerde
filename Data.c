@@ -2,10 +2,14 @@
 #include <stdlib.h>
 #include "Data.h"
 #include "Utils.h"
+
 /**
  * Tamanho maximo que é alocado de memoria em nº de clientes
  */
 int client_list_max_size = LIST_SIZE;
+/**
+ * Tamanho maximo que é alocado de memoria em nº de viagens resgistadas
+ */
 int trip_list_max_size = TRIP_SIZE;
 /**
  * Apontador para a lista de clientes
@@ -24,13 +28,18 @@ struct Lanco price_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];
  */
 struct Lanco distance_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];
 /**
- * Matriz das viagens
+ * Apontador para a lista de clientes
+ */
+struct Trip *trips_list = NULL;
+/**
+ * Apontador para uma variavel temporaria do tipo struct
  */
 struct Trip *trip_temp = NULL;
 /**
  * Variaveis globais que irao conter o tamanho do array dos cliente e das viagens, respetivamente.
  */
 int client_list_size = 0, trip_list_size = 0;
+
 /**
  * @brief Leitura do ficheiro dos clientes registados
  * É aberto o ficheiro em modo de leitura
@@ -65,8 +74,8 @@ void read_client_file() {
 
             if (i + 1 > client_list_max_size) {//memoria dinamica, limite 10, soma mais 10
                 temp = (struct Client *) realloc(clients_list,//se necessario
-                        client_list_max_size * sizeof(struct Client) +
-                                LIST_SIZE * sizeof(struct Client));
+                                                 client_list_max_size * sizeof(struct Client) +
+                                                 LIST_SIZE * sizeof(struct Client));
 
                 if (temp == NULL) {
 
@@ -86,6 +95,7 @@ void read_client_file() {
 
     fclose(file);
 }
+
 /**
  * @brief Escrita no ficheiro dos clientes
  * É aberto o ficheiro dos clientes em modo de escrita
@@ -98,7 +108,7 @@ void write_client_file() {
     int i, c;
     FILE *file;
 
-    file = fopen("../info_cliente.txt","w");//Creates an empty file for writing.
+    file = fopen("../info_cliente.txt", "w");//Creates an empty file for writing.
     // If a file with the same name already exists,
     // its content is erased and the file is considered as a new empty file.
 
@@ -121,6 +131,7 @@ void write_client_file() {
     }
     fclose(file);
 }
+
 // Nao sera utilizado em principio
 int count_file_line_numbers() {
 
@@ -144,6 +155,7 @@ int count_file_line_numbers() {
     fclose(file);
     return lines;
 }
+
 /**
  * @brief Leitura do ficheiro das viagens registados
  * É aberto o ficheiro em modo de leitura
@@ -166,7 +178,7 @@ void read_trip_file() {
         perror("Error: ");
     } else {
         struct Trip trip;
-        //TODO tratar das virgulas no input
+
         while (fscanf(file, "%d,%d,%d,%d/%d/%d,%d:%d:%d,%f,%f",
                       &trip.client_id,
                       &trip.choice_x,
@@ -182,8 +194,8 @@ void read_trip_file() {
         ) != EOF) {
             if (i + 1 > trip_list_max_size) {//memoria dinamica, limite 100, soma mais 100
                 trip_temp = (struct Trip *) realloc(trips_list,//se necessario
-                                                 trip_list_max_size * sizeof(struct Trip) +
-                                                 TRIP_SIZE * sizeof(struct Trip));
+                                                    trip_list_max_size * sizeof(struct Trip) +
+                                                    TRIP_SIZE * sizeof(struct Trip));
 
                 if (trip_temp == NULL) {
 
@@ -202,6 +214,7 @@ void read_trip_file() {
 
     fclose(file);
 }
+
 /**
  * @brief Escrita no ficheiro das viagens
  * É aberto o ficheiro dos clientes em modo de escrita
@@ -238,6 +251,7 @@ void write_trip_file() {
     }
     fclose(file);
 }
+
 /**
  * @brief Mostra a matriz dos preços no ecrã
  * Preenche a matriz dos preços e o false é relativo ao parametro isDistance
@@ -261,12 +275,13 @@ void show_prices() {
     }
     printf("-Legenda-\n1-Braga  2-Porto  3-Coimbra  4-Lisboa  5-Algarve\n");
 }
+
 /**
  * @brief Mostra a matriz da distancia no ecrã
  * Preenche a matriz da distancia e o true é relativo ao parametro isDistance
  * É entao imprimido no ecra a matriz bem como a respetiva legenda na parte inferior e o seu cabeçalho
  */
-void show_distances(){
+void show_distances() {
 
     fill_matrix(distance_matrix_list, "../Distancias.txt", true);
     int i, j;

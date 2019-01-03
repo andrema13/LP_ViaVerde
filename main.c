@@ -51,6 +51,7 @@ void main_menu() {
  *@brief Funçao main
  * Executa as funçoes necessarias á execuçao do programa
  * É alocado memoria para a lista dos clientes
+ * É alocado memoria para a lista das viagens
  * É lido o ficheiro dos clientes
  * É lido o ficheiro das viagens
  * @return 0 em caso de sucesso
@@ -70,7 +71,6 @@ int main() {
     read_client_file();
     read_trip_file();
     main_menu();
-
 
     return 0;
 }
