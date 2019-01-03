@@ -1,12 +1,13 @@
 #ifndef VIAVERDE_DATA_H
 #define VIAVERDE_DATA_H
 #define LIST_SIZE 10
+#define TRIP_SIZE 100
 #include "Cliente.h"
 #include "Viagem.h"
 #include "Utils.h"
 
 extern struct Client *clients_list;
-extern struct Trip trips_list[100];
+extern struct Trip *trips_list;
 extern struct Lanco price_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];
 extern struct Lanco distance_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];
 extern int client_list_max_size;

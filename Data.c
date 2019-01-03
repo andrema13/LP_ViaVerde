@@ -6,6 +6,7 @@
  * Tamanho maximo que é alocado de memoria em nº de clientes
  */
 int client_list_max_size = LIST_SIZE;
+int trip_list_max_size = TRIP_SIZE;
 /**
  * Apontador para a lista de clientes
  */
@@ -25,7 +26,7 @@ struct Lanco distance_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];
 /**
  * Matriz das viagens
  */
-struct Trip trips_list[100];
+struct Trip *trip_temp = NULL;
 /**
  * Variaveis globais que irao conter o tamanho do array dos cliente e das viagens, respetivamente.
  */
@@ -179,6 +180,20 @@ void read_trip_file() {
                       &trip.distance,
                       &trip.trip_cost
         ) != EOF) {
+            if (i + 1 > trip_list_max_size) {//memoria dinamica, limite 100, soma mais 100
+                trip_temp = (struct Trip *) realloc(trips_list,//se necessario
+                                                 trip_list_max_size * sizeof(struct Trip) +
+                                                 TRIP_SIZE * sizeof(struct Trip));
+
+                if (trip_temp == NULL) {
+
+                    printf("Memory failed!");
+                    break;
+                } else {
+                    trips_list = trip_temp;
+                    trip_list_max_size += TRIP_SIZE;
+                }
+            }
             trips_list[i] = trip;
             i++;
         }
