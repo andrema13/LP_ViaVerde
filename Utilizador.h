@@ -9,6 +9,7 @@ void user_management();
 void trip_management();
 void price_management();
 void distance_management();
+void clientInfoById(int id);
 void edit_prices();
 int delete_client();
 void search_trip();

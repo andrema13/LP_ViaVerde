@@ -454,6 +454,7 @@ void distance_management() {
  * Menu anterior
  * Sair do programa
  */
+
 void user_menu() {
 
     int choice;
@@ -543,131 +544,142 @@ void edit_prices() {
  * (completar)
  * @return 0
  */
-int delete_client() {
 
-    FILE *fileptr1, *fileptr2;
-    char ch;
-    int delete_id, temp = 1, cont = delete_id;
+int editClient() {
 
-    //open file in read mode
-    fileptr1 = fopen("../info_cliente.txt", "r");
-    ch = getc(fileptr1);
-    while (ch != EOF) {
-        printf("%c", ch);
-        ch = getc(fileptr1);
-    }
-    //rewind
-    rewind(fileptr1);
-    printf(" \n Enter client's ID to be deleted:");
-    scanf("%d", &delete_id);
-    //open new file in write mode
-    fileptr2 = fopen("replica.txt", "w");
-    ch = getc(fileptr1);
-    while (ch != EOF) {
-        ch = getc(fileptr1);
-        if (ch == '\n') {
-            temp++;
-        }
-        //except the line to be deleted
-        if (temp < delete_id) {
-            //copy all lines in file replica.c
-            putc(ch, fileptr2);
-        }
-        if (temp > delete_id) {
-            // copiar tudo menos id
-            // id = contador
-        }
-        if (temp == delete_id) {
-            temp++;
-        }
-    }
-    fclose(fileptr1);
-    fclose(fileptr2);
-    remove("../info_cliente.txt");
-    //rename the file replica.txt to original name
-    rename("replica.txt", "../info_cliente.txt");
-    printf("\n Client sucessfully deleted. There's the updated list of clients. \n");
-    fileptr1 = fopen("../info_cliente.txt", "r");
-    ch = getc(fileptr1);
-    while (ch != EOF) {
-        printf("%c", ch);
-        ch = getc(fileptr1);
-    }
-    fclose(fileptr1);
-    return 0;
-}
 
-/**
- * @brief Editar um cliente registado
- * (completar)
- * @return 0
- */
-int edit_client() {
-
-    FILE *fileptr1, *fileptr2;
-    char ch;
-    int edit_id, temp = 1, cont = edit_id;
-
-    //open file in read mode
-    fileptr1 = fopen("../info_cliente.txt", "r");
-    ch = getc(fileptr1);
-    while (ch != EOF) {
-        printf("%c", ch);
-        ch = getc(fileptr1);
-    }
-    //rewind
-    rewind(fileptr1);
+    struct Client client;
+    int edit_id = -1, choice, NIF_edited, CC_ed, NIB_ed;
+    char nameEdited[20], streetEdited;
+    int changed = 0;
     printf(" \n Enter client's ID to be edited:");
     scanf("%d", &edit_id);
-    //open new file in write mode
-    fileptr2 = fopen("replica.txt", "w");
-    ch = getc(fileptr1);
-    while (ch != EOF) {
-        ch = getc(fileptr1);
-        if (ch == '\n') {
-            temp++;
+
+
+    if (edit_id != -1 && edit_id < client_list_size) {// valida o id introduzido
+        client = clients_list[edit_id - 1];
+        do {
+            printf("ID - %d", client.ID); // TODO: testar isto!
+            printf("1 - Name - %c", client.name); // TODO: testar isto!
+            printf("2 - NIF - %d", client.NIF); // TODO: testar isto!
+            printf("3 - CC - %d", client.CC); // TODO: testar isto!
+            printf("4 - NIB - %d", client.NIB); // TODO: testar isto!
+            printf("5 - Street - %c", client.street); // TODO: testar isto!
+            printf("6 - Vehicle - %s", client.vehicle); // TODO: testar isto!
+            printf("7 - Sair"); // TODO: testar isto!
+            printf(" \n Enter the option to be edited:");
+            scanf("%d", &choice);
+            switch (choice) {
+                case 1:
+                    system("clear");
+                    readString(&nameEdited, 20, "Enter new client name: ");
+                    int flag = 0;
+                    //fazer ciclo
+                    printf("You want save the information? Yes press 1, No press 0");
+                    scanf("%d", &flag);
+                    if(flag == 1){
+                        strcpy(client.name, &nameEdited); //copia o conjunto de caracteres.   -> client.name = &nameEdited;
+                        changed = 1;
+                    }
+                    break;
+                case 2:
+                    printf("\nEnter new client NIF: \n");
+                    scanf("%c", &NIF_edited);
+                    readString(&NIF_edited, 10, "Enter new client NIF: ");
+                    int flag = 0;
+                    //fazer ciclo
+                    printf("You want save the information? Yes press 1, No press 0");
+                    scanf("%d", &flag);
+                    if(flag == 1){
+                        strcpy(client.NIF, &NIF_edited); //copia o conjunto de caracteres.   -> client.name = &nameEdited;
+                        changed = 1;
+                    }
+                    break;
+                case 3:
+                    printf("\nEnter new client CC: \n");
+                    scanf("%c", &CC_ed);
+                    readString(&CC_ed, 9, "Enter new client CC number: ");
+                    int flag = 0;
+                    //fazer ciclo
+                    printf("You want save the information? Yes press 1, No press 0");
+                    scanf("%d", &flag);
+                    if(flag == 1){
+                        strcpy(client.CC, &CC_ed); //copia o conjunto de caracteres.
+                        changed = 1;
+                    }
+
+                    break;
+                case 4:
+                    printf("\nEnter new client NIB: \n");
+                    scanf("%c", &NIB_ed);
+                    readString(&NIB_ed, 22, "Enter new client NIB: ");
+                    int flag = 0;
+                    //fazer ciclo
+                    printf("You want save the information? Yes press 1, No press 0");
+                    scanf("%d", &flag);
+                    if(flag == 1){
+                        strcpy(client.NIB, &NIB_ed); //copia o conjunto de caracteres.
+                        changed = 1;
+                    }
+                    break;
+                case 5:
+                    printf("\nEnter new client Street: \n");
+                    scanf("%c", &streetEdited);
+                    readString(&streetEdited, 40, "Enter new street: ");
+                    printf("You want save the information? Yes press 1, No press 0");
+                    scanf("%d", &flag);
+                    if(flag == 1){
+                        strcpy(client.street, &streetEdited); //copia o conjunto de caracteres.
+                        changed = 1;
+                    }
+                    break;
+                case 6:
+                    printf("\nEnter new client vehicle: \n");
+                    vehicleInfoById(edit_id);
+                    //scanf("%c", &NIF_edited); Chamar função para editar veiculo
+                    break;
+                default:
+                    break;
+            }
+        } while (choice != 7);
+
+        if(changed == 1){ //Se for alterado ele atualiza! caso contrario fica como está.
+            clients_list[edit_id] = client;
+            printf("Edited with success! ");
         }
-        //except the line to be deleted
-        if (temp != edit_id) {
-            //copy all lines in file replica.c
-            putc(ch, fileptr2);
-        }
-        if (temp = edit_id) {
-            // copiar ID , voltar a pedir o resto
-            // PEDIR TUDO OU PERGUNTAR O QUE QUER EDITAR?!!?!?!?!??
-        }
+
+    } else {
+        printf("Id not valid! \n");
     }
-    fclose(fileptr1);
-    fclose(fileptr2);
-    remove("../info_cliente.txt");
-    //rename the file replica.txt to original name
-    rename("replica.txt", "../info_cliente.txt");
-    printf("\n Client sucessfully edited. There's the updated list of clients. \n");
-    fileptr1 = fopen("../info_cliente.txt", "r");
-    ch = getc(fileptr1);
-    while (ch != EOF) {
-        printf("%c", ch);
-        ch = getc(fileptr1);
-    }
-    fclose(fileptr1);
+
     return 0;
 }
+/**
+*@brief Mostra as informaçoes do cliente caso o seu id seja igual a um id da lista de clientes
+*/
+void clientInfoById(int id) {
+    if (id >= 1 && id < client_list_size) {
+        printf("--Client Info--\n\n");
+        printf("ID : %d\n", clients_list[id].ID);
+        printf("Name : %s\n", clients_list[id].name);
+        printf("NIF : %s\n", clients_list[id].NIF);
+        printf("CC : %s\n", clients_list[id].CC);
+        printf("NIB : %s\n", clients_list[id].NIB);
+        printf("Street : %s\n", clients_list[id].street);
+    }
+}
+void vehicleInfoById(int id) {
+    if (id > -1 && id < client_list_size) {
+        printf("--Vehicle Info--\n\n");
+        printf("Manufacturer : %s\n", clients_list[id].vehicle.manufacturer);
+        printf("Model : %s\n", clients_list[id].vehicle.model);
+        printf("Registration : %s\n", clients_list[id].vehicle.registration);
+    }
+}
 
-/*int search_user() {
-    int search_id;
-    char ch;
-    FILE *fileptr1;
-    printf("What's the ID you want to search?");
-    scanf("%d", &search_id);
-    fileptr1 = fopen("../info_cliente.txt", "r");
-    ch = getc(fileptr1);
-    while (ch < search_id) {
-        ch++;
-    }
-    if ( ch == search_id ){
-        printf("%c", ch);
-        ch = getc(fileptr1);
-    }
-    fclose(fileptr1);
+int searchUser() {
+    int id = 0;
+    readInt(id, 1, client_list_size, "What's the ID you want to search?");
+    clientInfoById(id);
     return 0;
-}*/
+}
