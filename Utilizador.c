@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "Utilizador.h"
 #include "API_Leitura.h"
+#include "API_Utils.h"
 #include "Utils.h"
 #include "Cliente.h"
 #include "Viagem.h"
@@ -31,18 +32,16 @@ void user_management() {
                 break;
             case 2:
                 system("clear");
-                //edit_client();
+                edit_client();
                 //editar utili
                 break;
             case 3:
                 system("clear");
-                delete_client();
-                //remover utili
+                delete_client_data();
                 break;
             case 4:
                 system("clear");
-                //search_user();
-                //pesquisar utili
+                search_user();
                 break;
             case 5:
                 system("clear");
@@ -137,7 +136,6 @@ void search_trip() {
     for (int i = 0; i < trip_list_size; i++) {
         results_list[i] = trips_list[i];
         //copia as viagens resgistadas para o novo array results_list
-        printf("%d %f \n", results_list[i].client_id, results_list[i].distance);
     }
     results_list_size = trip_list_size;
 
@@ -155,19 +153,19 @@ void search_trip() {
                 system("clear");
                 printf("Day : ");
                 scanf("%d", &day);
-                day_search(day, results_list, results_list_size);
+                day_search(day, results_list, &results_list_size);
                 break;
             case 3:
                 system("clear");
                 printf("Month : \n");
                 scanf("%d", &month);
-               // month_search(month, results_list, results_list_size);
+                // month_search(month, results_list, results_list_size);
                 break;
             case 4:
                 system("clear");
                 printf("Year : \n");
                 scanf("%d", &year);
-               // year_search(year, results_list, results_list_size);
+                // year_search(year, results_list, results_list_size);
                 break;
             case 5:
                 system("clear");
@@ -194,7 +192,7 @@ void search_trip() {
     }
 }
 
-void print_results(struct Trip results_list[], int results_list_size) {
+void print_results(struct Trip *results_list, int results_list_size) {
 
     for (int i = 0; i < results_list_size; i++) {
 
@@ -225,16 +223,15 @@ void id_search(int id, struct Trip *results_list, int *results_list_size) {
     struct Trip temp_list[*results_list_size];
     int temp_list_size = 0;
 
-    for (int i = 0; i < *results_list_size ; i++) {
-        printf("%d %f \n", results_list[i].client_id, results_list[i].distance);
+    for (int i = 0; i < *results_list_size; i++) {
+
         if (id == results_list[i].client_id) {
             temp_list[temp_list_size] = results_list[i];
             temp_list_size++;
         }
     }
 
-    // falta corrigir isto
-    *results_list = *temp_list;
+    results_list = temp_list;
     *results_list_size = temp_list_size;
 
     print_results(results_list, *results_list_size);
@@ -245,21 +242,23 @@ void id_search(int id, struct Trip *results_list, int *results_list_size) {
  * O id fornecido terá de ser igual a um dos registados nas viagens
  * @param day - dia fornecido na escolha dos filtros
  */
-void day_search(int day, struct Trip results_list[], int results_list_size) {
+void day_search(int day, struct Trip *results_list, int *results_list_size) {
 
-    for (int i = 0; i <= results_list_size - 1; i++) {
+    struct Trip temp_list[*results_list_size];
+    int temp_list_size = 0;
 
-        if (day != results_list[i].date.tm_mday) {
+    for (int i = 0; i < *results_list_size; i++) {
 
-            results_list[i] = results_list[i + 1];
-            results_list_size--;
-            i--;
+        if (day == results_list[i].date.tm_mday) {
+            temp_list[temp_list_size] = results_list[i];
+            temp_list_size++;
         }
     }
-    if (results_list[results_list_size - 1].date.tm_mday != day) {
-        printf("\n** 404 - Trip not found **\n");
-    }
-    print_results(results_list, results_list_size);
+
+    results_list = temp_list;
+    *results_list_size = temp_list_size;
+
+    print_results(results_list, *results_list_size);
 }
 
 /**
@@ -545,110 +544,108 @@ void edit_prices() {
     }
 }
 
-/**
- * @brief Apagar um cliente registado
- * (completar)
- * @return 0
- */
-/*
-int editClient() {
 
+void edit_client() {
 
-    struct Client client;
-    int edit_id = -1, choice, NIF_edited, CC_ed, NIB_ed;
-    char nameEdited[20], streetEdited;
-    int changed = 0;
-    printf(" \n Enter client's ID to be edited:");
-    scanf("%d", &edit_id);
+    int choice, flag;
+    char name_edited[20];
+    /* struct Client client;
+     int edit_id = -1, choice, NIF_edited, CC_ed, NIB_ed;
+     , streetEdited;
+     int changed = 0;*/
+    client_info();
 
+    printf("\n--Edit Fields--\n\n"
 
-    if (edit_id != -1 && edit_id < client_list_size) {// valida o id introduzido
-        client = clients_list[edit_id - 1];
-        do {
-            printf("ID - %d", client.ID); // TODO: testar isto!
-            printf("1 - Name - %c", client.name); // TODO: testar isto!
-            printf("2 - NIF - %d", client.NIF); // TODO: testar isto!
-            printf("3 - CC - %d", client.CC); // TODO: testar isto!
-            printf("4 - NIB - %d", client.NIB); // TODO: testar isto!
-            printf("5 - Street - %c", client.street); // TODO: testar isto!
-            printf("6 - Vehicle - %s", client.vehicle); // TODO: testar isto!
-            printf("7 - Sair"); // TODO: testar isto!
-            printf(" \n Enter the option to be edited:");
-            scanf("%d", &choice);
-            switch (choice) {
-                case 1:
-                    system("clear");
-                    readString(&nameEdited, 20, "Enter new client name: ");
-                    int flag = 0;
-                    //fazer ciclo
-                    printf("You want save the information? Yes press 1, No press 0");
-                    scanf("%d", &flag);
-                    if(flag == 1){
-                        strcpy(client.name, &nameEdited); //copia o conjunto de caracteres.   -> client.name = &nameEdited;
-                        changed = 1;
-                    }
-                    break;
-                case 2:
-                    printf("\nEnter new client NIF: \n");
-                    scanf("%c", &NIF_edited);
-                    readString(&NIF_edited, 10, "Enter new client NIF: ");
-                    int flag = 0;
-                    //fazer ciclo
-                    printf("You want save the information? Yes press 1, No press 0");
-                    scanf("%d", &flag);
-                    if(flag == 1){
-                        strcpy(client.NIF, &NIF_edited); //copia o conjunto de caracteres.   -> client.name = &nameEdited;
-                        changed = 1;
-                    }
-                    break;
-                case 3:
-                    printf("\nEnter new client CC: \n");
-                    scanf("%c", &CC_ed);
-                    readString(&CC_ed, 9, "Enter new client CC number: ");
-                    int flag = 0;
-                    //fazer ciclo
-                    printf("You want save the information? Yes press 1, No press 0");
-                    scanf("%d", &flag);
-                    if(flag == 1){
-                        strcpy(client.CC, &CC_ed); //copia o conjunto de caracteres.
-                        changed = 1;
-                    }
+           "1.Name\n"
+           "2.NIF\n"
+           "3.CC\n"
+           "4.NIB\n"
+           "5.Street\n"
+           "6.Manufacturer\n"
+           "7.Model\n"
+           "8.Registration\n"
+           "0.Stop filters\n"
+    );
+    //aqui sao escolhidos os filtros(3-max) enquanto nao for clicado o 0
+    readInt(&choice, 0, 8, "Pick a field : ");
 
-                    break;
-                case 4:
-                    printf("\nEnter new client NIB: \n");
-                    scanf("%c", &NIB_ed);
-                    readString(&NIB_ed, 22, "Enter new client NIB: ");
-                    int flag = 0;
-                    //fazer ciclo
-                    printf("You want save the information? Yes press 1, No press 0");
-                    scanf("%d", &flag);
-                    if(flag == 1){
-                        strcpy(client.NIB, &NIB_ed); //copia o conjunto de caracteres.
-                        changed = 1;
-                    }
-                    break;
-                case 5:
-                    printf("\nEnter new client Street: \n");
-                    scanf("%c", &streetEdited);
-                    readString(&streetEdited, 40, "Enter new street: ");
-                    printf("You want save the information? Yes press 1, No press 0");
-                    scanf("%d", &flag);
-                    if(flag == 1){
-                        strcpy(client.street, &streetEdited); //copia o conjunto de caracteres.
-                        changed = 1;
-                    }
-                    break;
-                case 6:
-                    printf("\nEnter new client vehicle: \n");
-                    vehicleInfoById(edit_id);
-                    //scanf("%c", &NIF_edited); Chamar função para editar veiculo
-                    break;
-                default:
-                    break;
+    switch (choice) {
+        case 1:
+            system("clear");
+            input_validation(name_edited,"Enter new client name: ");
+            readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
+
+            if (flag == 1) {
+                strcpy(clients_list[current_client_id - 1].name, name_edited);//substitui o nome
+                write_client_file();
+                printf("Successfully edited!");
+                edit_client();
+            } else {
+                user_management();
             }
-        } while (choice != 7);
+            break;
+        case 2:
+            /*printf("\nEnter new client NIF: \n");
+            scanf("%c", &NIF_edited);
+            readString(&NIF_edited, 10, "Enter new client NIF: ");
+            int flag = 0;
+            //fazer ciclo
+            printf("You want save the information? Yes press 1, No press 0");
+            scanf("%d", &flag);
+            if(flag == 1){
+                strcpy(client.NIF, &NIF_edited); //copia o conjunto de caracteres.   -> client.name = &nameEdited;
+                changed = 1;
+            }*/
+            break;
+        case 3:
+            /*printf("\nEnter new client CC: \n");
+            scanf("%c", &CC_ed);
+            readString(&CC_ed, 9, "Enter new client CC number: ");
+            int flag = 0;
+            //fazer ciclo
+            printf("You want save the information? Yes press 1, No press 0");
+            scanf("%d", &flag);
+            if(flag == 1){
+                strcpy(client.CC, &CC_ed); //copia o conjunto de caracteres.
+                changed = 1;
+            }
+            */
+            break;
+        case 4:
+            /*printf("\nEnter new client NIB: \n");
+            scanf("%c", &NIB_ed);
+            readString(&NIB_ed, 22, "Enter new client NIB: ");
+            int flag = 0;
+            //fazer ciclo
+            printf("You want save the information? Yes press 1, No press 0");
+            scanf("%d", &flag);
+            if(flag == 1){
+                strcpy(client.NIB, &NIB_ed); //copia o conjunto de caracteres.
+                changed = 1;
+            }*/
+            break;
+        case 5:
+            /*printf("\nEnter new client Street: \n");
+            scanf("%c", &streetEdited);
+            readString(&streetEdited, 40, "Enter new street: ");
+            printf("You want save the information? Yes press 1, No press 0");
+            scanf("%d", &flag);
+            if(flag == 1){
+                strcpy(client.street, &streetEdited); //copia o conjunto de caracteres.
+                changed = 1;
+            }*/
+            break;
+        case 6:
+            /*printf("\nEnter new client vehicle: \n");
+            vehicleInfoById(edit_id);
+            //scanf("%c", &NIF_edited); Chamar função para editar veiculo*/
+            break;
+        default:
+            break;
+    }
 
+/*
         if(changed == 1){ //Se for alterado ele atualiza! caso contrario fica como está.
             clients_list[edit_id] = client;
             printf("Edited with success! ");
@@ -656,40 +653,116 @@ int editClient() {
 
     } else {
         printf("Id not valid! \n");
+    }*/
+}
+
+/**
+*@brief Pesquisar cliente
+ * Mostra as informaçoes do cliente caso o seu id seja igual a um id da lista de clientes
+*/
+void search_user() {
+
+    unsigned int id;
+    int results = 0;
+
+    printf("--Search Client--\n\n");
+
+    do {
+        printf("Tell me the ID you want to search : ");
+        printf("\n*Press 0 to exit*\n");
+        scanf("%d", &id);
+
+        for (int i = 0; i < client_list_size; i++) {
+
+            if (clients_list[i].ID == id) {
+                printf("--Client Info--\n\n");
+                printf("ID : %d\n", clients_list[i].ID);
+                printf("Name : %s\n", clients_list[i].name);
+                printf("NIF : %s\n", clients_list[i].NIF);
+                printf("CC : %s\n", clients_list[i].CC);
+                printf("NIB : %s\n", clients_list[i].NIB);
+                printf("Street : %s\n", clients_list[i].street);
+                results++;
+            }
+        }
+        cleanInputBuffer();
+        if (results == 0) {
+            printf("\n** 404 - Client not found **\n");
+        }
+
+    } while (id != 0);
+}
+
+/**
+ * @brief Apagar dados de um cliente registado
+ * Mostra os clientes atuais
+ * É pedido um id para ser apagado
+ * Procura-se esse id e é apagado do sistema se for encontrado
+ * Imprime no ecra a lista atual de clientes atualizada
+ */
+void delete_client_data() {
+
+    int delete_id, results = 0;
+
+    printf("--Registered Clients--\n\n");
+    print_clients();
+
+    //TODO verificar isto
+    printf("Choose the client ID who want to delete : ");
+    scanf("%d",&delete_id);
+
+    for (int i = 0; i < client_list_size ; i++) {
+        if(clients_list[i].ID == delete_id) {
+            clients_list[i] = clients_list[i + 1];
+            results++;
+        }
+    }
+    if(results == 0){
+        printf("\n** 404 - Client not found **\n");
+    } else{
+        client_list_size--;//decrementa o array
+        write_client_file();//escreve no ficheiro
+
+        printf("--Clients after delete--\n\n");
+        print_clients();
     }
 
-    return 0;
+    //TODO verificar isto(so esta a apagar uma viagem)
+    delete_trips(delete_id);
 }
- */
+
+void print_clients() {
+
+    for (int i = 0; i < client_list_size; i++) {
+
+        if (i == 0) {
+            printf("ID        Name       NIF       CC        NIB         Street      Manufacturer"
+                   "   Model     Registration\n");
+        }
+        printf("%d   %s   %s   %s   %s   %s   %s   %s   %s   %d\n",
+               clients_list[i].ID,
+               clients_list[i].name,
+               clients_list[i].NIF,
+               clients_list[i].CC,
+               clients_list[i].NIB,
+               clients_list[i].street,
+               clients_list[i].vehicle.manufacturer,
+               clients_list[i].vehicle.model,
+               clients_list[i].vehicle.registration,
+               clients_list[i].VVPoints);
+    }
+}
 /**
-*@brief Mostra as informaçoes do cliente caso o seu id seja igual a um id da lista de clientes
-*/
-/*
-void clientInfoById(int id) {
-    if (id >= 1 && id < client_list_size) {
-        printf("--Client Info--\n\n");
-        printf("ID : %d\n", clients_list[id].ID);
-        printf("Name : %s\n", clients_list[id].name);
-        printf("NIF : %s\n", clients_list[id].NIF);
-        printf("CC : %s\n", clients_list[id].CC);
-        printf("NIB : %s\n", clients_list[id].NIB);
-        printf("Street : %s\n", clients_list[id].street);
-    }
-}
+ * Apaga as viagens do cliente seleccionado
+ * @param delete_id
  */
-/*
-void vehicleInfoById(int id) {
-    if (id > -1 && id < client_list_size) {
-        printf("--Vehicle Info--\n\n");
-        printf("Manufacturer : %s\n", clients_list[id].vehicle.manufacturer);
-        printf("Model : %s\n", clients_list[id].vehicle.model);
-        printf("Registration : %s\n", clients_list[id].vehicle.registration);
+void delete_trips(int delete_id){
+
+    for(int i = 0; i < trip_list_size ; i++){
+        if(trips_list[i].client_id == delete_id){
+            trips_list[i] = trips_list[i+1];
+        }
     }
-}*/
-/*
-int searchUser() {
-    int id = 0;
-    readInt(id, 1, client_list_size, "What's the ID you want to search?");
-    clientInfoById(id);
-    return 0;
-}*/
+    trip_list_size--;
+    write_trip_file();
+}

@@ -17,7 +17,6 @@ extern int trip_list_size;
 int current_client_id;
 void read_client_file();
 void write_client_file();
-int count_file_line_numbers();
 void read_trip_file();
 void write_trip_file();
 void show_prices();

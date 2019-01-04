@@ -10,7 +10,8 @@ void customer_area();
 void client_menu();
 void new_client();
 void id_verification(void (*f)(void),void (*e)(void));
-void string_replace(char s[], char chr, char repl_chr);
+void input_validation(char *str, char *msg);
+
 struct Vehicle {
 
     char registration[10];

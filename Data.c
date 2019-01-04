@@ -63,7 +63,7 @@ void read_client_file() {
         perror("Error: ");
     } else {
         struct Client client;
-        //TODO tratar das virgulas no input
+
         while (fscanf(file, "%d,%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%d",
                       &client.ID, client.name, client.NIF,
                       client.CC, client.NIB, client.street,
@@ -130,30 +130,6 @@ void write_client_file() {
         putchar(c);
     }
     fclose(file);
-}
-
-// Nao sera utilizado em principio
-int count_file_line_numbers() {
-
-    int lines = 0;
-    int ch; //char que define se tem palavras ou EOF
-    FILE *file;
-    file = fopen("../info_cliente.txt", "r");
-
-    if (file == NULL) {
-        perror("Error: ");
-        return lines;
-    }
-
-    while (!feof(file)) {
-        ch = fgetc(file);
-        if (ch == '\n') {
-            lines++;
-        }
-    }
-
-    fclose(file);
-    return lines;
 }
 
 /**

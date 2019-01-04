@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "Cliente.h"
 #include "API_Leitura.h"
 #include "API_Utils.h"
@@ -7,6 +8,7 @@
 #include "Utilizador.h"
 #include "Data.h"
 #include "Viagem.h"
+
 /**
  *@brief Mostra as informaçoes do cliente caso o seu id seja igual a um id da lista de clientes
  */
@@ -24,6 +26,7 @@ void client_info() {
         }
     }
 }
+
 /**
  * @brief Mostra as informaçoes do veiculo asssociado ao cliente,
  * caso o id do cliente seja igual a um id da lista de clientes
@@ -87,6 +90,7 @@ void trip_info() {
         }
     } while (choice != 4);
 }
+
 /**
  * @brief Verificar os extratos disponiveis para o cliente que esta no programa atualmente
  * Voltar ao menu anterior
@@ -123,6 +127,7 @@ void extracts_info() {
         }
     } while (choice != 2);
 }
+
 /**
  * Faz o somatorio dos pontos obtidos das viagens efetuadas pelo cliente atual
  * Verifica o total de pontos acumulado pelo cliente atual
@@ -201,6 +206,7 @@ void customer_area() {
         }
     } while (choice != 6);
 }
+
 /**
  * @brief Menu da parte do cliente
  * Entrar na sua conta atraves do id indicado
@@ -252,6 +258,7 @@ void client_menu() {
         }
     } while (choice != 3);
 }
+
 /**
  * @brief Trata-se de uma funçao que verifica se o id dado existe nos clientes ja registados, se nao existir,
  * será pedido um novo id
@@ -287,6 +294,7 @@ void id_verification(void (*f)(void), void (*e)(void)) {//para passar duas funç
     cleanInputBuffer();//limpa o input anterior e espera um novo scanf
     id_verification((*f), (*e));
 }
+
 /**
  * @brief Registo de um novo cliente
  * É atribuido um id unico , caso ainda nao exista clientes o id atribuido a este novo
@@ -303,45 +311,42 @@ void id_verification(void (*f)(void), void (*e)(void)) {//para passar duas funç
 void new_client() {
 
     struct Client client;
-    char comma[1] = ",";
-    char space[1] = " ";
-
     if (client_list_size == 0) {
         client.ID = 1;
     } else {
         client.ID = clients_list[client_list_size - 1].ID + 1;//incrementa id do cliente
     }
 
-    readString(client.name, 20, "Name: ");//Pede informaçoes pessoais ao utilizador
-    string_replace(client.name,*comma,*space);
-    readString(client.NIF, 9, "NIF: ");
-    //TODO verificar se tem so numeros
-    readString(client.CC, 8, "CC: ");
-    //TODO verificar se tem so numeros
-    readString(client.NIB, 20, "NIB: ");
-    //TODO verificar se tem so numeros
-    readString(client.street, 40, "Street: ");
-    string_replace(client.street,*comma,*space);
+    input_validation(client.name, "Name: ");
+    input_validation(client.NIF, "NIF : ");
+    input_validation(client.CC, "CC : ");
+    input_validation(client.NIB, "NIB: ");
+    input_validation(client.street, "Street: ");
     printf("\nEnter your vehicle information: \n ");
-    readString(client.vehicle.manufacturer, 12, "Manufacturer: ");
-    string_replace(client.vehicle.manufacturer,*comma,*space);
-    readString(client.vehicle.model, 12, "Model: ");
-    string_replace(client.vehicle.model,*comma,*space);
-    readString(client.vehicle.registration, 10, "Registration: ");
-    string_replace(client.vehicle.registration,*comma,*space);
-    client.VVPoints = 0 ;
+    input_validation(client.vehicle.manufacturer, "Manufacturer: ");
+    input_validation(client.vehicle.model, "Model: ");
+    input_validation(client.vehicle.registration, "Registration: ");
+    client.VVPoints = 0;
 
     clients_list[client_list_size++] = client;
     write_client_file();
     printf("Your ID is: %d", client.ID);
 }
-void string_replace(char s[], char chr, char repl_chr) {
+/**
+ * @brief Validaçao de input
+ * É validado se o utilizador introduziu alguma virgula pelo que nao é possivel a sua inserçao
+ * @param str string a ser validada
+ */
+//TODO verificar isto, porque escreve mal no ficheiro quando passa do tamanho do char
 
-    int i = 0;
-    while (s[i] != '\0') {
-        if (s[i] == chr) {
-            s[i] = repl_chr;
+void input_validation(char *str, char *msg) {
+
+
+    readString(str, 20, msg);//Pede informaçoes pessoais ao utilizador
+    for (int i = 0; i < strlen(str); i++) {
+        if (44 == str[i]) {//se tem virgula
+            printf("Cannot have commas, try again!");
+            input_validation(str,msg);
         }
-        i++;
     }
 }

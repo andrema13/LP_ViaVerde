@@ -49,6 +49,7 @@ void main_menu() {
         }
     } while (choice != 3);
 }
+
 /**
  *@brief Funçao main
  * Executa as funçoes necessarias á execuçao do programa
@@ -67,9 +68,8 @@ int main() {
 //    }
 //    fclose(file);
 
-    clients_list = (struct Client*) malloc(client_list_max_size * sizeof(struct Client));
-    trips_list = (struct Trip*) malloc(trip_list_max_size * sizeof(struct Trip));
-
+    clients_list = (struct Client *) malloc(client_list_max_size * sizeof(struct Client));
+    trips_list = (struct Trip *) malloc(trip_list_max_size * sizeof(struct Trip));
     read_client_file();
     read_trip_file();
     main_menu();
