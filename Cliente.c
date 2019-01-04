@@ -317,15 +317,15 @@ void new_client() {
         client.ID = clients_list[client_list_size - 1].ID + 1;//incrementa id do cliente
     }
 
-    input_validation(client.name, "Name: ");
-    input_validation(client.NIF, "NIF : ");
-    input_validation(client.CC, "CC : ");
-    input_validation(client.NIB, "NIB: ");
-    input_validation(client.street, "Street: ");
+    input_validation(client.name, "Name: ", 20);
+    input_validation(client.NIF, "NIF : ", 10);
+    input_validation(client.CC, "CC : ", 9);
+    input_validation(client.NIB, "NIB: ", 22);
+    input_validation(client.street, "Street: ", 40);
     printf("\nEnter your vehicle information: \n ");
-    input_validation(client.vehicle.manufacturer, "Manufacturer: ");
-    input_validation(client.vehicle.model, "Model: ");
-    input_validation(client.vehicle.registration, "Registration: ");
+    input_validation(client.vehicle.manufacturer, "Manufacturer: ", 12);
+    input_validation(client.vehicle.model, "Model: ", 12);
+    input_validation(client.vehicle.registration, "Registration: ", 10);
     client.VVPoints = 0;
 
     clients_list[client_list_size++] = client;
@@ -339,14 +339,12 @@ void new_client() {
  */
 //TODO verificar isto, porque escreve mal no ficheiro quando passa do tamanho do char
 
-void input_validation(char *str, char *msg) {
-
-
-    readString(str, 20, msg);//Pede informaçoes pessoais ao utilizador
+void input_validation(char *str, char *msg, const unsigned int size) {
+    readString(str, size, msg);//Pede informaçoes pessoais ao utilizador
     for (int i = 0; i < strlen(str); i++) {
         if (44 == str[i]) {//se tem virgula
             printf("Cannot have commas, try again!");
-            input_validation(str,msg);
+            input_validation(str, msg, size);
         }
     }
 }

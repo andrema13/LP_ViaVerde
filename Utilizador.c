@@ -33,7 +33,6 @@ void user_management() {
             case 2:
                 system("clear");
                 edit_client();
-                //editar utili
                 break;
             case 3:
                 system("clear");
@@ -519,6 +518,7 @@ void user_menu() {
  * É escrito na matriz o novo preço substituindo o antigo
  * Volta a mostrar a matriz com os preços atualizados
  */
+
 void edit_prices() {
 
     int choice_x, choice_y;
@@ -544,15 +544,18 @@ void edit_prices() {
     }
 }
 
+/**
+ * Editar cliente
+ * Mostra os campos a ser editados
+ * É pedido o campo a ser editado e se for bem sucedido é escrito no ficheiro
+ */
 
 void edit_client() {
 
     int choice, flag;
-    char name_edited[20];
-    /* struct Client client;
-     int edit_id = -1, choice, NIF_edited, CC_ed, NIB_ed;
-     , streetEdited;
-     int changed = 0;*/
+    char name_edited[20], edit_NIF[10], edit_CC[9],
+            edit_NIB[22], edit_street[40], edit_manufacturer[12], edit_model[12], edit_regist[10];
+
     client_info();
 
     printf("\n--Edit Fields--\n\n"
@@ -565,15 +568,19 @@ void edit_client() {
            "6.Manufacturer\n"
            "7.Model\n"
            "8.Registration\n"
-           "0.Stop filters\n"
+           "0.Exit\n"
     );
-    //aqui sao escolhidos os filtros(3-max) enquanto nao for clicado o 0
     readInt(&choice, 0, 8, "Pick a field : ");
 
     switch (choice) {
-        case 1:
+
+        case 0:
             system("clear");
-            input_validation(name_edited,"Enter new client name: ");
+            break;
+
+        case 1:
+
+            readString(name_edited, 20, "Enter new client name: ");
             readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
 
             if (flag == 1) {
@@ -586,74 +593,102 @@ void edit_client() {
             }
             break;
         case 2:
-            /*printf("\nEnter new client NIF: \n");
-            scanf("%c", &NIF_edited);
-            readString(&NIF_edited, 10, "Enter new client NIF: ");
-            int flag = 0;
-            //fazer ciclo
-            printf("You want save the information? Yes press 1, No press 0");
-            scanf("%d", &flag);
-            if(flag == 1){
-                strcpy(client.NIF, &NIF_edited); //copia o conjunto de caracteres.   -> client.name = &nameEdited;
-                changed = 1;
-            }*/
+            readString(edit_NIF, 10, "Enter new NIF : ");
+            readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
+
+            if (flag == 1) {
+                strcpy(clients_list[current_client_id - 1].NIF, edit_NIF);//substitui o nome
+                write_client_file();
+                printf("Successfully edited!");
+                edit_client();
+            } else {
+                user_management();
+            }
             break;
         case 3:
-            /*printf("\nEnter new client CC: \n");
-            scanf("%c", &CC_ed);
-            readString(&CC_ed, 9, "Enter new client CC number: ");
-            int flag = 0;
-            //fazer ciclo
-            printf("You want save the information? Yes press 1, No press 0");
-            scanf("%d", &flag);
-            if(flag == 1){
-                strcpy(client.CC, &CC_ed); //copia o conjunto de caracteres.
-                changed = 1;
+            readString(edit_CC, 9, "Enter new CC : ");
+            readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
+
+            if (flag == 1) {
+                strcpy(clients_list[current_client_id - 1].CC, edit_CC);//substitui o nome
+                write_client_file();
+                printf("Successfully edited!");
+                edit_client();
+            } else {
+                user_management();
             }
-            */
             break;
         case 4:
-            /*printf("\nEnter new client NIB: \n");
-            scanf("%c", &NIB_ed);
-            readString(&NIB_ed, 22, "Enter new client NIB: ");
-            int flag = 0;
-            //fazer ciclo
-            printf("You want save the information? Yes press 1, No press 0");
-            scanf("%d", &flag);
-            if(flag == 1){
-                strcpy(client.NIB, &NIB_ed); //copia o conjunto de caracteres.
-                changed = 1;
-            }*/
+            readString(edit_NIB, 22, "Enter new NIB : ");
+            readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
+
+            if (flag == 1) {
+                strcpy(clients_list[current_client_id - 1].NIB, edit_NIB);//substitui o nome
+                write_client_file();
+                printf("Successfully edited!");
+                edit_client();
+            } else {
+                user_management();
+            }
             break;
         case 5:
-            /*printf("\nEnter new client Street: \n");
-            scanf("%c", &streetEdited);
-            readString(&streetEdited, 40, "Enter new street: ");
-            printf("You want save the information? Yes press 1, No press 0");
-            scanf("%d", &flag);
-            if(flag == 1){
-                strcpy(client.street, &streetEdited); //copia o conjunto de caracteres.
-                changed = 1;
-            }*/
+            readString(edit_street, 40, "Enter new street: ");
+            readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
+
+            if (flag == 1) {
+                strcpy(clients_list[current_client_id - 1].street, edit_street);//substitui o nome
+                write_client_file();
+                printf("Successfully edited!");
+                edit_client();
+            } else {
+                user_management();
+            }
             break;
         case 6:
-            /*printf("\nEnter new client vehicle: \n");
-            vehicleInfoById(edit_id);
-            //scanf("%c", &NIF_edited); Chamar função para editar veiculo*/
+            readString(edit_manufacturer, 12, "Enter new manufacturer : ");
+            readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
+
+            if (flag == 1) {
+                strcpy(clients_list[current_client_id - 1].vehicle.manufacturer,
+                       edit_manufacturer);//substitui o nome
+                write_client_file();
+                printf("Successfully edited!");
+                edit_client();
+            } else {
+                user_management();
+            }
             break;
+        case 7:
+            readString(edit_model, 12, "Enter new model : ");
+            readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
+
+            if (flag == 1) {
+                strcpy(clients_list[current_client_id - 1].vehicle.model,
+                       edit_model);//substitui o nome
+                write_client_file();
+                printf("Successfully edited!");
+                edit_client();
+            } else {
+                user_management();
+            }
+        case 8:
+            readString(edit_regist, 10, "Enter new registration : ");
+            readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
+
+            if (flag == 1) {
+                strcpy(clients_list[current_client_id - 1].vehicle.registration,
+                       edit_regist);//substitui o nome
+                write_client_file();
+                printf("Successfully edited!");
+                edit_client();
+            } else {
+                user_management();
+            }
         default:
+            printf("Wrong choice. Try again\n");
             break;
     }
 
-/*
-        if(changed == 1){ //Se for alterado ele atualiza! caso contrario fica como está.
-            clients_list[edit_id] = client;
-            printf("Edited with success! ");
-        }
-
-    } else {
-        printf("Id not valid! \n");
-    }*/
 }
 
 /**
@@ -709,17 +744,17 @@ void delete_client_data() {
 
     //TODO verificar isto
     printf("Choose the client ID who want to delete : ");
-    scanf("%d",&delete_id);
+    scanf("%d", &delete_id);
 
-    for (int i = 0; i < client_list_size ; i++) {
-        if(clients_list[i].ID == delete_id) {
+    for (int i = 0; i < client_list_size; i++) {
+        if (clients_list[i].ID == delete_id) {
             clients_list[i] = clients_list[i + 1];
             results++;
         }
     }
-    if(results == 0){
+    if (results == 0) {
         printf("\n** 404 - Client not found **\n");
-    } else{
+    } else {
         client_list_size--;//decrementa o array
         write_client_file();//escreve no ficheiro
 
@@ -731,6 +766,9 @@ void delete_client_data() {
     delete_trips(delete_id);
 }
 
+/**
+ * Imprime os clientes existentes na aplicaçao
+ */
 void print_clients() {
 
     for (int i = 0; i < client_list_size; i++) {
@@ -752,15 +790,16 @@ void print_clients() {
                clients_list[i].VVPoints);
     }
 }
+
 /**
  * Apaga as viagens do cliente seleccionado
  * @param delete_id
  */
-void delete_trips(int delete_id){
+void delete_trips(int delete_id) {
 
-    for(int i = 0; i < trip_list_size ; i++){
-        if(trips_list[i].client_id == delete_id){
-            trips_list[i] = trips_list[i+1];
+    for (int i = 0; i < trip_list_size; i++) {
+        if (trips_list[i].client_id == delete_id) {
+            trips_list[i] = trips_list[i + 1];
         }
     }
     trip_list_size--;
