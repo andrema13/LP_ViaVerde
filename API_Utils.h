@@ -12,18 +12,18 @@
  */
 
 #ifndef API_UTILS_H
-#define	API_UTILS_H
+#define    API_UTILS_H
 
 
-#ifdef	__cplusplus
+#ifdef    __cplusplus
 extern "C" {
 #endif
-    
-    void cleanInputBuffer();
 
-#ifdef	__cplusplus
+void cleanInputBuffer();
+
+#ifdef    __cplusplus
 }
 #endif
 
-#endif	/* API_UTILS_H */
+#endif    /* API_UTILS_H */
 

@@ -688,7 +688,6 @@ void edit_client() {
             printf("Wrong choice. Try again\n");
             break;
     }
-
 }
 
 /**
@@ -742,7 +741,6 @@ void delete_client_data() {
     printf("--Registered Clients--\n\n");
     print_clients();
 
-    //TODO verificar isto
     printf("Choose the client ID who want to delete : ");
     scanf("%d", &delete_id);
 
@@ -761,8 +759,6 @@ void delete_client_data() {
         printf("--Clients after delete--\n\n");
         print_clients();
     }
-
-    //TODO verificar isto(so esta a apagar uma viagem)
     delete_trips(delete_id);
 }
 
@@ -799,9 +795,12 @@ void delete_trips(int delete_id) {
 
     for (int i = 0; i < trip_list_size; i++) {
         if (trips_list[i].client_id == delete_id) {
-            trips_list[i] = trips_list[i + 1];
+            for (int j = i; j < trip_list_size; j++) {
+                trips_list[j] = trips_list[j + 1];
+            }
+            i--;
+            trip_list_size--;
         }
     }
-    trip_list_size--;
     write_trip_file();
 }

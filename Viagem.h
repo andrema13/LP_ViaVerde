@@ -1,5 +1,6 @@
 #ifndef VIAGEM_H
 #define VIAGEM_H
+
 #include "time.h"
 
 struct Trip {
@@ -10,8 +11,13 @@ struct Trip {
     float trip_cost;
     float distance;
 };
+
 void add_trip();
+
 void show_distance();
+
 void trip_history();
+
 void extracts_page();
+
 #endif

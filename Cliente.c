@@ -332,12 +332,12 @@ void new_client() {
     write_client_file();
     printf("Your ID is: %d", client.ID);
 }
+
 /**
  * @brief Validaçao de input
  * É validado se o utilizador introduziu alguma virgula pelo que nao é possivel a sua inserçao
  * @param str string a ser validada
  */
-//TODO verificar isto, porque escreve mal no ficheiro quando passa do tamanho do char
 
 void input_validation(char *str, char *msg, const unsigned int size) {
     readString(str, size, msg);//Pede informaçoes pessoais ao utilizador

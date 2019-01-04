@@ -4,6 +4,7 @@
 #include "Utilizador.h"
 #include "API_Leitura.h"
 #include "Data.h"
+
 /**
  * @brief Adicionar uma viagem
  * Funçao que adiciona uma viagem e regista a hora , a data e os pontos ganhos com a mesma.
@@ -28,13 +29,13 @@ void add_trip() {
     struct Trip trip;
 
     fill_matrix(price_matrix_list, "../Precos.txt", false);
-    fill_matrix(distance_matrix_list,"../Distancias.txt",true);
+    fill_matrix(distance_matrix_list, "../Distancias.txt", true);
     show_prices();
     printf("Enter where you want to go:\n");
     readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:");
     readInt(&choice_y, 1, NUM_PORTAGENS, "Choose between 1-5:\nY:");
     trip_cost = price_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
-    total_distance = distance_matrix_list[(choice_x -1) * NUM_PORTAGENS + (choice_y -1)].distance;
+    total_distance = distance_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].distance;
 
     if (trip_cost == 0) {/*verifica se o preço é = 0 e tambem verifica
                             se estamos a ir para o mesmo destino, ja que o preco tambem é 0*/
@@ -60,21 +61,23 @@ void add_trip() {
         printf("Earned Points: %d\n", (int) trip_cost);
     }
 }
+
 /**
  * @brief Mostra a matriz das distancias no ecra
  * Imprime os km's efetuados no total pelo cliente seleccionado
  */
-void show_distance(){
+void show_distance() {
     printf("--Total Distance--\n\n");
     float add_distance = 0;
 
-    for(int i= 0; i < trip_list_size;i++){
+    for (int i = 0; i < trip_list_size; i++) {
         if (current_client_id == trips_list[i].client_id) {
             add_distance += trips_list[i].distance;
         }
     }
-    printf("You already have made %f km's in ViaVerde!\n",add_distance);
+    printf("You already have made %f km's in ViaVerde!\n", add_distance);
 }
+
 /**
  * @brief Historico das viagens registadas
  * Imprime as viagens registadas pelo cliente atual
@@ -108,6 +111,7 @@ void trip_history() {
         printf("No trips registered yet!\n");
     }
 }
+
 /**
  * @brief Extracto gerado
  * É pedido um mes e um ano especifico

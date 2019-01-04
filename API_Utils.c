@@ -20,7 +20,7 @@ const char CAR_FRASE_FIM = '\0';
  *  cleanInputBuffer();
  * @endcode
  */
-void cleanInputBuffer(){
+void cleanInputBuffer() {
     char ch;
 
     while ((ch = getchar()) != CAR_NOVA_LINHA && ch != EOF);
