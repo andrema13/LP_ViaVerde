@@ -12,7 +12,7 @@ void distance_management();
 void edit_prices();
 int delete_client();
 void search_trip();
-void id_search(int id, struct Trip results_list[], int results_list_size);
+void id_search(int id, struct Trip *results_list, int *results_list_size);
 void day_search(int day, struct Trip results_list[], int results_list_size);
 void input_toll_search(int input_toll, struct Trip results_list[], int results_list_size);
 void exit_toll_search(int exit_toll, struct Trip results_list[], int results_list_size);

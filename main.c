@@ -40,6 +40,8 @@ void main_menu() {
                 break;
             case 3:
                 printf("\nSee you soon! ;\051");
+                free(clients_list);
+                free(trips_list);
                 exit(0);
             default:
                 printf("Wrong choice. Try Again\n");

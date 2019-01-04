@@ -78,6 +78,8 @@ void trip_info() {
                 break;
             case 5:
                 printf("\nSee you soon! ;\051");
+                free(clients_list);
+                free(trips_list);
                 exit(0);
             default:
                 printf("Wrong choice. Try Again\n");
@@ -111,6 +113,8 @@ void extracts_info() {
                 break;
             case 3:
                 printf("\nSee you soon! ;\051");
+                free(clients_list);
+                free(trips_list);
                 exit(0);
 
             default:
@@ -188,6 +192,8 @@ void customer_area() {
                 break;
             case 7:
                 printf("\nSee you soon! ;\051");
+                free(clients_list);
+                free(trips_list);
                 exit(0);
             default:
                 printf("Wrong choice. Try Again\n");
@@ -236,6 +242,8 @@ void client_menu() {
                 break;
             case 4:
                 printf("\nSee you soon! ;\051");
+                free(clients_list);
+                free(trips_list);
                 exit(0);
 
             default:
@@ -327,14 +335,12 @@ void new_client() {
     write_client_file();
     printf("Your ID is: %d", client.ID);
 }
-void string_replace(char s[], char chr, char repl_chr){
+void string_replace(char s[], char chr, char repl_chr) {
 
-    int i=0;
-    while(s[i]!='\0')
-    {
-        if(s[i]==chr)
-        {
-            s[i]=repl_chr;
+    int i = 0;
+    while (s[i] != '\0') {
+        if (s[i] == chr) {
+            s[i] = repl_chr;
         }
         i++;
     }

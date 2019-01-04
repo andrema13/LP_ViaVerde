@@ -169,7 +169,8 @@ int count_file_line_numbers() {
  * É atribuido o valor do tamanho do array das viagens á variavel trip_list_size
  * É fechado por fim o ficheiro.
  */
-void read_trip_file() {
+void
+read_trip_file() {
 
     FILE *file;
     int i = 0;
