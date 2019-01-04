@@ -28,15 +28,15 @@ void id_search(int id, struct Trip *results_list, int *results_list_size);
 
 void day_search(int day, struct Trip *results_list, int *results_list_size);
 
-void input_toll_search(int input_toll, struct Trip results_list[], int results_list_size);
+void input_toll_search(int input_toll, struct Trip *results_list, int *results_list_size);
 
-void exit_toll_search(int exit_toll, struct Trip results_list[], int results_list_size);
+void exit_toll_search(int exit_toll, struct Trip *results_list, int *results_list_size);
 
-void price_search(float price, struct Trip results_list[], int results_list_size);
+void price_search(float price, struct Trip *results_list, int *results_list_size);
 
-void month_search(int month, struct Trip results_list[], int results_list_size);
+void month_search(int month, struct Trip *results_list, int *results_list_size);
 
-void year_search(int year, struct Trip results_list[], int results_list_size);
+void year_search(int year, struct Trip *results_list, int *results_list_size);
 
 void print_results(struct Trip *results_list, int results_list_size);
 

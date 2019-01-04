@@ -158,37 +158,38 @@ void search_trip() {
                 system("clear");
                 printf("Month : \n");
                 scanf("%d", &month);
-                // month_search(month, results_list, results_list_size);
+                month_search(month, results_list, &results_list_size);
                 break;
             case 4:
                 system("clear");
                 printf("Year : \n");
                 scanf("%d", &year);
-                // year_search(year, results_list, results_list_size);
+                year_search(year, results_list, &results_list_size);
                 break;
             case 5:
                 system("clear");
                 printf("Input toll : \n");
                 scanf("%d", &input_toll);
-                //input_toll_search(input_toll, results_list, results_list_size);
+                input_toll_search(input_toll, results_list, &results_list_size);
                 break;
             case 6:
                 system("clear");
                 printf("Exit toll : \n");
                 scanf("%d", &exit_toll);
-                //exit_toll_search(exit_toll, results_list, results_list_size);
+                exit_toll_search(exit_toll, results_list, &results_list_size);
                 break;
             case 7:
                 system("clear");
                 printf("Price : \n");
                 scanf("%f", &price);
-                //price_search(price, results_list, results_list_size);
+                price_search(price, results_list, &results_list_size);
                 break;
             default:
                 printf("Wrong choice. Try again\n");
                 break;
         }
     }
+    print_results(results_list, results_list_size);
 }
 
 void print_results(struct Trip *results_list, int results_list_size) {
@@ -218,22 +219,15 @@ void print_results(struct Trip *results_list, int results_list_size) {
  * @param id - id fornecido na escolha dos filtros
  */
 void id_search(int id, struct Trip *results_list, int *results_list_size) {
-
-    struct Trip temp_list[*results_list_size];
-    int temp_list_size = 0;
-
     for (int i = 0; i < *results_list_size; i++) {
-
-        if (id == results_list[i].client_id) {
-            temp_list[temp_list_size] = results_list[i];
-            temp_list_size++;
+        if (id != results_list[i].client_id) {
+            for (int j = i; j < *results_list_size; j++) {
+                results_list[j] = results_list[j + 1];
+            }
+            i--;
+            *results_list_size -= 1;
         }
     }
-
-    results_list = temp_list;
-    *results_list_size = temp_list_size;
-
-    print_results(results_list, *results_list_size);
 }
 
 /**
@@ -242,22 +236,15 @@ void id_search(int id, struct Trip *results_list, int *results_list_size) {
  * @param day - dia fornecido na escolha dos filtros
  */
 void day_search(int day, struct Trip *results_list, int *results_list_size) {
-
-    struct Trip temp_list[*results_list_size];
-    int temp_list_size = 0;
-
     for (int i = 0; i < *results_list_size; i++) {
-
-        if (day == results_list[i].date.tm_mday) {
-            temp_list[temp_list_size] = results_list[i];
-            temp_list_size++;
+        if (day != results_list[i].date.tm_mday) {
+            for (int j = i; j < *results_list_size; j++) {
+                results_list[j] = results_list[j + 1];
+            }
+            i--;
+            *results_list_size -= 1;
         }
     }
-
-    results_list = temp_list;
-    *results_list_size = temp_list_size;
-
-    print_results(results_list, *results_list_size);
 }
 
 /**
@@ -265,21 +252,16 @@ void day_search(int day, struct Trip *results_list, int *results_list_size) {
  * O id fornecido terá de ser igual a um dos registados nas viagens
  * @param month - mes fornecido na escolha dos filtros
  */
-void month_search(int month, struct Trip results_list[], int results_list_size) {
-
-    for (int i = 0; i <= results_list_size - 1; i++) {
-
+void month_search(int month, struct Trip *results_list, int *results_list_size) {
+    for (int i = 0; i < *results_list_size; i++) {
         if (month != results_list[i].date.tm_mon) {
-
-            results_list[i] = results_list[i + 1];
-            results_list_size--;
+            for (int j = i; j < *results_list_size; j++) {
+                results_list[j] = results_list[j + 1];
+            }
             i--;
+            *results_list_size -= 1;
         }
     }
-    if (results_list[results_list_size - 1].date.tm_mon != month) {
-        printf("\n** 404 - Trip not found **\n");
-    }
-    print_results(results_list, results_list_size);
 }
 
 /**
@@ -287,21 +269,16 @@ void month_search(int month, struct Trip results_list[], int results_list_size) 
  * O id fornecido terá de ser igual a um dos registados nas viagens
  * @param year - ano fornecido na escolha dos filtros
  */
-void year_search(int year, struct Trip results_list[], int results_list_size) {
-
-    for (int i = 0; i <= results_list_size - 1; i++) {
-
+void year_search(int year, struct Trip *results_list, int *results_list_size) {
+    for (int i = 0; i < *results_list_size; i++) {
         if (year != results_list[i].date.tm_year) {
-
-            results_list[i] = results_list[i + 1];
-            results_list_size--;
+            for (int j = i; j < *results_list_size; j++) {
+                results_list[j] = results_list[j + 1];
+            }
             i--;
+            *results_list_size -= 1;
         }
     }
-    if (results_list[results_list_size - 1].date.tm_year != year) {
-        printf("\n** 404 - Trip not found **\n");
-    }
-    print_results(results_list, results_list_size);
 }
 
 /**
@@ -309,21 +286,16 @@ void year_search(int year, struct Trip results_list[], int results_list_size) {
  * O id fornecido terá de ser igual a um dos registados nas viagens
  * @param in_toll - portico de entrada fornecido na escolha dos filtros
  */
-void input_toll_search(int input_toll, struct Trip results_list[], int results_list_size) {
-
-    for (int i = 0; i <= results_list_size - 1; i++) {
-
+void input_toll_search(int input_toll, struct Trip *results_list, int *results_list_size) {
+    for (int i = 0; i < *results_list_size; i++) {
         if (input_toll != results_list[i].choice_x) {
-
-            results_list[i] = results_list[i + 1];
-            results_list_size--;
+            for (int j = i; j < *results_list_size; j++) {
+                results_list[j] = results_list[j + 1];
+            }
             i--;
+            *results_list_size -= 1;
         }
     }
-    if (results_list[results_list_size - 1].choice_x != input_toll) {
-        printf("\n** 404 - Trip not found **\n");
-    }
-    print_results(results_list, results_list_size);
 }
 
 /**
@@ -331,21 +303,16 @@ void input_toll_search(int input_toll, struct Trip results_list[], int results_l
  * O id fornecido terá de ser igual a um dos registados nas viagens
  * @param out_toll - portico de saida fornecido na escolha dos filtros
  */
-void exit_toll_search(int exit_toll, struct Trip results_list[], int results_list_size) {
-
-    for (int i = 0; i <= results_list_size - 1; i++) {
-
+void exit_toll_search(int exit_toll, struct Trip *results_list, int *results_list_size) {
+    for (int i = 0; i < *results_list_size; i++) {
         if (exit_toll != results_list[i].choice_y) {
-
-            results_list[i] = results_list[i + 1];
-            results_list_size--;
+            for (int j = i; j < *results_list_size; j++) {
+                results_list[j] = results_list[j + 1];
+            }
             i--;
+            *results_list_size -= 1;
         }
     }
-    if (results_list[results_list_size - 1].choice_y != exit_toll) {
-        printf("\n** 404 - Trip not found **\n");
-    }
-    print_results(results_list, results_list_size);
 }
 
 /**
@@ -353,21 +320,16 @@ void exit_toll_search(int exit_toll, struct Trip results_list[], int results_lis
  * O id fornecido terá de ser igual a um dos registados nas viagens
  * @param price - preço fornecido na escolha dos filtros
  */
-void price_search(float price, struct Trip results_list[], int results_list_size) {
-
-    for (int i = 0; i <= results_list_size - 1; i++) {
-
+void price_search(float price, struct Trip *results_list, int *results_list_size) {
+    for (int i = 0; i < *results_list_size; i++) {
         if (price != results_list[i].trip_cost) {
-
-            results_list[i] = results_list[i + 1];
-            results_list_size--;
+            for (int j = i; j < *results_list_size; j++) {
+                results_list[j] = results_list[j + 1];
+            }
             i--;
+            *results_list_size -= 1;
         }
     }
-    if (results_list[results_list_size - 1].trip_cost != price) {
-        printf("\n** 404 - Trip not found **\n");
-    }
-    print_results(results_list, results_list_size);
 }
 
 /**
