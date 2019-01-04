@@ -403,7 +403,9 @@ void price_management() {
                 break;
             case 4:
                 printf("\nSee you soon! ;\051");
-                exit(0);//sair
+                free(clients_list);
+                free(trips_list);
+                exit(0);
             default:
                 printf("Wrong choice. Try Again\n");
                 break;
@@ -498,7 +500,8 @@ void user_menu() {
                 break;
             case 7:
                 printf("\nSee you soon! ;\051");
-                //free(*__alloc_align())
+                free(clients_list);
+                free(trips_list);
                 exit(0);
             default:
                 printf("Wrong choice. Try again\n");
@@ -547,7 +550,7 @@ void edit_prices() {
  * (completar)
  * @return 0
  */
-
+/*
 int editClient() {
 
 
@@ -657,9 +660,11 @@ int editClient() {
 
     return 0;
 }
+ */
 /**
 *@brief Mostra as informaçoes do cliente caso o seu id seja igual a um id da lista de clientes
 */
+/*
 void clientInfoById(int id) {
     if (id >= 1 && id < client_list_size) {
         printf("--Client Info--\n\n");
@@ -671,6 +676,8 @@ void clientInfoById(int id) {
         printf("Street : %s\n", clients_list[id].street);
     }
 }
+ */
+/*
 void vehicleInfoById(int id) {
     if (id > -1 && id < client_list_size) {
         printf("--Vehicle Info--\n\n");
@@ -678,11 +685,11 @@ void vehicleInfoById(int id) {
         printf("Model : %s\n", clients_list[id].vehicle.model);
         printf("Registration : %s\n", clients_list[id].vehicle.registration);
     }
-}
-
+}*/
+/*
 int searchUser() {
     int id = 0;
     readInt(id, 1, client_list_size, "What's the ID you want to search?");
     clientInfoById(id);
     return 0;
-}
+}*/
