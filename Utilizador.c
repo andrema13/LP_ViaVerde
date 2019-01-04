@@ -254,7 +254,7 @@ void day_search(int day, struct Trip *results_list, int *results_list_size) {
  */
 void month_search(int month, struct Trip *results_list, int *results_list_size) {
     for (int i = 0; i < *results_list_size; i++) {
-        if (month != results_list[i].date.tm_mon) {
+        if (month != results_list[i].date.tm_mon + 1) {
             for (int j = i; j < *results_list_size; j++) {
                 results_list[j] = results_list[j + 1];
             }
@@ -271,7 +271,7 @@ void month_search(int month, struct Trip *results_list, int *results_list_size) 
  */
 void year_search(int year, struct Trip *results_list, int *results_list_size) {
     for (int i = 0; i < *results_list_size; i++) {
-        if (year != results_list[i].date.tm_year) {
+        if (year != results_list[i].date.tm_year + 1900) {
             for (int j = i; j < *results_list_size; j++) {
                 results_list[j] = results_list[j + 1];
             }
