@@ -192,6 +192,11 @@ void search_trip() {
     print_results(results_list, results_list_size);
 }
 
+/**
+ * Imprime os resultados dos filtros dados
+ * @param results_list
+ * @param results_list_size
+ */
 void print_results(struct Trip *results_list, int results_list_size) {
 
     for (int i = 0; i < results_list_size; i++) {
@@ -214,9 +219,10 @@ void print_results(struct Trip *results_list, int results_list_size) {
 }
 
 /**
- * @brief Pesquisa pelas viagens registadas ( client ID)
- * O id fornecido terá de ser igual a um dos registados nas viagens
- * @param id - id fornecido na escolha dos filtros
+ * Filtra os resultados
+ * @param id
+ * @param results_list
+ * @param results_list_size
  */
 void id_search(int id, struct Trip *results_list, int *results_list_size) {
     for (int i = 0; i < *results_list_size; i++) {
@@ -231,9 +237,10 @@ void id_search(int id, struct Trip *results_list, int *results_list_size) {
 }
 
 /**
- * @brief Pesquisa pelas viagens registadas (dia)
- * O id fornecido terá de ser igual a um dos registados nas viagens
- * @param day - dia fornecido na escolha dos filtros
+ * Filtra os resultados
+ * @param day
+ * @param results_list
+ * @param results_list_size
  */
 void day_search(int day, struct Trip *results_list, int *results_list_size) {
     for (int i = 0; i < *results_list_size; i++) {
@@ -248,9 +255,10 @@ void day_search(int day, struct Trip *results_list, int *results_list_size) {
 }
 
 /**
- * @brief Pesquisa pelas viagens registadas (mes)
- * O id fornecido terá de ser igual a um dos registados nas viagens
- * @param month - mes fornecido na escolha dos filtros
+ * Filtra os resultados
+ * @param month
+ * @param results_list
+ * @param results_list_size
  */
 void month_search(int month, struct Trip *results_list, int *results_list_size) {
     for (int i = 0; i < *results_list_size; i++) {
@@ -265,9 +273,10 @@ void month_search(int month, struct Trip *results_list, int *results_list_size) 
 }
 
 /**
- * @brief Pesquisa pelas viagens registadas (ano)
- * O id fornecido terá de ser igual a um dos registados nas viagens
- * @param year - ano fornecido na escolha dos filtros
+ * Filtra os resultados
+ * @param year
+ * @param results_list
+ * @param results_list_size
  */
 void year_search(int year, struct Trip *results_list, int *results_list_size) {
     for (int i = 0; i < *results_list_size; i++) {
