@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Utilizador.h"
-#include "API_Leitura.h"
+#include "User.h"
+#include "API_Read.h"
 #include "API_Utils.h"
 #include "Utils.h"
-#include "Cliente.h"
-#include "Viagem.h"
+#include "Client.h"
+#include "Trip.h"
 #include "Data.h"
 
-/**
- * Array de resultados do tipo struct Resultado
- */
 void user_management() {
 
     int choice;
@@ -49,21 +46,13 @@ void user_management() {
                 printf("\nSee you soon! ;\051");
                 free(clients_list);
                 free(trips_list);
-                exit(0);//sair
+                exit(0);
             default:
                 printf("Wrong choice. Try Again\n");
                 break;
         }
     } while (choice != 5);
 }
-
-/**
- * @brief Gestao de viagens
- * Adicionar uma nova viagem
- * Pesquisar por viagens ja efetuadas
- * Menu anterior
- * Sair do programa
- */
 void trip_management() {
 
     int choice;
@@ -99,8 +88,8 @@ void trip_management() {
 }
 
 /**
- * @brief Pesquisa de viagens
- * É possivel pesquisar por diferentes filtros bem como utilizar a combinaçao de dois filtros
+ * @brief Trip Search
+ * It's possible to search for different filters as well as to use the combination of two filters
  */
 
 void search_trip() {
@@ -123,7 +112,7 @@ void search_trip() {
            "0.Stop filters\n"
            "Note : You only can choose 3 filters(max) to do the search.\n"
     );
-    do {//aqui sao escolhidos os filtros(3-max) enquanto nao for clicado o 0
+    do {// here the filters (3-max) are chosen until 0 is clicked
         readInt(&choice, 0, 7, "Pick a filter : ");
         if (choice != 0) {
             filters[filters_size] = choice;
@@ -131,10 +120,19 @@ void search_trip() {
         }
     } while (choice != 0 && filters_size < MAX_FILTERS);
 
+    for (int i = 0; i < filters_size; i++) {//Verify if exists equals filters
+        for (int j = i; j < filters_size; j++) {
+            if (filters[i] == filters[j+1]) {
+                printf("Cannot choose the same filter, try again\n");
+                search_trip();
+            }
+        }
+    }
+
     struct Trip results_list[trip_list_size];
     for (int i = 0; i < trip_list_size; i++) {
         results_list[i] = trips_list[i];
-        //copia as viagens resgistadas para o novo array results_list
+        // copy the saved trips to the new array results_list
     }
     results_list_size = trip_list_size;
 
@@ -143,43 +141,36 @@ void search_trip() {
         switch (filters[i]) {
 
             case 1:
-                system("clear");
-                printf("Cliente ID : ");
+                printf("Client ID : ");
                 scanf("%d", &input_id);
                 id_search(input_id, results_list, &results_list_size);
                 break;
             case 2:
-                system("clear");
                 printf("Day : ");
                 scanf("%d", &day);
                 day_search(day, results_list, &results_list_size);
                 break;
             case 3:
-                system("clear");
                 printf("Month : \n");
                 scanf("%d", &month);
                 month_search(month, results_list, &results_list_size);
                 break;
             case 4:
-                system("clear");
                 printf("Year : \n");
                 scanf("%d", &year);
                 year_search(year, results_list, &results_list_size);
                 break;
             case 5:
-                system("clear");
                 printf("Input toll : \n");
                 scanf("%d", &input_toll);
                 input_toll_search(input_toll, results_list, &results_list_size);
                 break;
             case 6:
-                system("clear");
                 printf("Exit toll : \n");
                 scanf("%d", &exit_toll);
                 exit_toll_search(exit_toll, results_list, &results_list_size);
                 break;
             case 7:
-                system("clear");
                 printf("Price : \n");
                 scanf("%f", &price);
                 price_search(price, results_list, &results_list_size);
@@ -190,10 +181,11 @@ void search_trip() {
         }
     }
     print_results(results_list, results_list_size);
+    trip_management();
 }
 
 /**
- * Imprime os resultados dos filtros dados
+ * Prints the results of the given filters
  * @param results_list
  * @param results_list_size
  */
@@ -202,7 +194,7 @@ void print_results(struct Trip *results_list, int results_list_size) {
     for (int i = 0; i < results_list_size; i++) {
 
         if (i == 0) {
-            printf("Client ID  Input-Exit      Date       Hour        Price\n");
+            printf("Client_ID   Input-Exit      Date       Hour        Price\n");
         }
         printf("   %d          %d-%d       %d/%d/%d   %d:%d:%d \t %f\n",
                results_list[i].client_id,
@@ -219,7 +211,7 @@ void print_results(struct Trip *results_list, int results_list_size) {
 }
 
 /**
- * Filtra os resultados
+ * Filter the results
  * @param id
  * @param results_list
  * @param results_list_size
@@ -237,7 +229,7 @@ void id_search(int id, struct Trip *results_list, int *results_list_size) {
 }
 
 /**
- * Filtra os resultados
+ * Filter the results
  * @param day
  * @param results_list
  * @param results_list_size
@@ -255,7 +247,7 @@ void day_search(int day, struct Trip *results_list, int *results_list_size) {
 }
 
 /**
- * Filtra os resultados
+ * Filter the results
  * @param month
  * @param results_list
  * @param results_list_size
@@ -273,7 +265,7 @@ void month_search(int month, struct Trip *results_list, int *results_list_size) 
 }
 
 /**
- * Filtra os resultados
+ * Filter the results
  * @param year
  * @param results_list
  * @param results_list_size
@@ -291,10 +283,10 @@ void year_search(int year, struct Trip *results_list, int *results_list_size) {
 }
 
 /**
- * @brief Pesquisa pelas viagens registadas (portico de entrada)
- * O id fornecido terá de ser igual a um dos registados nas viagens
- * @param in_toll - portico de entrada fornecido na escolha dos filtros
- */
+  * @brief Search for registered trip (input toll)
+  * The given id will have to be equal to one registered in the trips
+  * @param input_toll - input port provided when choosing filters
+*/
 void input_toll_search(int input_toll, struct Trip *results_list, int *results_list_size) {
     for (int i = 0; i < *results_list_size; i++) {
         if (input_toll != results_list[i].choice_x) {
@@ -308,9 +300,9 @@ void input_toll_search(int input_toll, struct Trip *results_list, int *results_l
 }
 
 /**
- * @brief Pesquisa pelas viagens registadas (portico de saida)
- * O id fornecido terá de ser igual a um dos registados nas viagens
- * @param out_toll - portico de saida fornecido na escolha dos filtros
+  * @brief Search for travel (exit toll)
+  * The given id will have to be equal to one registered in the trips
+  * @param exit_toll - output port provided when choosing filters
  */
 void exit_toll_search(int exit_toll, struct Trip *results_list, int *results_list_size) {
     for (int i = 0; i < *results_list_size; i++) {
@@ -325,9 +317,9 @@ void exit_toll_search(int exit_toll, struct Trip *results_list, int *results_lis
 }
 
 /**
- * @brief Pesquisa pelas viagens registadas (preço da viagem)
- * O id fornecido terá de ser igual a um dos registados nas viagens
- * @param price - preço fornecido na escolha dos filtros
+  * @brief Search for registered travel (price of the trip)
+  * The given id will have to be equal to one registered in the trips
+  * @param price - price provided when choosing filters
  */
 void price_search(float price, struct Trip *results_list, int *results_list_size) {
     for (int i = 0; i < *results_list_size; i++) {
@@ -342,17 +334,17 @@ void price_search(float price, struct Trip *results_list, int *results_list_size
 }
 
 /**
- * @brief Gestao de preços
- * Ver a tabela de preços atual
- * Editar a tabela de preços
- * Menu anterior
- * Sair do programa
+  * @brief pricing management
+  * See current rate card
+  * Edit the price list
+  * Previous menu
+  * Quit the program
  */
 void price_management() {
     int choice;
     do {
         printf("\n---Price Management---\n\n");
-        printf("1. Show Prices\n");//funcionalidade nova(relatorio)
+        printf("1. Show Prices\n");
         printf("2. Edit Prices\n");
         printf("3. Previous Menu\n");
         printf("4. Exit\n");
@@ -364,7 +356,7 @@ void price_management() {
                 show_prices();
                 break;
             case 2:
-                system("clear");//menu anterior
+                system("clear");
                 edit_prices();
                 break;
             case 3:
@@ -383,21 +375,21 @@ void price_management() {
 }
 
 /**
- * @brief Gestao da distancia
- * É preenchido a matriz da distancia, isDistance? true(Param)
- * Mostra a matriz no ecra
- * É pedido para escolher qual a distancia a ser editado pelos eixos x e y
- * Se as escolhas de x e y forem iguais nao é permitido editar, e é voltado a mostrar a matriz no ecra
- * Se forem escolhas diferentes é pedido para introduzir um numero entre 0-100 como nova distancia
- * É escrito na matriz a nova distancia substituindo a antiga
- * Volta a mostrar a matriz com as distancias atualizadas
+  * @brief Distance Management
+  * Is the distance matrix filled, isDistance? true (Param)
+  * Shows matrix on screen
+  * You are prompted to choose the distance to be edited by the x and y axes
+  * If the choices of x and y are equal, it is not allowed to edit, and it is returned to show the matrix in the screen
+  * If they are different choices you are asked to enter a number between 0-100 as a new distance
+  * The new distance is written in the matrix replacing the old one
+  * Displays matrix with updated distances
  */
 void distance_management() {
 
     int choice_x, choice_y;
     float new_distance;
 
-    fill_matrix(distance_matrix_list, "../Distancias.txt", true);
+    fill_matrix(distance_matrix_list, "../Distances.txt", true);
     printf("\n---Distance Management---\n\n");
     show_distances();
     printf("Enter the distance to edit:\n");
@@ -412,21 +404,21 @@ void distance_management() {
         printf("Enter the new distance:\n");
         readFloat(&new_distance, 0, 100, "Choose between 0-100: ");
         distance_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].distance = new_distance;
-        write_matrix(distance_matrix_list, "../Distancias.txt", false);
+        write_matrix(distance_matrix_list, "../Distances.txt", false);
         system("clear");
         show_distances();
     }
 }
 
 /**
- * @brief Menu do utlizador
- * Gestao dos clientes
- * Gestao das viagens
- * Gestao dos preços
- * Gestao das viagens
- * Geraçao de faturas
- * Menu anterior
- * Sair do programa
+  * @brief User Menu
+  * Customer management
+  * Travel management
+  * Management of prices
+  * Travel management
+  * Generation of invoices
+  * Previous menu
+  * Quit the program
  */
 
 void user_menu() {
@@ -480,22 +472,22 @@ void user_menu() {
 }
 
 /**
- * @brief Editar os preços tabelados
- * É preenchido a matriz dos preços , isDistance? false(Param)
- * Mostra a matriz no ecra
- * É pedido para escolher qual o preço a ser editado pelos eixos x e y
- * Se as escolhas de x e y forem iguais nao é permitido editar, e é voltado a mostrar a matriz no ecra
- * Se forem escolhas diferentes é pedido para introduzir um numero entre 0-100 como novo preço
- * É escrito na matriz o novo preço substituindo o antigo
- * Volta a mostrar a matriz com os preços atualizados
+* @brief Edit tabulated prices
+  * Is the matrix of prices filled, isDistance? false (Param)
+  * Shows matrix on screen
+  * You are asked to choose the price to be edited by the axes x and y
+  * If the choices of x and y are equal, it is not allowed to edit,
+    and it is returned to show the matrix in the screen
+  * If they are different choices you are asked to enter a number between 0-100 as new price
+  * The new price is written in the matrix replacing the old one
+  * Displays the matrix with updated prices
  */
-
 void edit_prices() {
 
     int choice_x, choice_y;
     float new_price;
 
-    fill_matrix(price_matrix_list, "../Precos.txt", false);
+    fill_matrix(price_matrix_list, "../Prices.txt", false);
     show_prices();
     printf("Enter the price to edit:\n");
     readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:\n");
@@ -509,18 +501,17 @@ void edit_prices() {
         printf("Enter the new price:\n");
         readFloat(&new_price, 0, 100, "Choose between 0-100: ");
         price_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price = new_price;
-        write_matrix(price_matrix_list, "../Precos.txt", true);
+        write_matrix(price_matrix_list, "../Prices.txt", true);
         system("clear");
         show_prices();
     }
 }
 
 /**
- * Editar cliente
- * Mostra os campos a ser editados
- * É pedido o campo a ser editado e se for bem sucedido é escrito no ficheiro
+  * Edit customer
+  * Shows the fields to be edited
+  * The field to be edited is requested and if successful it is written in the file
  */
-
 void edit_client() {
 
     int choice, flag;
@@ -555,7 +546,7 @@ void edit_client() {
             readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
 
             if (flag == 1) {
-                strcpy(clients_list[current_client_id - 1].name, name_edited);//substitui o nome
+                strcpy(clients_list[current_client_id - 1].name, name_edited);
                 write_client_file();
                 printf("Successfully edited!");
                 edit_client();
@@ -568,8 +559,7 @@ void edit_client() {
             readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
 
             if (flag == 1) {
-                strcpy(clients_list[current_client_id - 1].NIF, edit_NIF);//substitui o nome
-                write_client_file();
+                strcpy(clients_list[current_client_id - 1].NIF, edit_NIF);
                 printf("Successfully edited!");
                 edit_client();
             } else {
@@ -581,7 +571,7 @@ void edit_client() {
             readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
 
             if (flag == 1) {
-                strcpy(clients_list[current_client_id - 1].CC, edit_CC);//substitui o nome
+                strcpy(clients_list[current_client_id - 1].CC, edit_CC);
                 write_client_file();
                 printf("Successfully edited!");
                 edit_client();
@@ -594,7 +584,7 @@ void edit_client() {
             readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
 
             if (flag == 1) {
-                strcpy(clients_list[current_client_id - 1].NIB, edit_NIB);//substitui o nome
+                strcpy(clients_list[current_client_id - 1].NIB, edit_NIB);
                 write_client_file();
                 printf("Successfully edited!");
                 edit_client();
@@ -607,7 +597,7 @@ void edit_client() {
             readInt(&flag, 0, 1, "You want save the information? Yes press 1, No press 0");
 
             if (flag == 1) {
-                strcpy(clients_list[current_client_id - 1].street, edit_street);//substitui o nome
+                strcpy(clients_list[current_client_id - 1].street, edit_street);
                 write_client_file();
                 printf("Successfully edited!");
                 edit_client();
@@ -621,7 +611,7 @@ void edit_client() {
 
             if (flag == 1) {
                 strcpy(clients_list[current_client_id - 1].vehicle.manufacturer,
-                       edit_manufacturer);//substitui o nome
+                       edit_manufacturer);
                 write_client_file();
                 printf("Successfully edited!");
                 edit_client();
@@ -635,7 +625,7 @@ void edit_client() {
 
             if (flag == 1) {
                 strcpy(clients_list[current_client_id - 1].vehicle.model,
-                       edit_model);//substitui o nome
+                       edit_model);
                 write_client_file();
                 printf("Successfully edited!");
                 edit_client();
@@ -648,7 +638,7 @@ void edit_client() {
 
             if (flag == 1) {
                 strcpy(clients_list[current_client_id - 1].vehicle.registration,
-                       edit_regist);//substitui o nome
+                       edit_regist);
                 write_client_file();
                 printf("Successfully edited!");
                 edit_client();
@@ -662,8 +652,8 @@ void edit_client() {
 }
 
 /**
-*@brief Pesquisar cliente
- * Mostra as informaçoes do cliente caso o seu id seja igual a um id da lista de clientes
+  * @brief Search for customer
+  * Displays customer information if your id is equal to a customer list id
 */
 void search_user() {
 
@@ -699,11 +689,11 @@ void search_user() {
 }
 
 /**
- * @brief Apagar dados de um cliente registado
- * Mostra os clientes atuais
- * É pedido um id para ser apagado
- * Procura-se esse id e é apagado do sistema se for encontrado
- * Imprime no ecra a lista atual de clientes atualizada
+  * @brief Erase data from a registered client
+  * Shows current customers
+  * You are prompted for an id to be deleted
+  * This id is searched and deleted from the system if it is found
+  * Print on screen the current list of updated clients
  */
 void delete_client_data() {
 
@@ -724,9 +714,8 @@ void delete_client_data() {
     if (results == 0) {
         printf("\n** 404 - Client not found **\n");
     } else {
-        client_list_size--;//decrementa o array
-        write_client_file();//escreve no ficheiro
-
+        client_list_size--;
+        write_client_file();
         printf("--Clients after delete--\n\n");
         print_clients();
     }
@@ -734,7 +723,7 @@ void delete_client_data() {
 }
 
 /**
- * Imprime os clientes existentes na aplicaçao
+  * Prints existing clients in the application
  */
 void print_clients() {
 
@@ -759,7 +748,7 @@ void print_clients() {
 }
 
 /**
- * Apaga as viagens do cliente seleccionado
+ * Clears the trips of the selected customer
  * @param delete_id
  */
 void delete_trips(int delete_id) {

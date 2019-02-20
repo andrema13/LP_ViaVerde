@@ -1,6 +1,5 @@
 #ifndef VIAGEM_H
 #define VIAGEM_H
-
 #include "time.h"
 
 struct Trip {

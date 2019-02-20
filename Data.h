@@ -3,8 +3,8 @@
 #define LIST_SIZE 10
 #define TRIP_SIZE 100
 
-#include "Cliente.h"
-#include "Viagem.h"
+#include "Client.h"
+#include "Trip.h"
 #include "Utils.h"
 
 extern struct Client *clients_list;
@@ -29,4 +29,4 @@ void show_prices();
 
 void show_distances();
 
-#endif //VIAVERDE_DATA_H
+#endif

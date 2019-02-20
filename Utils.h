@@ -24,5 +24,4 @@ bool write_matrix(struct Lanco *f, char *file, bool is_price);
 }
 #endif
 
-#endif /* UTILS_H */
-
+#endif

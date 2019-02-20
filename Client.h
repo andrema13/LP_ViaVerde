@@ -19,7 +19,7 @@ void new_client();
 
 void id_verification(void (*f)(void), void (*e)(void));
 
-void input_validation(char *str, char *msg, const unsigned int size);
+void input_validation(char *str, char *msg, unsigned int size);
 
 struct Vehicle {
 

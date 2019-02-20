@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "API_Leitura.h"
-#include "Cliente.h"
-#include "Utilizador.h"
+#include "API_Read.h"
+#include "Client.h"
+#include "User.h"
 #include "Data.h"
-#include "Viagem.h"
+#include "Trip.h"
 
 /**
- * @brief Menu incial da aplicaçao
- * Menu com a escolha para a parte do cliente ou do utilizador, ou da saida do programa
- * Na opçao 2 é verificado se existem clientes senao é imprimido uma mensagem a dizer que nao existem
- * clientes e é voltado a ser mostrado o menu inicial.
- * Se existir clientes é entao verificado se o id dado existe nos clientes registados
+  * @brief Application start menu
+  * Menu with the choice for the client or user part, or the program exit
+  * In option 2 it is checked if there are clients only if a message is said saying that they do not exist
+  * clients and the initial menu is shown again.
+  * If clients exist then it is verified if the given id exists in registered clients
  */
 void main_menu() {
 
@@ -30,12 +30,12 @@ void main_menu() {
                 break;
             case 2:
                 system("clear");
-                if (client_list_size == 0) {//se nao existir clientes
+                if (client_list_size == 0) {//if no clients
                     printf("\nNo clients yet!\n");
-                    main_menu();
+
                 } else {
                     id_verification(main_menu, user_menu);
-                    //verifica se o id dado existe nos clientes registados
+                    //verify id is equal to registered's id
                 }
                 break;
             case 3:
@@ -51,25 +51,14 @@ void main_menu() {
 }
 
 /**
- *@brief Funçao main
- * Executa as funçoes necessarias á execuçao do programa
- * É alocado memoria para a lista dos clientes
- * É alocado memoria para a lista das viagens
- * É lido o ficheiro dos clientes
- * É lido o ficheiro das viagens
- * @return 0 em caso de sucesso
+  * @brief Main function
+  * Performs the functions required to execute the program
+  * The customer file is read
+  * The travel file is read
+  * @return 0 if success
  */
 int main() {
-//
-//    FILE *file;
-//    file = fopen("../info_cliente.txt", "w");
-//    if (file == NULL) {
-//        perror("Error: ");
-//    }
-//    fclose(file);
 
-    clients_list = (struct Client *) malloc(client_list_max_size * sizeof(struct Client));
-    trips_list = (struct Trip *) malloc(trip_list_max_size * sizeof(struct Trip));
     read_client_file();
     read_trip_file();
     main_menu();

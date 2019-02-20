@@ -1,24 +1,24 @@
-#include "Viagem.h"
+#include "Trip.h"
 #include "time.h"
 #include "Utils.h"
-#include "Utilizador.h"
-#include "API_Leitura.h"
+#include "User.h"
+#include "API_Read.h"
 #include "Data.h"
 
 /**
- * @brief Adicionar uma viagem
- * Funçao que adiciona uma viagem e regista a hora , a data e os pontos ganhos com a mesma.
- * É pedido para escolher uma viagem entre x e y
- * É atribuido um preço a essa escolha e a respetiva distancia efetuada
- * Se o preço da viagem for 0 entao entao estamos a ir para o mesmo destino ou nao é possivel viajar no
- * entre x e y dados.
- * Se for efetuada uma viagem com sucesso entao é registado o id do cliente, o portico de entrada,
- * o portico de saida, a data, a hora, o custo da viagem, a distancia efetuada e  é feita a conversao
- * do custo da viagem para int e é atribuido esse valor aos pontos ganhos com a viagem
- * A viagem é adicionada ao array das viagens e é encrementada a posiçao para a proxima viagem
- * Escreve no ficheiro dos clientes para atualizar os pontos
- * Escreve no ficheiro das viagens a viagem registada
- * Mostra os dados do resgisto da viagem
+  * @brief Add trip
+  * Function that adds a trip and records the time, date and points earned with it.
+  * You are requested to choose a trip between x and y
+  * A price is assigned to that choice and to its distance made
+  * If the price of the trip is 0 then we are going to the same destination or it is not possible to travel in the
+  * between x and y data.
+  * If a successful trip is made then the customer id, the input portico,
+  * the departure port, the date, the time, the cost of the trip, the distance made and the conversion is made
+  * of travel cost to int and this value is assigned to points earned with the trip
+  * The trip is added to the travel array and the position for the next trip is incremented
+  * Write in the clients file to update the points
+  * Write in the travel file the trip recorded
+  * Displays travel trip data
  */
 void add_trip() {
 
@@ -28,8 +28,8 @@ void add_trip() {
     float trip_cost, total_distance;
     struct Trip trip;
 
-    fill_matrix(price_matrix_list, "../Precos.txt", false);
-    fill_matrix(distance_matrix_list, "../Distancias.txt", true);
+    fill_matrix(price_matrix_list, "../Prices.txt", false);
+    fill_matrix(distance_matrix_list, "../Distances.txt", true);
     show_prices();
     printf("Enter where you want to go:\n");
     readInt(&choice_x, 1, NUM_PORTAGENS, "Choose between 1-5:\nX:");
@@ -37,8 +37,8 @@ void add_trip() {
     trip_cost = price_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].price;
     total_distance = distance_matrix_list[(choice_x - 1) * NUM_PORTAGENS + (choice_y - 1)].distance;
 
-    if (trip_cost == 0) {/*verifica se o preço é = 0 e tambem verifica
-                            se estamos a ir para o mesmo destino, ja que o preco tambem é 0*/
+    if (trip_cost == 0) {/* check if the price is = 0 and also check
+                                     if we are going to the same destination, since the price is also 0 */
         printf("\nThis trip is not valid!\n");
         printf("Please try another one.\n");
         add_trip();
@@ -48,10 +48,10 @@ void add_trip() {
         trip.choice_y = choice_y;
         trip.date = tm;
         trip.trip_cost = trip_cost;
-        trip.distance = total_distance;//soma a distancia percorrida por este cliente
-        clients_list[current_client_id - 1].VVPoints = (int) trip_cost;//converte para int e soma os pontos
+        trip.distance = total_distance;// sum distance traveled by this client
+        clients_list[current_client_id - 1].VVPoints = (int) trip_cost;// convert to int and sum the points
         trips_list[trip_list_size++] = trip;
-        write_client_file();//para atualizar no ficheiro do cliente os pontos
+        write_client_file();// to update in the client file the points
         write_trip_file();
 
         printf("Success! Trip registered.\n");
@@ -63,8 +63,8 @@ void add_trip() {
 }
 
 /**
- * @brief Mostra a matriz das distancias no ecra
- * Imprime os km's efetuados no total pelo cliente seleccionado
+  * @brief Shows the distances matrix on the screen
+  * Print the miles made in total by the selected client // to update in the client file the points
  */
 void show_distance() {
     printf("--Total Distance--\n\n");
@@ -79,9 +79,9 @@ void show_distance() {
 }
 
 /**
- * @brief Historico das viagens registadas
- * Imprime as viagens registadas pelo cliente atual
- * É imprimido tambem uma mensagem caso nao existam viagens registadas ainda
+  * @brief Registered trip history
+  * Prints trips registered by the current customer
+  * A message is also printed if there are no trips registered yet
  */
 void trip_history() {
 
@@ -92,7 +92,7 @@ void trip_history() {
     for (i = 0; i < trip_list_size; i++) {
 
         if (current_client_id == trips_list[i].client_id) {
-            printf("** Trip nº%d **\n", trip_count++);//mostra o numero de viagens ordenado p/cliente
+            printf("** Trip nº%d **\n", trip_count++);
             printf("Input Toll : %d\n", trips_list[i].choice_x);
             printf("Exit Toll : %d\n", trips_list[i].choice_y);
             printf("Date : %d/%d/%d\n",
@@ -106,20 +106,20 @@ void trip_history() {
             printf("Cost : %f€\n\n", trips_list[i].trip_cost);
         }
     }
-    if (trip_count == 1) {//chegando aqui e dado que se nao houver viagens registadas
-        //o trip count sera 1 portanto nao existem viagens ainda
+    if (trip_count == 1) {// arriving here and given that if there are no trips registered
+           // the trip count will be 1 so there are no trips yet
         printf("No trips registered yet!\n");
     }
 }
 
 /**
- * @brief Extracto gerado
- * É pedido um mes e um ano especifico
- * É verificado se existe viagens do cliente atual
- * Pesquisa pelo mes e o ano dados
- * É imprimido o cabeçalho dos resultados encontrados
- * Se nao forem encontradas viagens é imprimido uma mensagem
- * No final é tambem imprimido o preço total das viagens encontradas
+  * @brief Extract generated
+  * A month and a specific year is requested
+  * It is checked if there is travel of the current client
+  * Search by month and year data
+  * The header of the results is printed
+  * If no trips are found a message is printed
+  * At the end, the total price of the trips found is also printed
  */
 void extracts_page() {
 
@@ -133,12 +133,11 @@ void extracts_page() {
 
     for (int i = 0; i < trip_list_size; i++) {
 
-        if (current_client_id == trips_list[i].client_id && //verifica o id do cliente
-            trips_list[i].date.tm_mon + 1 == month &&      // pesquisa pelo mes e ano
+        if (current_client_id == trips_list[i].client_id && 
+            trips_list[i].date.tm_mon + 1 == month &&      
             trips_list[i].date.tm_year + 1900 == year) {
 
-            system("clear");
-            if (results == 0) {//apenas para imprimir o cabeçalho uma vez
+            if (results == 0) {
                 printf("*** Extract %d/%d ***\n\n", month, year);
                 printf("Client ID  Input-Exit      Date       Hour        Price\n");
             }

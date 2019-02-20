@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "Cliente.h"
-#include "API_Leitura.h"
+#include "Client.h"
+#include "API_Read.h"
 #include "API_Utils.h"
 #include "Utils.h"
-#include "Utilizador.h"
+#include "User.h"
 #include "Data.h"
-#include "Viagem.h"
+#include "Trip.h"
 
 /**
- *@brief Mostra as informaçoes do cliente caso o seu id seja igual a um id da lista de clientes
+ *@brief Displays customer information if your id is equal to an id of the customer list
  */
 void client_info() {
 
@@ -28,8 +28,8 @@ void client_info() {
 }
 
 /**
- * @brief Mostra as informaçoes do veiculo asssociado ao cliente,
- * caso o id do cliente seja igual a um id da lista de clientes
+ * @brief Displays the information of the associated vehicle with the customer,
+if the client id is equal to an id of the client list
  */
 void vehicle_info() {
 
@@ -42,14 +42,14 @@ void vehicle_info() {
         }
     }
 
-}// ver info carro ( penso que seja uma funcionalidade p/relatorio)
+}
 /**
- * @brief Nesta funçao temos um menu em que é possivel  :
- * Adicionar uma nova viagem ao cliente atual
- * Ver o historico de viagens do cliente que esta no programa atualmente
- * Ver o total de km's percorrido pelo cliente em toda a sua utilizaçao da Via Verde
- * Voltar ao menu anterior
- * Sair do programa
+ * @brief In this function we have a menu where it is possible:
+ * Add a new trip to the current customer
+ * View the client's trip history currently on the show
+ * See the total number of kilometers traveled by the customer in all his use of Via Verde
+ * Back to previous menu
+ * Exit program
  */
 void trip_info() {
 
@@ -57,8 +57,8 @@ void trip_info() {
     do {
         printf("---Trips---\n\n");
         printf("1. Add trip\n");
-        printf("2. Trip history\n");//funcionalidade nova
-        printf("3. Total Distance\n");//funcionalidade nova
+        printf("2. Trip history\n");
+        printf("3. Total Distance\n");
         printf("4. Previous Menu \n");
         printf("5. Exit\n");
         readInt(&choice, 1, 5, "Choose an option: ");
@@ -92,9 +92,9 @@ void trip_info() {
 }
 
 /**
- * @brief Verificar os extratos disponiveis para o cliente que esta no programa atualmente
- * Voltar ao menu anterior
- * Sair do programa
+ * @brief Check the statements available to the client that is currently on the program
+ * Back to previous menu
+ * Exit program
  */
 void extracts_info() {
 
@@ -113,7 +113,7 @@ void extracts_info() {
                 extracts_page();
                 break;
             case 2:
-                system("clear");//menu anterior
+                system("clear");
                 break;
             case 3:
                 printf("\nSee you soon! ;\051");
@@ -129,9 +129,9 @@ void extracts_info() {
 }
 
 /**
- * Faz o somatorio dos pontos obtidos das viagens efetuadas pelo cliente atual
- * Verifica o total de pontos acumulado pelo cliente atual
- * @return o numero de pontos atual do cliente
+  * Sums points obtained from trips made by the current customer
+  * Check the total of points accumulated by the current customer
+  * @return the customer's current number of points
  */
 int points_info() {
 
@@ -145,16 +145,16 @@ int points_info() {
     printf("Points : %d\n", total_points);
 
     return total_points;
-}// ver info pontos ( penso que seja uma funcionalidade p/relatorio)
+}
 /**
- * @brief Trata-se do menu inicial do cliente assim que efetua o respetivo login, pelo que podera ver:
- * Os seus dados pessoais registados
- * Os dados do seu veiculo associado
- * Entrar no menu de viagens, pelo que podera adicionar viagens e verificar o seu historico
- * Gerar um extrato das viagens ja efetuadas
- * Verificar os seus pontos acumulados
- * Voltar ao menu anterior(menu do cliente)
- * Sair do programa
+  * @brief This is the client's home menu as soon as you log in, so you can see:
+  * Your registered personal information
+  * The data of your associated vehicle
+  * Enter the travel menu, so you can add trips and check your history
+  * Generate an extract of trips already made
+  * Check your accumulated points
+  * Return to previous menu (customer menu)
+  * Quit the program
  */
 void customer_area() {
 
@@ -208,11 +208,11 @@ void customer_area() {
 }
 
 /**
- * @brief Menu da parte do cliente
- * Entrar na sua conta atraves do id indicado
- * Registar um novo cliente
- * Voltar ao menu anterior(ecra inicial)
- * Sair do programa
+  * @brief Customer part menu
+  * Login to your account through the indicated id
+  * Register a new customer
+  * Return to the previous menu (initial screen)
+  * Quit the program
  */
 void client_menu() {
 
@@ -228,12 +228,12 @@ void client_menu() {
         switch (choice) {
             case 1:
                 system("clear");
-                if (client_list_size == 0) {//se nao existir clientes
+                if (client_list_size == 0) {//if no clients
                     printf("\nNo clients yet!\n");
                     client_menu();
                 } else {
                     id_verification(client_menu, customer_area);
-                    //verifica se o id dado existe nos clientes registados
+                    //verify if id exists in registered clients
                 }
                 break;
 
@@ -260,21 +260,21 @@ void client_menu() {
 }
 
 /**
- * @brief Trata-se de uma funçao que verifica se o id dado existe nos clientes ja registados, se nao existir,
- * será pedido um novo id
- * @param f - Apontador que espera uma funçao sem argumentos e sem return
- * @param e - Apontador que espera uma funçao sem argumenos e sem return
- * Será primeiramente imprimido os clientes já registados
- * Será posteriormente pedido um id ao utilizador
- * É verificado se o id corresponde aos id ja registados no programa
- * Se exitir o utilizador entra na sua conta (cliente/Utilizador)
- * Se nao corresponder , imprime uma mensagem e é pedido um novo id
- * É tambem efetuada a respetiva limpeza do input para que seja efetuado uma nova tentativa de login
+  * @brief This is a function that verifies if the given id exists in the already registered clients,
+  * if it does not exist, a new id will be requested
+  * @param f - A pointer that expects a function with no arguments and no return
+  * @param e - Pointer that expects a function without arguments and without return
+  * First customers will be printed already registered
+  * A user id will be requested later
+  * It is checked if the id corresponds to the ids already registered in the program
+  * If the user enters your account (client / user)
+  * If it does not match, prints a message and asks for a new id
+  * The respective cleaning of the input is also effected for a new login attempt
  */
-void id_verification(void (*f)(void), void (*e)(void)) {//para passar duas funçoes sem argumentos
+void id_verification(void (*f)(void), void (*e)(void)) {
 
     printf("--Registered Clients--\n");
-    for (int i = 0; i < client_list_size; i++) {//mostra os clientes id/nome
+    for (int i = 0; i < client_list_size; i++) {
         printf("Id: %d - Name: %s\n", clients_list[i].ID, clients_list[i].name);
     }
 
@@ -282,31 +282,32 @@ void id_verification(void (*f)(void), void (*e)(void)) {//para passar duas funç
     current_client_id = 0;
     scanf(" %d", &current_client_id);
 
-    for (int i = 0; i < client_list_size; i++) {//verifica se exite o id
+    for (int i = 0; i < client_list_size; i++) {
+
         if (current_client_id == clients_list[i].ID) {
             system("clear");
             (*e)();
             return;
         }
-    }//se chega aqui entao nao existe o id , logo volta a pedir um novo id
+    }
     printf("** 404 - Client not found **\n");
     system("clear");
-    cleanInputBuffer();//limpa o input anterior e espera um novo scanf
+    cleanInputBuffer();
     id_verification((*f), (*e));
 }
 
 /**
- * @brief Registo de um novo cliente
- * É atribuido um id unico , caso ainda nao exista clientes o id atribuido a este novo
- * registo sera 1 . Se já existir clientes, é verificado o ultimo cliente(posiçao que ocupa no array)
- * e é adicionado 1.
- * É pedido informaçoes para ser registado um novo cliente, tais como:
- * Nome, NIF, Cartao de Cidadão, NIB, Rua, Marca do veiculo, Modelo e a matricula do veiculo .
- * É atribuido os pontos correspondentes pelo que começará em 0 , no caso de um novo cliente .
- * É entao inserido no array dos clientes o novo cliente com as informaçoes dadas e é incrmentado
- * uma posicao para o proximo cliente a ser registado
- * write_cliente_file() é a funçao responsavel por escrever no ficheiro dos cliente o seu registo
- * É ainda mostrado no ecrã o id atribuido a este novo cliente
+  * @brief Registration of a new customer
+  * A unique id is assigned, if there are no clients yet, the id assigned to this new one
+  * registration will be 1. If clients already exist, the last client is verified (position in the array)
+  * and 1 is added.
+  * Information is requested to be registered a new customer, such as:
+  * Name, NIF, Citizen Card, NIB, Street, Vehicle Make, Model and vehicle registration.
+  * The corresponding points are assigned so that it will start at 0, in the case of a new client.
+  * It is then inserted into the customer array the new client with the information given and is incrmented
+  * a position for the next client to be registered
+  * write_cliente_file () is the function responsible for writing to the client file its registration
+  * The id assigned to this new customer is also shown on the screen.
  */
 void new_client() {
 
@@ -314,7 +315,7 @@ void new_client() {
     if (client_list_size == 0) {
         client.ID = 1;
     } else {
-        client.ID = clients_list[client_list_size - 1].ID + 1;//incrementa id do cliente
+        client.ID = clients_list[client_list_size - 1].ID + 1;
     }
 
     input_validation(client.name, "Name: ", 20);
@@ -334,16 +335,16 @@ void new_client() {
 }
 
 /**
- * @brief Validaçao de input
- * É validado se o utilizador introduziu alguma virgula pelo que nao é possivel a sua inserçao
- * @param str string a ser validada
+  * @brief Validation of input
+  * It is validated if the user has entered a comma so it is not possible to insert it
+  * @param str string to be validated
  */
 
 void input_validation(char *str, char *msg, const unsigned int size) {
-    readString(str, size, msg);//Pede informaçoes pessoais ao utilizador
+    readString(str, size, msg);
     for (int i = 0; i < strlen(str); i++) {
-        if (44 == str[i]) {//se tem virgula
-            printf("Cannot have commas, try again!");
+        if (44 == str[i]) {
+            printf("Cannot have commas, please try again!");
             input_validation(str, msg, size);
         }
     }

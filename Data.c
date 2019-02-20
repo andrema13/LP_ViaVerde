@@ -3,61 +3,37 @@
 #include "Data.h"
 #include "Utils.h"
 
-/**
- * Tamanho maximo que é alocado de memoria em nº de clientes
- */
-int client_list_max_size = LIST_SIZE;
-/**
- * Tamanho maximo que é alocado de memoria em nº de viagens resgistadas
- */
-int trip_list_max_size = TRIP_SIZE;
-/**
- * Apontador para a lista de clientes
- */
-struct Client *clients_list = NULL;
-/**
- * Apontador para uma variavel temporaria do tipo struct
- */
-struct Client *temp = NULL;
-/**
- * Matriz dos preços que é uma matriz global com o numero de portagens atual(pode ser mudado)
- */
 struct Lanco price_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];
-/**
- * Matriz das distancias que é uma matriz global com o numero de portagens atual(pode ser mudado)
- */
 struct Lanco distance_matrix_list[NUM_PORTAGENS * NUM_PORTAGENS];
-/**
- * Apontador para a lista de clientes
- */
-struct Trip *trips_list = NULL;
-/**
- * Apontador para uma variavel temporaria do tipo struct
- */
-struct Trip *trip_temp = NULL;
-/**
- * Variaveis globais que irao conter o tamanho do array dos cliente e das viagens, respetivamente.
- */
+
 int client_list_size = 0, trip_list_size = 0;
+int client_list_max_size = LIST_SIZE;
+int trip_list_max_size = TRIP_SIZE;
 
 /**
- * @brief Leitura do ficheiro dos clientes registados
- * É aberto o ficheiro em modo de leitura
- * Verificado se ele realmente exite senao ocorre um erro
- * Declarado a estrutura indicada e enquanto nao chegar ao fim do ficheiro é lido as informaçoes
- * pelos campos correspondentes
- * É alocado memoria para o limite estipulado(10) e se for necessario é alocado mais 10 neste caso
- * Se nao chegar a existir realocaçao é imprimido uma mensagem de erro
- * Se for bem sucedido é entao realocado o espaço de memoria
- * O cliente é adicionado á lista de clientes e é incrementado o valor do array
- * É atribuido o valor do tamanho do array dos clientes á variavel client_list_size
- * É fechado por fim o ficheiro.
- */
+ * @brief Read the registered clients file
+  * The file is opened in read mode
+  * Verified if it really does not exist if an error occurs
+  * Declared the indicated structure and while not reaching the end of the file is read the information
+  * by the corresponding fields
+  * Memory is allocated for the stipulated limit (10) and
+  * if necessary is allocated a further 10 in this case
+  * If no reallocation exists, an error message is printed
+  * If successful, the memory space is then reallocated
+  * The client is added to the client list and the value of the array is incremented.
+  * The value of the array size of the clients is assigned to the variable client_list_size
+  * The file is closed by the end.
+ **/
 void read_client_file() {
+
+    struct Client *clients_list = NULL;
+    struct Client *temp = NULL;
+
+    clients_list = (struct Client *) malloc(client_list_max_size * sizeof(struct Client));
 
     FILE *file;
     int i = 0;
-    file = fopen("../info_cliente.txt", "r");
+    file = fopen("../client_info.txt", "r");
 
     if (file == NULL) {
         perror("Error: ");
@@ -72,14 +48,14 @@ void read_client_file() {
                       &client.VVPoints
         ) != EOF) {
 
-            if (i + 1 > client_list_max_size) {//memoria dinamica, limite 10, soma mais 10
-                temp = (struct Client *) realloc(clients_list,//se necessario
+            if (i + 1 > client_list_max_size) {
+                temp = (struct Client *) realloc(clients_list,
                                                  client_list_max_size * sizeof(struct Client) +
                                                  LIST_SIZE * sizeof(struct Client));
 
                 if (temp == NULL) {
 
-                    printf("Memory failed!");
+                    printf("Memory Allocation failed!");
                     break;
                 } else {
                     clients_list = temp;
@@ -95,20 +71,19 @@ void read_client_file() {
 
     fclose(file);
 }
-
 /**
- * @brief Escrita no ficheiro dos clientes
- * É aberto o ficheiro dos clientes em modo de escrita
- * É entao escrito as informaçoes do cliente e do respetivo veiculo por cada campo separado por virgulas
- * Enquanto nao chegar ao fim do ficheiro escreve as informaçoes
- * É fechado o ficheiro
+ * @brief Writing to clients file
+ * The client file is opened in write mode
+ * The information of the customer and the respective vehicle are then written for each field separated by commas
+ * Until you reach the end of the file, write the information
+ * The file is closed
  */
 void write_client_file() {
 
     int i, c;
     FILE *file;
 
-    file = fopen("../info_cliente.txt", "w");//Creates an empty file for writing.
+    file = fopen("../client_info.txt", "w");//Creates an empty file for writing.
     // If a file with the same name already exists,
     // its content is erased and the file is considered as a new empty file.
 
@@ -133,24 +108,28 @@ void write_client_file() {
 }
 
 /**
- * @brief Leitura do ficheiro das viagens registados
- * É aberto o ficheiro em modo de leitura
- * Verificado se ele realmente exite senao ocorre um erro
- * Declarado a estrutura indicada e enquanto nao chegar ao fim do ficheiro é lido as informaçoes
- * pelos campos correspondentes
- * É alocado memoria para o limite estipulado(100) e se for necessario é alocado mais 100 neste caso
- * Se nao chegar a existir realocaçao é imprimido uma mensagem de erro
- * Se for bem sucedido é entao realocado o espaço de memoria
- * A viagem é adicionada  á lista de viagens e é incrementado o valor do array
- * É atribuido o valor do tamanho do array das viagens á variavel trip_list_size
- * É fechado por fim o ficheiro.
+ * @brief Reading of registered trip file
+  * The file is opened in read mode
+  * Verified if it really does not exist if an error occurs
+  * Declared the indicated structure and while not reaching the end of the file is read the information
+  * by the corresponding fields
+  * Memory is allocated for the stipulated limit (100) and if necessary is allocated another 100 in this case
+  * If no reallocation exists, an error message is printed
+  * If successful, the memory space is then reallocated
+  * The trip is added to the travel list and the value of the array is incremented.
+  * The trip array size value is assigned to the trip_list_size variable
+  * The file is closed by the end.
  */
-void
-read_trip_file() {
+void read_trip_file() {
+
+    struct Trip *trips_list = NULL;
+    struct Trip *trip_temp = NULL;
+
+    trips_list = (struct Trip *) malloc(trip_list_max_size * sizeof(struct Trip));
 
     FILE *file;
     int i = 0;
-    file = fopen("../travel_registration.txt", "r");
+    file = fopen("../trip_registration.txt", "r");
     if (file == NULL) {
         perror("Error: ");
     } else {
@@ -169,8 +148,8 @@ read_trip_file() {
                       &trip.distance,
                       &trip.trip_cost
         ) != EOF) {
-            if (i + 1 > trip_list_max_size) {//memoria dinamica, limite 100, soma mais 100
-                trip_temp = (struct Trip *) realloc(trips_list,//se necessario
+            if (i + 1 > trip_list_max_size) {
+                trip_temp = (struct Trip *) realloc(trips_list,
                                                     trip_list_max_size * sizeof(struct Trip) +
                                                     TRIP_SIZE * sizeof(struct Trip));
 
@@ -193,18 +172,18 @@ read_trip_file() {
 }
 
 /**
- * @brief Escrita no ficheiro das viagens
- * É aberto o ficheiro dos clientes em modo de escrita
- * É entao escrito as viagens do cliente por cada campo separado por virgulas
- * Enquanto nao chegar ao fim do ficheiro escreve as informaçoes
- * É fechado o ficheiro
+ * @brief Writing in the trip file
+  * The client file is opened in write mode
+  * Customer trips are then written for each field separated by commas
+  * Until you reach the end of the file, write the information
+  * The file is closed
  */
 void write_trip_file() {
 
     int i, c;
     FILE *file;
 
-    file = fopen("../travel_registration.txt", "w");//Creates an empty file for writing.
+    file = fopen("../trip_registration.txt", "w");//Creates an empty file for writing.
     // If a file with the same name already exists,
     // its content is erased and the file is considered as a new empty file.
 
@@ -215,8 +194,8 @@ void write_trip_file() {
                 trips_list[i].choice_x,
                 trips_list[i].choice_y,
                 trips_list[i].date.tm_mday,
-                trips_list[i].date.tm_mon,//somar +1
-                trips_list[i].date.tm_year,//somar +1900
+                trips_list[i].date.tm_mon,//plus +1
+                trips_list[i].date.tm_year,//plus +1900
                 trips_list[i].date.tm_hour,
                 trips_list[i].date.tm_min,
                 trips_list[i].date.tm_sec,
@@ -230,13 +209,13 @@ void write_trip_file() {
 }
 
 /**
- * @brief Mostra a matriz dos preços no ecrã
- * Preenche a matriz dos preços e o false é relativo ao parametro isDistance
- * É entao imprimido no ecra a matriz bem como a respetiva legenda na parte inferior e o seu cabeçalho
+ * @brief Shows the price matrix on the screen
+  * Fills the price matrix and false is relative to the isDistance parameter
+  * The matrix and its caption at the bottom and its header are then printed on the screen.
  */
 void show_prices() {
 
-    fill_matrix(price_matrix_list, "../Precos.txt", false);
+    fill_matrix(price_matrix_list, "../Prices.txt", false);
     int i, j;
 
     printf("---Prices---\n\n");
@@ -250,17 +229,17 @@ void show_prices() {
         }
         printf("\n");
     }
-    printf("-Legenda-\n1-Braga  2-Porto  3-Coimbra  4-Lisboa  5-Algarve\n");
+    printf("-Legend-\n1-Braga  2-Porto  3-Coimbra  4-Lisboa  5-Algarve\n");
 }
 
 /**
- * @brief Mostra a matriz da distancia no ecrã
- * Preenche a matriz da distancia e o true é relativo ao parametro isDistance
- * É entao imprimido no ecra a matriz bem como a respetiva legenda na parte inferior e o seu cabeçalho
+  * @brief Shows the distance matrix on the screen
+  * Fills the distance matrix and true is relative to the isDistance parameter
+  * The matrix and its caption at the bottom and its header are then printed on the screen.
  */
 void show_distances() {
 
-    fill_matrix(distance_matrix_list, "../Distancias.txt", true);
+    fill_matrix(distance_matrix_list, "../Distances.txt", true);
     int i, j;
 
     printf("---Distances---\n\n");
@@ -274,6 +253,6 @@ void show_distances() {
         }
         printf("\n");
     }
-    printf("-Legenda-\n1-Braga  2-Porto  3-Coimbra  4-Lisboa  5-Algarve\n");
+    printf("-Legend-\n1-Braga  2-Porto  3-Coimbra  4-Lisboa  5-Algarve\n");
 }
 

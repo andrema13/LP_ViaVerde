@@ -1,14 +1,13 @@
 #include "Utils.h"
 /**
- * Função que preenche uma matriz quadrada de lado NUM_PORTAGENS com o
- * conteúdo do ficheiro especificado. A função pode ser utilizada para preencher
- * a matriz de distâncias ou a matriz de preços.
- *
- * @param matrix A matriz a preencher, que deve ser previamente alocada
- * @param file O ficheiro de onde vão ser lidos os dados
- * @param is_distance Indica se será preenchida a matriz de distâncias ou de preços
- *
- * @return Indica se a função terminou com sucesso
+  * Function that fills a square NUM_PORTS square side with the
+  * content of the specified file. The function can be used to fill
+  * the distance matrix or the price matrix.
+  * @param matrix The array to be filled, which must be previously allocated
+  * @param file The file from which the data will be read
+  * @param is_distance Indicates whether the array of distances or prices will be filled
+  *
+  * @return Indicates if the function ended successfully
  */
 bool fill_matrix(struct Lanco *f, char *file, bool is_distance) {
 
@@ -54,12 +53,12 @@ bool fill_matrix(struct Lanco *f, char *file, bool is_distance) {
     return true;
 }
 /**
- * Funçao que escreve a matriz no ficheiro indicado .
- * Esta funçao pode ser utilizada para escrever a matriz de preços ou de distancias
- * @param f matriz que sera escrita
- * @param file Ficheiro onde vao ser escritos os dados
- * @param is_price  Indica se sera escrita a matriz dos preços ou da distancia
- * @return Indica se a funçao terminou com sucesso
+  * Function that writes the array in the indicated file.
+  * This function can be used to write the price or distance matrix
+  * @param f array that will be written
+  * @param file File where the data will be written
+  * @param is_price Indicates whether the price or distance matrix will be written
+  * @return Indicates if the function ended successfully
  */
 bool write_matrix(struct Lanco *f, char *file, bool is_price) {
 
